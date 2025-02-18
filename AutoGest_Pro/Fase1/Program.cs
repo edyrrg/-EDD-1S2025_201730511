@@ -1,23 +1,19 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System;
+using Fase1.src.gui;
 using Gtk;
 
-class Program
+namespace Fase1
 {
-    static void Main(string[] args)
+    class Program
     {
-        Application.Init();
-
-        var win = new Window("Hello World");
-        win.SetDefaultSize(200, 200);
-        win.DeleteEvent += (_, _) => Application.Quit();
-
-        var label = new Label("Hello World");
-        win.Add(label);
-
-        win.ShowAll();
-
-        Application.Run();
+        static void Main(string[] args)
+        {
+            Application.Init();
+            _ = new Login();
+            Application.Run();
+        }
     }
 }
+
