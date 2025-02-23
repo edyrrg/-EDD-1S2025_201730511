@@ -1,0 +1,31 @@
+window {
+  background-color: #000;
+  color: white;
+  font-family: "Arial";
+}
+
+button{
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+
+entry {
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+  caret-color: #000;
+}
+
+headerbar {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}

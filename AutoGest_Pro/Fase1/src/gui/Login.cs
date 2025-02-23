@@ -1,5 +1,6 @@
 using Gtk;
 using Fase1.src.auth;
+using System.Runtime.CompilerServices;
 
 namespace Fase1.src.gui
 {
@@ -13,10 +14,13 @@ namespace Fase1.src.gui
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
 
+            // Aplicando estilos
+            AplicarEstilos();
+
             var grid = new Grid
             {
-                ColumnSpacing = 5,
-                RowSpacing = 5
+                ColumnSpacing = 8,
+                RowSpacing = 8
             };
 
             var vbox = new Box(Orientation.Vertical, 0)
@@ -35,6 +39,8 @@ namespace Fase1.src.gui
             var btnLogin = new Button("Login");
             btnLogin.Clicked += OnLoginClicked;
 
+            btnLogin.StyleContext.AddClass("button_style");
+
             grid.Attach(lblUserName, 0, 0, 1, 1);
             grid.Attach(entryUserName, 1, 0, 1, 1);
             grid.Attach(lblPassword, 0, 1, 1, 1);
@@ -43,6 +49,27 @@ namespace Fase1.src.gui
             vbox.Add(grid);
             Add(vbox);
             ShowAll();
+        }
+
+        private static void AplicarEstilos()
+        {
+            CssProvider cssProvider = new CssProvider();
+
+            try
+            {
+                cssProvider.LoadFromPath("src/gui/styles/styles.css");
+                Console.WriteLine("CSS cargado exitosamente.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al cargar CSS: {e.Message}");
+            }
+
+            StyleContext.AddProviderForScreen(
+                Gdk.Screen.Default,
+                cssProvider,
+                (uint)StyleProviderPriority.User
+            );
         }
 
         private void OnKeyRelease(object sender, KeyReleaseEventArgs args)
@@ -66,12 +93,13 @@ namespace Fase1.src.gui
                     DialogFlags.Modal,
                     MessageType.Info,
                     ButtonsType.Ok,
-                    "Bienvenido");
+                    "Bienvenido " + username);
                 dialog.Run();
                 dialog.Destroy();
                 Hide();
                 var mainWindow = new MainWindow();
                 mainWindow.ShowAll();
+
             }
             else
             {
