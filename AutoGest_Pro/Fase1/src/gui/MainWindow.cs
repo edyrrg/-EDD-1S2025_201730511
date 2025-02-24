@@ -4,9 +4,9 @@ using System.Xml.Serialization;
 
 namespace Fase1.src.gui
 {
-    public class MainWindow : Window
+    public class MainWindow : MyWindow
     {
-        public MainWindow() : base("AutoGest Pro")
+        public MainWindow() : base("Menu Principal | AutoGest Pro")
         {
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
@@ -50,21 +50,11 @@ namespace Fase1.src.gui
             ShowAll();
         }
 
-        private static void AplicarEstilos()
-        {
-            CssProvider cssProvider = new CssProvider();
-            cssProvider.LoadFromPath("src/gui/styles/styles.css");
-
-            StyleContext.AddProviderForScreen(
-                Gdk.Screen.Default,
-                cssProvider,
-                (uint)StyleProviderPriority.Application
-            );
-        }
-
         private void OnCargaMasivaClicked(object? sender, EventArgs e)
         {
-            return;
+            var cargaMasiva = new CargaMasiva(this);
+            cargaMasiva.ShowAll();
+            Hide();
         }
 
         private void OnIngresoIndividualClicked(object? sender, EventArgs e)

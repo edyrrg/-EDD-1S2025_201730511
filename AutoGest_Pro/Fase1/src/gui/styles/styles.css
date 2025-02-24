@@ -17,7 +17,7 @@ button:hover {
   border-color: #fff;
 }
 
-entry {
+entry, combobox {
   background: #fff;
   color: #000;
   border: 1px solid #fff;
@@ -28,4 +28,33 @@ headerbar {
   background: #000;
   color: #fff;
   border: 1px solid #fff;
+}
+
+combobox:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+combobox menu {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+combobox menu menuitem {
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+}
+
+menuitem:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: bold;
 }

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Fase1.src.gui
 {
-    public class Login : Window
+    public class Login : MyWindow
     {
         private Entry entryUserName;
         private Entry entryPassword;
@@ -48,28 +48,8 @@ namespace Fase1.src.gui
             grid.Attach(btnLogin, 0, 2, 2, 1);
             vbox.Add(grid);
             Add(vbox);
+
             ShowAll();
-        }
-
-        private static void AplicarEstilos()
-        {
-            CssProvider cssProvider = new CssProvider();
-
-            try
-            {
-                cssProvider.LoadFromPath("src/gui/styles/styles.css");
-                Console.WriteLine("CSS cargado exitosamente.");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Error al cargar CSS: {e.Message}");
-            }
-
-            StyleContext.AddProviderForScreen(
-                Gdk.Screen.Default,
-                cssProvider,
-                (uint)StyleProviderPriority.User
-            );
         }
 
         private void OnKeyRelease(object sender, KeyReleaseEventArgs args)
@@ -99,7 +79,6 @@ namespace Fase1.src.gui
                 Hide();
                 var mainWindow = new MainWindow();
                 mainWindow.ShowAll();
-
             }
             else
             {
