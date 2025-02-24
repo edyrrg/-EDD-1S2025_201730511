@@ -4,7 +4,7 @@ namespace Fase1.src.models
     {
         public T ID;
         public int IdOrden;
-        public string Total;
+        public float Total;
         public NodoFactura<T>* Next;
 
     }
