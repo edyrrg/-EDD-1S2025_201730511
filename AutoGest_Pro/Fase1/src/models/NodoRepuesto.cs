@@ -5,7 +5,7 @@ namespace Fase1.src.models
         public T ID;
         public string Repuesto;
         public string Detalles;
-        public string Costo;
+        public float Costo;
         public NodoRepuesto<T>* Next;
 
     }

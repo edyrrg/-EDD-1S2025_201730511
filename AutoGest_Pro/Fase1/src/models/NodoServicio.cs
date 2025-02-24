@@ -6,7 +6,7 @@ namespace Fase1.src.models
         public int IdRepuesto;
         public int IdVehiculo;
         public string Detalles;
-        public string Costo;
+        public float Costo;
         public NodoServicio<T>* Next;
 
     }
