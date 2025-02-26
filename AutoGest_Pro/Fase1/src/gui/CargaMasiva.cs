@@ -8,17 +8,15 @@ namespace Fase1.src.gui
 {
     public class CargaMasiva : MyWindow
     {
-        private readonly Window _contextMain;
         private ComboBoxText _comboBox;
 
-        public CargaMasiva(Window contextMain) : base("Carga Masiva | AutoGest Pro")
+        public CargaMasiva(Window contextParent) : base("Carga Masiva | AutoGest Pro", contextParent)
         {
-            // Pasando referencia de la ventana principal
-            _contextMain = contextMain;
-
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
+
+            AplicarEstilos();
 
             var vbox = new Box(Orientation.Vertical, 15)
             {
@@ -84,13 +82,6 @@ namespace Fase1.src.gui
                 dialog.Destroy();
             }
         }
-
-        public void OnDeleteEvent()
-        {
-            _contextMain.ShowAll();
-            Destroy();
-        }
-
         private void ProcessFileByType(string jsonText)
         {
             switch (_comboBox.ActiveText)

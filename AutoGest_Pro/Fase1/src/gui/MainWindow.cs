@@ -13,7 +13,7 @@ namespace Fase1.src.gui
             DeleteEvent += (_, _) => Application.Quit();
 
             // Aplicando estilos
-            AplicarEstilos();
+            //AplicarEstilos();
 
             var vbox = new Box(Orientation.Vertical, 0)
             {

@@ -58,3 +58,9 @@ menuitem:hover {
   font-size: 15px;
   font-weight: bold;
 }
+
+textview {
+  background: #fff;
+  color: #000;
+  border: 2px solid #fff;
+}

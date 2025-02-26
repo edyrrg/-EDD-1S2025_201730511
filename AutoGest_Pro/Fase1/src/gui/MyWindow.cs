@@ -4,7 +4,8 @@ namespace Fase1.src.gui
 {
     public abstract class MyWindow : Window
     {
-        public MyWindow(string title) : base(title) { }
+        private readonly Window? _contextParent;
+        public MyWindow(string title, Window? contextParent = null) : base(title) { _contextParent = contextParent; }
         public void AplicarEstilos()
         {
             CssProvider cssProvider = new CssProvider();
@@ -24,6 +25,12 @@ namespace Fase1.src.gui
                 cssProvider,
                 (uint)StyleProviderPriority.Application
             );
+        }
+
+        public void OnDeleteEvent()
+        {
+            _contextParent?.ShowAll();
+            Destroy();
         }
     }
 }
