@@ -4,6 +4,7 @@ using System;
 using Fase1.src.adt;
 using Fase1.src.gui;
 using Fase1.src.models;
+using Fase1.src.services;
 using Gtk;
 
 namespace Fase1
@@ -12,8 +13,10 @@ namespace Fase1
     {
         static void Main(string[] args)
         {
+            
             Application.Init();
-            _ = new GestionUsuarios();
+            var dataService = DataService.Instance;
+            _ = new MainWindow(dataService);
             Application.Run();
 
             // var SimpleList = new SimpleList<int>();

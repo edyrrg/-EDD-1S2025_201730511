@@ -76,6 +76,26 @@ namespace Fase1.src.adt
             return 1;
         }
 
+        public int Search(int id)
+        {
+            if (head == null) return 0;
+            NodoUsuario<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    Console.WriteLine("ID: " + current->ID);
+                    Console.WriteLine("Nombres: " + current->Nombres);
+                    Console.WriteLine("Apellidos: " + current->Apellidos);
+                    Console.WriteLine("Correo: " + current->Correo);
+                    Console.WriteLine("Contrasenia: " + current->Contrasenia);
+                    return 1;
+                }
+                current = current->Next;
+            }
+            return 0;
+        }
+
         /** 
          *  Elimina un nodo de la lista simplemente enlazada por medio de su id
          *  @param id

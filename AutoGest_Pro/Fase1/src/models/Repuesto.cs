@@ -1,11 +1,11 @@
 namespace Fase1.src.models
 {
-    public class Repuesto    
+    public class RepuestoModel    
     {
-        public required int Id { get; set; }
-        public required string Respuesto { get; set; }
+        public required int ID { get; set; }
+        public required string Repuesto { get; set; }
         public required string Detalles { get; set; }
-        public required double Costo { get; set; }
+        public required float Costo { get; set; }
     
     }
 }

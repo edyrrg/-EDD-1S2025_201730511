@@ -1,3 +1,4 @@
+using Fase1.src.services;
 using Gtk;
 using System;
 
@@ -5,8 +6,12 @@ namespace Fase1.src.gui
 {
     public class MainWindow : MyWindow
     {
-        public MainWindow() : base("Menu Principal | AutoGest Pro")
+        private readonly DataService _DataService;
+        
+        public MainWindow(DataService dataService) : base("Menu Principal | AutoGest Pro")
         {
+            _DataService = dataService;
+
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
@@ -51,8 +56,9 @@ namespace Fase1.src.gui
 
         private void OnCargaMasivaClicked(object? sender, EventArgs e)
         {
-            var cargaMasiva = new CargaMasiva(this);
+            var cargaMasiva = new CargaMasiva(this, _DataService);
             cargaMasiva.ShowAll();
+            
             Hide();
         }
 

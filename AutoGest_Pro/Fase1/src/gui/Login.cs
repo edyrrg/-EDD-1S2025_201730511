@@ -1,15 +1,18 @@
 using Gtk;
 using Fase1.src.auth;
 using System.Runtime.CompilerServices;
+using Fase1.src.services;
 
 namespace Fase1.src.gui
 {
     public class Login : MyWindow
     {
+        private readonly DataService _DataService;
         private Entry entryUserName;
         private Entry entryPassword;
-        public Login() : base("Login | AutoGest Pro")
+        public Login(DataService dataService) : base("Login | AutoGest Pro")
         {
+            _DataService = dataService;
             SetDefaultSize(400, 300);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
@@ -77,7 +80,7 @@ namespace Fase1.src.gui
                 dialog.Run();
                 dialog.Destroy();
                 Hide();
-                var mainWindow = new MainWindow();
+                var mainWindow = new MainWindow(_DataService);
                 mainWindow.ShowAll();
             }
             else
