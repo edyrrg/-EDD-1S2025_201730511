@@ -1,6 +1,5 @@
 using Gtk;
 using System;
-using System.Xml.Serialization;
 
 namespace Fase1.src.gui
 {
@@ -13,7 +12,7 @@ namespace Fase1.src.gui
             DeleteEvent += (_, _) => Application.Quit();
 
             // Aplicando estilos
-            //AplicarEstilos();
+            AplicarEstilos();
 
             var vbox = new Box(Orientation.Vertical, 0)
             {
@@ -21,23 +20,23 @@ namespace Fase1.src.gui
                 Valign = Align.Center
             };
 
-            
+
             // Creando botones
             var btnCargaMasiva = new Button("Carga Masiva");
             btnCargaMasiva.Clicked += OnCargaMasivaClicked;
             btnCargaMasiva.StyleContext.AddClass("button"); // Añadir clase CSS
 
             var btnIngresoIndividual = new Button("Ingreso Individual");
-            btnIngresoIndividual.Clicked += OnCargaMasivaClicked;
+            btnIngresoIndividual.Clicked += OnIngresoIndividualClicked;
 
             var btnGestionDeUsuarios = new Button("Gestión de Usuarios");
-            btnGestionDeUsuarios.Clicked += OnCargaMasivaClicked;
+            btnGestionDeUsuarios.Clicked += OnGestionDeUsuariosClicked;
 
             var btnGenerarServicio = new Button("Generar Servicio");
-            btnGenerarServicio.Clicked += OnCargaMasivaClicked;
+            btnGenerarServicio.Clicked += OnGenerarServicioClicked;
 
             var btnCancelarFactura = new Button("Cancelar Factura");
-            btnCancelarFactura.Clicked += OnCargaMasivaClicked;
+            btnCancelarFactura.Clicked += OnCancelarFacturaClicked;
 
             // Agregando botones al vbox
             vbox.PackStart(btnCargaMasiva, false, false, 6);
@@ -59,21 +58,34 @@ namespace Fase1.src.gui
 
         private void OnIngresoIndividualClicked(object? sender, EventArgs e)
         {
-            return;
+            var MenuIngresoManual = new MenuIngresoManual(this);
+            MenuIngresoManual.ShowAll();
+            Hide();
         }
 
         private void OnGestionDeUsuariosClicked(object? sender, EventArgs e)
         {
-            return;
+            var GestionUsuarios = new GestionUsuarios(this);
+            GestionUsuarios.ShowAll();
+            Hide();
         }
 
         private void OnGenerarServicioClicked(object? sender, EventArgs e)
         {
-            return;
+            var GenerarServicio = new GenerarServicio(this);
+            GenerarServicio.ShowAll();
+            Hide();
         }
 
         private void OnCancelarFacturaClicked(object? sender, EventArgs e)
         {
+            var dialog = new MessageDialog(this,
+                DialogFlags.Modal,
+                MessageType.Info,
+                ButtonsType.Ok,
+                "Funcionalidad no implementada | Facturación\n\nID:\t\t\t1\nID Orden:\t\t1\nTotal:\t\t200");
+            dialog.Run();
+            dialog.Destroy();
             return;
         }
     }

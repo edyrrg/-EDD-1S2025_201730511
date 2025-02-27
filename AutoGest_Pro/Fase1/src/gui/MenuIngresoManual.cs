@@ -3,18 +3,16 @@ using Gtk;
 
 namespace Fase1.src.gui
 {
-    public class MenuIngresoManul : MyWindow
+    public class MenuIngresoManual : MyWindow
     {
         /**
          * Init the window
          */
-        public MenuIngresoManul() : base("Menu | AutoGest Pro")
+        public MenuIngresoManual(Window contextParent) : base("Menu | AutoGest Pro", contextParent)
         {
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
-            DeleteEvent += (_, _) => Application.Quit();
-
-            AplicarEstilos();
+            DeleteEvent += (_, _) => OnDeleteEvent();
 
             var vbox = new Box(Orientation.Vertical, 0)
             {

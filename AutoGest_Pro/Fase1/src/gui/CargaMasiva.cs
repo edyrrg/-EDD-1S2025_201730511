@@ -1,7 +1,5 @@
-using GLib;
 using Gtk;
 using Fase1.src.models;
-using System.Text.Json.Serialization;
 using System.Text.Json;
 
 namespace Fase1.src.gui
@@ -16,7 +14,7 @@ namespace Fase1.src.gui
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
 
-            AplicarEstilos();
+            // AplicarEstilos();
 
             var vbox = new Box(Orientation.Vertical, 15)
             {
@@ -43,22 +41,17 @@ namespace Fase1.src.gui
 
         private void OnCargarClicked(object? sender, System.EventArgs e)
         {
-            // Obteniendo la opción seleccionada en el ComboBox Text
-            var selected = _comboBox.ActiveText;
-            Console.WriteLine($"Opción seleccionada: {selected}");
-
             using var dialog = new FileChooserDialog("Seleccione el archivo JSON a cargar",
                 this,
                 FileChooserAction.Open,
                 "Cancelar", ResponseType.Cancel,
                 "Abrir", ResponseType.Accept);
-            dialog.SetSizeRequest(500, 400);
+            dialog.SetSizeRequest(600, 400);
             dialog.SelectMultiple = false;
-            dialog.SetCurrentFolder("/mnt/c/Users/edyrr/Downloads");
-
             var filter = new FileFilter { Name = "Archivos JSON" };
             filter.AddPattern("*.json");
-            dialog.AddFilter(filter);
+            dialog.Filter = filter;
+            dialog.SetCurrentFolder("/mnt/c/Users/edyrr/Downloads");
 
             try
             {
@@ -75,6 +68,12 @@ namespace Fase1.src.gui
                     {
                         Console.WriteLine($"Error al leer el archivo: {ex.Message}");
                     }
+                }
+                else
+                {
+                    var dialogError = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "No se seleccionó ningún archivo");
+                    dialogError.Run();
+                    dialogError.Destroy();
                 }
             }
             finally

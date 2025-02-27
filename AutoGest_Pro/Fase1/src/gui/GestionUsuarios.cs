@@ -9,11 +9,11 @@ namespace Fase1.src.gui
         private Entry _txtApellidos;
         private Entry _txtCorreo;
         private TextView _txtvVehiculos;
-        public GestionUsuarios() : base("Gestion de Usuarios | AutoGest Pro")
+        public GestionUsuarios(Window contextParent) : base("Gestion de Usuarios | AutoGest Pro", contextParent)
         {
             SetSizeRequest(900, 500);
             SetPosition(WindowPosition.Center);
-            DeleteEvent += (_, _) => Application.Quit();
+            DeleteEvent += (_, _) => OnDeleteEvent();
 
             AplicarEstilos();
 
@@ -65,7 +65,6 @@ namespace Fase1.src.gui
             _txtvVehiculos.Buffer.Text = "Hello World!\nVehiculos del Usuario";
             _txtvVehiculos.SetSizeRequest(300, 150);
             _txtvVehiculos.VscrollPolicy = ScrollablePolicy.Natural;
-            // _txtvVehiculos.StyleContext.AddClass("textview");
 
             hbox.PackStart(vbox, true, true, 0);
             hbox.PackStart(_txtvVehiculos, true, true, 0);
