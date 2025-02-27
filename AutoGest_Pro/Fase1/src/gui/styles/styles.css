@@ -1,0 +1,66 @@
+window {
+  background-color: #000;
+  color: white;
+  font-family: "Arial";
+}
+
+button{
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+
+entry, combobox {
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+  caret-color: #000;
+}
+
+headerbar {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+combobox:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+combobox menu {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+combobox menu menuitem {
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+}
+
+menuitem:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+textview {
+  background: #fff;
+  color: #000;
+  border: 2px solid #fff;
+}

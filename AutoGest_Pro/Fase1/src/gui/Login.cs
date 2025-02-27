@@ -1,9 +1,10 @@
 using Gtk;
 using Fase1.src.auth;
+using System.Runtime.CompilerServices;
 
 namespace Fase1.src.gui
 {
-    public class Login : Window
+    public class Login : MyWindow
     {
         private Entry entryUserName;
         private Entry entryPassword;
@@ -13,10 +14,13 @@ namespace Fase1.src.gui
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
 
+            // Aplicando estilos
+            AplicarEstilos();
+
             var grid = new Grid
             {
-                ColumnSpacing = 5,
-                RowSpacing = 5
+                ColumnSpacing = 8,
+                RowSpacing = 8
             };
 
             var vbox = new Box(Orientation.Vertical, 0)
@@ -35,6 +39,8 @@ namespace Fase1.src.gui
             var btnLogin = new Button("Login");
             btnLogin.Clicked += OnLoginClicked;
 
+            btnLogin.StyleContext.AddClass("button_style");
+
             grid.Attach(lblUserName, 0, 0, 1, 1);
             grid.Attach(entryUserName, 1, 0, 1, 1);
             grid.Attach(lblPassword, 0, 1, 1, 1);
@@ -42,6 +48,7 @@ namespace Fase1.src.gui
             grid.Attach(btnLogin, 0, 2, 2, 1);
             vbox.Add(grid);
             Add(vbox);
+
             ShowAll();
         }
 
@@ -66,7 +73,7 @@ namespace Fase1.src.gui
                     DialogFlags.Modal,
                     MessageType.Info,
                     ButtonsType.Ok,
-                    "Bienvenido");
+                    "Bienvenido " + username);
                 dialog.Run();
                 dialog.Destroy();
                 Hide();

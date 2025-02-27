@@ -13,8 +13,9 @@ namespace Fase1
         static void Main(string[] args)
         {
             Application.Init();
-            _ = new Login();
+            _ = new GestionUsuarios();
             Application.Run();
+
             // var SimpleList = new SimpleList<int>();
             // SimpleList.Insert(1, "Juan", "Perez", "jperez@mail.com", "1234");
             // SimpleList.Insert(2, "Maria", "Lopez", "mlopez@mail.com", "5678");
@@ -45,4 +46,3 @@ namespace Fase1
         }
     }
 }
-
