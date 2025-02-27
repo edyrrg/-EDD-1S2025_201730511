@@ -64,14 +64,14 @@ namespace Fase1.src.gui
 
         private void OnIngresoIndividualClicked(object? sender, EventArgs e)
         {
-            var MenuIngresoManual = new MenuIngresoManual(this);
+            var MenuIngresoManual = new MenuIngresoManual(this, _DataService);
             MenuIngresoManual.ShowAll();
             Hide();
         }
 
         private void OnGestionDeUsuariosClicked(object? sender, EventArgs e)
         {
-            var GestionUsuarios = new GestionUsuarios(this);
+            var GestionUsuarios = new GestionUsuarios(this, _DataService);
             GestionUsuarios.ShowAll();
             Hide();
         }

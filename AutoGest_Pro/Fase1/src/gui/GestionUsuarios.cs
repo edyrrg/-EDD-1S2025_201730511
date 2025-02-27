@@ -1,16 +1,22 @@
+using Fase1.src.models;
+using Fase1.src.services;
 using Gtk;
 
 namespace Fase1.src.gui
 {
     public class GestionUsuarios : MyWindow
     {
+        private readonly DataService _DataService;
         private Entry _txtId;
         private Entry _txtNombres;
         private Entry _txtApellidos;
         private Entry _txtCorreo;
         private TextView _txtvVehiculos;
-        public GestionUsuarios(Window contextParent) : base("Gestion de Usuarios | AutoGest Pro", contextParent)
+        public GestionUsuarios(Window contextParent, DataService dataService) : base("Gestion de Usuarios | AutoGest Pro", contextParent)
         {
+            // Inyección de dependencias
+            _DataService = dataService;
+
             SetSizeRequest(900, 500);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
@@ -31,10 +37,10 @@ namespace Fase1.src.gui
                 Valign = Align.Center
             };
 
-            var lblId = new Label("ID"){ Halign = Align.Start };
-            var lblNombres = new Label("Nombres"){ Halign = Align.Start };
-            var lblApellidos = new Label("Apellidos"){ Halign = Align.Start };
-            var lblCorreo = new Label("Correo"){ Halign = Align.Start };
+            var lblId = new Label("ID") { Halign = Align.Start };
+            var lblNombres = new Label("Nombres") { Halign = Align.Start };
+            var lblApellidos = new Label("Apellidos") { Halign = Align.Start };
+            var lblCorreo = new Label("Correo") { Halign = Align.Start };
 
             _txtId = new Entry() { PlaceholderText = "ID" };
             _txtNombres = new Entry() { PlaceholderText = "Nombres", Sensitive = false };
@@ -42,6 +48,7 @@ namespace Fase1.src.gui
             _txtCorreo = new Entry() { PlaceholderText = "Correo", Sensitive = false };
 
             var btnBuscar = new Button("Buscar");
+            btnBuscar.Clicked += OnBuscarClicked;
 
             var btnActualizar = new Button("Actualizar");
 
@@ -72,6 +79,40 @@ namespace Fase1.src.gui
             Add(hbox);
 
             ShowAll();
+        }
+
+        private void OnBuscarClicked(object? sender, EventArgs e)
+        {
+            var id = _txtId.Text;
+            if (string.IsNullOrEmpty(id))
+            {
+                PopError("El campo ID no puede estar vacío.");
+                return;
+            }
+            if (!int.TryParse(id, out var idInt))
+            {
+                PopError("El campo ID debe ser un número entero.");
+                return;
+            }
+
+            try
+            {
+                Usuario usuario = _DataService.BuscarUsuario(idInt);
+                _txtNombres.Text = usuario.Nombres;
+                _txtApellidos.Text = usuario.Apellidos;
+                _txtCorreo.Text = usuario.Correo;
+                EnableViews(true);
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+        }
+        private void EnableViews(bool enable)
+        {
+            _txtNombres.Sensitive = enable;
+            _txtApellidos.Sensitive = enable;
+            _txtCorreo.Sensitive = enable;
         }
     }
 }

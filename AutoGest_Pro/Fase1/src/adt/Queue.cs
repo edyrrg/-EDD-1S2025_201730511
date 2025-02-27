@@ -46,6 +46,22 @@ namespace Fase1.src.adt
             head = head->Next;
             Marshal.FreeHGlobal((IntPtr)tmp);
         }
+
+        public int Search(int id)
+        {
+            if (head == null) return 0;
+
+            NodoServicio<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return 1;
+                }
+                current = current->Next;
+            }
+            return 0;
+        }
         public void Print()
         {
             if (head == null) return;

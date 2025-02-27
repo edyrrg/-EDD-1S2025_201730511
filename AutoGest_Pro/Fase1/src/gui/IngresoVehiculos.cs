@@ -1,16 +1,25 @@
+using Fase1.src.models;
+using Fase1.src.services;
 using Gtk;
 
 namespace Fase1.src.gui
 {
     public class IngresoVehiculo: MyWindow 
     {
+        private readonly DataService _DataService;
         private Entry _txtId;
         private Entry _txtiIdUsuario;
         private Entry _txtMarca;
         private Entry _txtModelo;
         private Entry _txtPlaca;
-        public IngresoVehiculo(Window contextParent): base("Ingreso de Vehiculos | AutoGest Pro", contextParent)
+        /**
+         * Init the window
+         */
+        public IngresoVehiculo(Window contextParent, DataService dataService): base("Ingreso de Vehiculos | AutoGest Pro", contextParent)
         {
+            // Inyectamos dataService
+            _DataService = dataService;
+
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
@@ -48,7 +57,34 @@ namespace Fase1.src.gui
             var marca = _txtMarca.Text;
             var modelo = _txtModelo.Text;
             var placa = _txtPlaca.Text;
-            return;
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(idUsuario) || string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(modelo) || string.IsNullOrEmpty(placa))
+            {
+                PopError("Todos los campos son requeridos");
+                return;
+            }
+            try
+            {
+                _DataService.IngresarVehiculo(new Vehiculo
+                {
+                    ID = int.Parse(id),
+                    ID_Usuario = int.Parse(idUsuario),
+                    Marca = marca,
+                    Modelo = modelo,
+                    Placa = placa
+                });
+                PopSucess("Vehiculo ingresado correctamente");
+                OnDeleteEvent();
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            } finally {
+                _txtId.Text = "";
+                _txtiIdUsuario.Text = "";
+                _txtMarca.Text = "";
+                _txtModelo.Text = "";
+                _txtPlaca.Text = "";
+            }
         }
     }
 }

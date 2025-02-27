@@ -1,4 +1,5 @@
 using Fase1.src.models;
+using GLib;
 using System;
 using System.Runtime.InteropServices;
 
@@ -75,7 +76,11 @@ namespace Fase1.src.adt
             }
             return 1;
         }
-
+        /** 
+         *  Busca un nodo de la lista simplemente enlazada por medio de su id
+         *  @param id
+         *  @return 1 si se encontro, 0 si no se encontro
+         */
         public int Search(int id)
         {
             if (head == null) return 0;
@@ -84,16 +89,37 @@ namespace Fase1.src.adt
             {
                 if (current->ID == id)
                 {
-                    Console.WriteLine("ID: " + current->ID);
-                    Console.WriteLine("Nombres: " + current->Nombres);
-                    Console.WriteLine("Apellidos: " + current->Apellidos);
-                    Console.WriteLine("Correo: " + current->Correo);
-                    Console.WriteLine("Contrasenia: " + current->Contrasenia);
                     return 1;
                 }
                 current = current->Next;
             }
             return 0;
+        }
+        /** 
+         *  Busca un nodo de la lista simplemente enlazada por medio de su id
+         *  @param id
+         *  @return Usuario
+         */
+        public Usuario? Find(int id)
+        {
+            if (head == null) return null;
+            NodoUsuario<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return new Usuario
+                    {
+                        ID = current->ID,
+                        Nombres = current->Nombres,
+                        Apellidos = current->Apellidos,
+                        Correo = current->Correo,
+                        Contrasenia = current->Contrasenia
+                    };
+                }
+                current = current->Next;
+            }
+            return null;
         }
 
         /** 

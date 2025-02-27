@@ -66,7 +66,7 @@ namespace Fase1.src.gui
                     try
                     {
                         string jsonText = File.ReadAllText(filename);
-                        Console.WriteLine(jsonText);
+                        // Console.WriteLine(jsonText);
                         ProcessFileByType(jsonText);
                     }
                     catch (Exception ex)
@@ -124,7 +124,7 @@ namespace Fase1.src.gui
                 }
             }
             PopSucess("Usuarios cargados exitosamente");
-            _DataService.ListadoUsuarios.Print();
+            // _DataService.ListadoUsuarios.Print();
         }
 
         private void DeserializarVehiculos(string jsonText)
@@ -148,7 +148,7 @@ namespace Fase1.src.gui
                 }
             }
             PopSucess("Vehiculos cargados exitosamente");
-            _DataService.ListadoVehiculos.Print();
+            // _DataService.ListadoVehiculos.Print();
         }
 
         private void DeserializarRepuestos(string jsonText)
@@ -172,22 +172,10 @@ namespace Fase1.src.gui
                 }
             }
             PopSucess("Repuestos cargados exitosamente");
-            _DataService.ListadoRepuestos.Print();
+            // _DataService.ListadoRepuestos.Print();
         }
 
-        private void PopError(string txtError)
-        {
-            var dialogError = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, $"{txtError}");
-            dialogError.Run();
-            dialogError.Destroy();
-        }
-
-        private void PopSucess(string txtSuccess)
-        {
-            var dialogSuccess = new MessageDialog(this, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, $"{txtSuccess}");
-            dialogSuccess.Run();
-            dialogSuccess.Destroy();
-        }
+        
     }
 
 }
