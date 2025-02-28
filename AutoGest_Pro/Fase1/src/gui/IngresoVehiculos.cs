@@ -69,7 +69,7 @@ namespace Fase1.src.gui
                     ID = int.Parse(id),
                     ID_Usuario = int.Parse(idUsuario),
                     Marca = marca,
-                    Modelo = modelo,
+                    Modelo = int.Parse(modelo),
                     Placa = placa
                 });
                 PopSucess("Vehiculo ingresado correctamente");

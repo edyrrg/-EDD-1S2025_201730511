@@ -15,7 +15,7 @@ namespace Fase1.src.adt
         private NodoVehiculo<int>* head = null;
         private NodoVehiculo<int>* tail = null;
 
-        public void Insert(int id, int idUsuario, string marca, string modelo, string placa)
+        public void Insert(int id, int idUsuario, string marca, int modelo, string placa)
         {
             NodoVehiculo<int>* newNode = (NodoVehiculo<int>*)Marshal.AllocHGlobal(sizeof(NodoVehiculo<int>));
             newNode->ID = id;

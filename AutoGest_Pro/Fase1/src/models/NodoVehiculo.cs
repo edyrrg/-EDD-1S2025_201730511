@@ -5,7 +5,7 @@ namespace Fase1.src.models
         public T ID;
         public int IdUsuario;
         public string Marca;
-        public string Modelo;
+        public int Modelo;
         public string Placa;
         public NodoVehiculo<T>* Next;
         public NodoVehiculo<T>* Prev;
