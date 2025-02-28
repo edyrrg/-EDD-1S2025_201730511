@@ -1,6 +1,12 @@
 using Fase1.src.models;
 using System;
 using System.Runtime.InteropServices;
+//Importar paquetes para graphviz
+using DotNetGraph.Compilation;
+using DotNetGraph.Core;
+using DotNetGraph.Extensions;
+//Importar paquete para ejecutar el comando (este ya viene instalado)
+using System.Diagnostics;
 
 namespace Fase1.src.adt
 {
@@ -133,6 +139,83 @@ namespace Fase1.src.adt
                 current = current->Next;
             }
             return 0;
+        }
+
+        public bool GenerarReporte()
+        {
+            DotGraph graph = new DotGraph()
+                                .WithIdentifier("Listado de Vehiculos")
+                                .Directed()
+                                .WithRankDir(DotRankDir.LR)
+                                .WithLabel("Listado de Vehiculos");
+
+            if (head == null) return false;
+            NodoVehiculo<int>* current = head;
+
+            while (current != null)
+            {
+                if (current->Next != null)
+                {
+                    NodoVehiculo<int>* next = current->Next;
+                    DotNode node1 = new DotNode()
+                                    .WithIdentifier(current->ID.ToString())
+                                    .WithShape(DotNodeShape.Box)
+                                    .WithLabel($"ID: {current->ID}\nID Usuario: {current->IdUsuario}\nMarca: {current->Marca}\nModelo: {current->Modelo}\nPlaca: {current->Placa}")
+                                    .WithFillColor(DotColor.Azure)
+                                    .WithFontColor(DotColor.Black);
+                
+                    DotNode node2 = new DotNode()
+                                    .WithIdentifier(next->ID.ToString())
+                                    .WithShape(DotNodeShape.Box)
+                                    .WithLabel($"ID: {next->ID}\nID Usuario: {next->IdUsuario}\nMarca: {next->Marca}\nModelo: {next->Modelo}\nPlaca: {next->Placa}")
+                                    .WithFillColor(DotColor.Azure)
+                                    .WithFontColor(DotColor.Black)
+                                    .WithWidth(0.5)
+                                    .WithHeight(0.5)
+                                    .WithPenWidth(1.5)
+                                    .WithWidth(0.5)
+                                    .WithHeight(0.5)
+                                    .WithPenWidth(1.5);
+
+                    DotEdge edge1 = new DotEdge()
+                                    .From(node1)
+                                    .To(node2)
+                                    .WithArrowHead(DotEdgeArrowType.Normal)
+                                    .WithColor(DotColor.Black)
+                                    .WithFontColor(DotColor.Black)
+                                    .WithPenWidth(1.5);
+                    
+                    DotEdge edge2 = new DotEdge()
+                                    .From(node2)
+                                    .To(node1)
+                                    .WithArrowHead(DotEdgeArrowType.Normal)
+                                    .WithColor(DotColor.Black)
+                                    .WithFontColor(DotColor.Black)
+                                    .WithPenWidth(1.5);
+                    
+                    graph.Elements.Add(node1);
+                    graph.Elements.Add(node2);
+                    graph.Elements.Add(edge1);
+                    graph.Elements.Add(edge2);
+                }
+                current = current->Next;
+            }
+
+            using var writer = new StringWriter();
+            var context = new CompilationContext(writer, new CompilationOptions());
+            graph.CompileAsync(context);
+
+            var result = writer.GetStringBuilder().ToString();
+
+            // Save it to a file
+            File.WriteAllText("../../AutoGest_Pro/Fase1/reportes/ListadoVehiculos.dot", result);
+
+            ProcessStartInfo startInfo = new ProcessStartInfo("dot");
+
+            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase1/reportes/ListadoVehiculos.dot -o ../../AutoGest_Pro/Fase1/reportes/ListadoVehiculos.png";
+
+            Process.Start(startInfo);
+            return true;
         }
         ~DoubleLinkedList()
         {

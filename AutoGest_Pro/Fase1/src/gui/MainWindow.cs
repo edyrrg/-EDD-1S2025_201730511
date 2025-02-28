@@ -102,14 +102,51 @@ namespace Fase1.src.gui
 
         private void OnGenerarReportesClicked(object? sender, EventArgs e)
         {
-            var dialog = new MessageDialog(this,
-                DialogFlags.Modal,
-                MessageType.Info,
-                ButtonsType.Ok,
-                "Funcionalidad no implementada | Reportes");
-            dialog.Run();
-            dialog.Destroy();
-            return;
+            try
+            {
+                _DataService.GenerarReporteListadoUsuarios();
+                PopSucess("Reporte de usuarios generado correctamente");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _DataService.GenerarReporteListadoVehiculos();
+                PopSucess("Reporte de vehículos generado correctamente");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _DataService.GenerarReporteListadoRepuestos();
+                PopSucess("Reporte de repuestos generado correctamente");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _DataService.GenerarReporteListadoServicios();
+                PopSucess("Reporte de servicios generado correctamente");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _DataService.GenerarReporteListadoFacturas();
+                PopSucess("Reporte de facturas generado correctamente");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
     }
 }
