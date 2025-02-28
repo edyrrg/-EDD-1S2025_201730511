@@ -124,8 +124,8 @@ namespace Fase1.src.services
             }
             ColaServicio.Enqueue(servicio.ID, servicio.IdRepuesto, servicio.IdVehiculo, servicio
                                     .Detalles, servicio.Costo);
-            Console.WriteLine("Servicio creado correctamente");
-            ColaServicio.Print();
+            // Console.WriteLine("Servicio creado correctamente");
+            // ColaServicio.Print();
         }
 
         public void CrearFactura(Factura factura)
@@ -135,8 +135,8 @@ namespace Fase1.src.services
                 throw new Exception("No hay servicios en la cola para generar la factura");
             }
             PilaFactura.Push(factura.IdOrden, factura.Total);
-            Console.WriteLine("Factura creada correctamente");
-            PilaFactura.Print();
+            // Console.WriteLine("Factura creada correctamente");
+            // PilaFactura.Print();
         }
         public Factura? CancelarFactura()
         {
@@ -145,6 +145,45 @@ namespace Fase1.src.services
                 throw new Exception("No existen Facturas pendientes por cancelar");
             }
             return PilaFactura.Pop();
+        }
+        public void GenerarReporteListadoUsuarios()
+        {
+            if (!ListadoUsuarios.GenerarReporte())
+            {
+                throw new Exception("No hay usuarios registrados");
+            }
+        }
+
+        public void GenerarReporteListadoVehiculos()
+        {
+            if (!ListadoVehiculos.GenerarReporte())
+            {
+                throw new Exception("No hay vehículos registrados");
+            }
+        }
+
+        public void GenerarReporteListadoRepuestos()
+        {
+            if (!ListadoRepuestos.GenerarReporte())
+            {
+                throw new Exception("No hay repuestos registrados");
+            }
+        }
+
+        public void GenerarReporteListadoServicios()
+        {
+            if (!ColaServicio.GenerarReporte())
+            {
+                throw new Exception("No hay servicios registrados");
+            }
+        }
+
+        public void GenerarReporteListadoFacturas()
+        {
+            if (!PilaFactura.GenerarReporte())
+            {
+                throw new Exception("No hay facturas registradas");
+            }
         }
     }
 }

@@ -56,28 +56,26 @@ namespace Fase1.src.gui
             var filter = new FileFilter { Name = "Archivos JSON" };
             filter.AddPattern("*.json");
             dialog.Filter = filter;
-            dialog.SetCurrentFolder("/mnt/c/Users/edyrr/Downloads");
+            // dialog.SetCurrentFolder("/mnt/c/Users/edyrr/Downloads");
 
             try
             {
                 if (dialog.Run() == (int)ResponseType.Accept)
                 {
                     var filename = dialog.Filename;
-                    try
-                    {
-                        string jsonText = File.ReadAllText(filename);
-                        // Console.WriteLine(jsonText);
-                        ProcessFileByType(jsonText);
-                    }
-                    catch (Exception ex)
-                    {
-                        PopError(ex.Message);
-                    }
+
+                    string jsonText = File.ReadAllText(filename);
+                    // Console.WriteLine(jsonText);
+                    ProcessFileByType(jsonText);
                 }
                 else
                 {
                     PopError("No se seleccionó ningún archivo");
                 }
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
             }
             finally
             {
@@ -105,7 +103,15 @@ namespace Fase1.src.gui
 
         private void DeserializarUsuarios(string jsonText)
         {
-            var usuarios = JsonSerializer.Deserialize<List<Usuario>>(jsonText);
+            List<Usuario>? usuarios = null;
+            try
+            {
+                usuarios = JsonSerializer.Deserialize<List<Usuario>>(jsonText);
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
             if (usuarios is null)
             {
                 PopError("No se pudo deserializar el archivo JSON");
@@ -129,7 +135,15 @@ namespace Fase1.src.gui
 
         private void DeserializarVehiculos(string jsonText)
         {
-            var vehiculos = JsonSerializer.Deserialize<List<Vehiculo>>(jsonText);
+            List<Vehiculo>? vehiculos = null;
+            try
+            {
+                vehiculos = JsonSerializer.Deserialize<List<Vehiculo>>(jsonText);
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
             if (vehiculos is null)
             {
                 PopError("No se pudo deserializar el archivo JSON");
@@ -153,7 +167,15 @@ namespace Fase1.src.gui
 
         private void DeserializarRepuestos(string jsonText)
         {
-            var repuestos = JsonSerializer.Deserialize<List<RepuestoModel>>(jsonText);
+            List<RepuestoModel>? repuestos = null;
+            try
+            {
+                repuestos = JsonSerializer.Deserialize<List<RepuestoModel>>(jsonText);
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
             if (repuestos is null)
             {
                 PopError("No se pudo deserializar el archivo JSON");
@@ -175,7 +197,7 @@ namespace Fase1.src.gui
             // _DataService.ListadoRepuestos.Print();
         }
 
-        
+
     }
 
 }
