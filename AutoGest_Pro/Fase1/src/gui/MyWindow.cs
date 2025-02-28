@@ -32,5 +32,19 @@ namespace Fase1.src.gui
             _contextParent?.ShowAll();
             Destroy();
         }
+
+        public void PopError(string txtError)
+        {
+            var dialogError = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, $"{txtError}");
+            dialogError.Run();
+            dialogError.Destroy();
+        }
+
+        public void PopSucess(string txtSuccess)
+        {
+            var dialogSuccess = new MessageDialog(this, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, $"{txtSuccess}");
+            dialogSuccess.Run();
+            dialogSuccess.Destroy();
+        }
     }
 }

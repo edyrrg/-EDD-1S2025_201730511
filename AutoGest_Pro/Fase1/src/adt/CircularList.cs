@@ -46,6 +46,29 @@ namespace Fase1.src.adt
             return 0;
         }
 
+        public RepuestoModel? Find(int id)
+        {
+            if (head == null) return null;
+
+            NodoRepuesto<int>* current = head;
+            do
+            {
+                if (current->ID == id)
+                {
+                    return new RepuestoModel
+                    {
+                        ID = current->ID,
+                        Repuesto = current->Repuesto,
+                        Detalles = current->Detalles,
+                        Costo = current->Costo
+                    };
+                }
+                current = current->Next;
+            } while (current != head);
+
+            return null;
+        }
+
         public int Delete(int id)
         {
             if (head == null) return 0;

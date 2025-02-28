@@ -1,5 +1,6 @@
 using Fase1.src.models;
 using System;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 
 namespace Fase1.src.adt
@@ -45,6 +46,50 @@ namespace Fase1.src.adt
             NodoServicio<int>* tmp = head;
             head = head->Next;
             Marshal.FreeHGlobal((IntPtr)tmp);
+        }
+
+        public int Search(int id)
+        {
+            if (head == null) return 0;
+
+            NodoServicio<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return 1;
+                }
+                current = current->Next;
+            }
+            return 0;
+        }
+
+        public Servicio? Find(int id)
+        {
+            if (head == null) return null;
+
+            NodoServicio<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return new Servicio
+                    {
+                        ID = current->ID,
+                        IdRepuesto = current->IdRepuesto,
+                        IdVehiculo = current->IdVehiculo,
+                        Detalles = current->Detalles,
+                        Costo = current->Costo
+                    };
+                }
+                current = current->Next;
+            }
+            return null;
+
+        }
+        public bool IsEmpty()
+        {
+            return head == null;
         }
         public void Print()
         {

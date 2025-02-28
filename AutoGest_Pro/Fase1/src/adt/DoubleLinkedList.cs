@@ -48,17 +48,23 @@ namespace Fase1.src.adt
             return 0;
         }
 
-        public List<NodoVehiculo<int>>? SearchVehiclesByUserId(int idUsuario)
+        public List<Vehiculo>? SearchVehiclesByUserId(int idUsuario)
         {
             if (head == null) return null;
-            List<NodoVehiculo<int>> vehicles = new List<NodoVehiculo<int>>();
+            var vehicles = new List<Vehiculo>();
 
             NodoVehiculo<int>* current = head;
             while (current != null)
             {
                 if (current->IdUsuario == idUsuario)
                 {
-                    vehicles.Add(*current);
+                    var ID = current->ID;
+                    var IDUsuario = current->IdUsuario;
+                    var marca = current->Marca;
+                    var modelo = current->Modelo;
+                    var placa = current->Placa;
+                    var vehiculo = new Vehiculo { ID = ID, ID_Usuario = IDUsuario, Marca = marca, Modelo = modelo, Placa = placa };
+                    vehicles.Add(vehiculo);
                 }
                 current = current->Next;
             }
@@ -98,10 +104,12 @@ namespace Fase1.src.adt
                     if (prev == null)
                     {
                         head = current->Next;
-                        if(head != null)
+                        if (head != null)
                         {
                             head->Prev = null;
-                        } else {
+                        }
+                        else
+                        {
                             tail = null;
                         }
 
@@ -112,7 +120,9 @@ namespace Fase1.src.adt
                         if (current->Next != null)
                         {
                             current->Next->Prev = prev;
-                        } else {
+                        }
+                        else
+                        {
                             tail = prev;
                         }
                     }

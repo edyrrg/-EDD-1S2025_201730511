@@ -1,18 +1,21 @@
+using Fase1.src.models;
+using Fase1.src.services;
 using Gtk;
 
 namespace Fase1.src.gui
 {
     public class IngresoRepuesto : MyWindow
     {
+        private readonly DataService _DataService;
         private Entry _txtId;
         private Entry _txtRepuesto;
         private Entry _txtDetalles;
         private Entry _txtCosto;
 
-        public IngresoRepuesto(Window contextParent) : base("Ingreso Individual | AutoGest Pro", contextParent)
+        public IngresoRepuesto(Window contextParent, DataService dataService) : base("Ingreso Individual | AutoGest Pro", contextParent)
         {
-            // Pasando referencia de la ventana principal
-            // _contextMain = contextMain;
+            // Inyectamos dataService
+            _DataService = dataService;
 
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
@@ -48,7 +51,32 @@ namespace Fase1.src.gui
             var detalles = _txtDetalles.Text;
             var costo = _txtCosto.Text;
 
-            return;
+            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(repuesto) || string.IsNullOrWhiteSpace(detalles) || string.IsNullOrWhiteSpace(costo))
+            {
+                PopError("Por favor, llene todos los campos.");
+                return;
+            }
+
+            try
+            {
+                _DataService.IngresarRepuesto(new RepuestoModel
+                {
+                    ID = int.Parse(id),
+                    Repuesto = repuesto,
+                    Detalles = detalles,
+                    Costo = float.Parse(costo)
+                });
+                PopSucess("Repuesto ingresado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            } finally {
+                _txtId.Text = "";
+                _txtRepuesto.Text = "";
+                _txtDetalles.Text = "";
+                _txtCosto.Text = "";
+            }
         }
     }
 }

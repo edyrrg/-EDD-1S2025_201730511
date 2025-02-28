@@ -1,4 +1,5 @@
 using Fase1.src.models;
+using GLib;
 using System;
 using System.Runtime.InteropServices;
 
@@ -49,7 +50,7 @@ namespace Fase1.src.adt
          *  @return void
          */
 
-        public int Udpate(int id, string nombres, string apellidos, string correo, string Contrasenia)
+        public int Update(int id, string nombres, string apellidos, string correo)
         {
             if (head == null) return 0;
             if (head->ID == id)
@@ -57,7 +58,6 @@ namespace Fase1.src.adt
                 head->Nombres = nombres;
                 head->Apellidos = apellidos;
                 head->Correo = correo;
-                head->Contrasenia = Contrasenia;
                 return 1;
             }
             NodoUsuario<int>* current = head;
@@ -68,12 +68,56 @@ namespace Fase1.src.adt
                     current->Nombres = nombres;
                     current->Apellidos = apellidos;
                     current->Correo = correo;
-                    current->Contrasenia = Contrasenia;
-                    break;
+                    return 1;
                 }
                 current = current->Next;
             }
-            return 1;
+            return 0;
+        }
+        /** 
+         *  Busca un nodo de la lista simplemente enlazada por medio de su id
+         *  @param id
+         *  @return 1 si se encontro, 0 si no se encontro
+         */
+        public int Search(int id)
+        {
+            if (head == null) return 0;
+            NodoUsuario<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return 1;
+                }
+                current = current->Next;
+            }
+            return 0;
+        }
+        /** 
+         *  Busca un nodo de la lista simplemente enlazada por medio de su id
+         *  @param id
+         *  @return Usuario
+         */
+        public Usuario? Find(int id)
+        {
+            if (head == null) return null;
+            NodoUsuario<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return new Usuario
+                    {
+                        ID = current->ID,
+                        Nombres = current->Nombres,
+                        Apellidos = current->Apellidos,
+                        Correo = current->Correo,
+                        Contrasenia = current->Contrasenia
+                    };
+                }
+                current = current->Next;
+            }
+            return null;
         }
 
         /** 

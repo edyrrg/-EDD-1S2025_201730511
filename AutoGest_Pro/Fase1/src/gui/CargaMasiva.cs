@@ -1,15 +1,20 @@
 using Gtk;
 using Fase1.src.models;
 using System.Text.Json;
+using Fase1.src.services;
 
 namespace Fase1.src.gui
 {
     public class CargaMasiva : MyWindow
     {
+        private readonly DataService _DataService;
         private ComboBoxText _comboBox;
 
-        public CargaMasiva(Window contextParent) : base("Carga Masiva | AutoGest Pro", contextParent)
+        public CargaMasiva(Window contextParent, DataService dataService) : base("Carga Masiva | AutoGest Pro", contextParent)
         {
+            // Inyección de dependencias
+            _DataService = dataService;
+
             SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
@@ -61,19 +66,17 @@ namespace Fase1.src.gui
                     try
                     {
                         string jsonText = File.ReadAllText(filename);
-                        Console.WriteLine(jsonText);
+                        // Console.WriteLine(jsonText);
                         ProcessFileByType(jsonText);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error al leer el archivo: {ex.Message}");
+                        PopError(ex.Message);
                     }
                 }
                 else
                 {
-                    var dialogError = new MessageDialog(this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "No se seleccionó ningún archivo");
-                    dialogError.Run();
-                    dialogError.Destroy();
+                    PopError("No se seleccionó ningún archivo");
                 }
             }
             finally
@@ -89,10 +92,10 @@ namespace Fase1.src.gui
                     DeserializarUsuarios(jsonText);
                     break;
                 case "Carga de Vehiculos":
-                    DeserializarVehiculos();
+                    DeserializarVehiculos(jsonText);
                     break;
                 case "Carga de Repuestos":
-                    DeserializarRepuestos();
+                    DeserializarRepuestos(jsonText);
                     break;
                 default:
                     break;
@@ -105,23 +108,74 @@ namespace Fase1.src.gui
             var usuarios = JsonSerializer.Deserialize<List<Usuario>>(jsonText);
             if (usuarios is null)
             {
-                Console.WriteLine("Error al deserializar el archivo JSON");
+                PopError("No se pudo deserializar el archivo JSON");
                 return;
             }
+
             foreach (var usuario in usuarios)
             {
-                Console.WriteLine(usuario);
+                try
+                {
+                    _DataService.IngresarUsuario(usuario);
+                }
+                catch (Exception ex)
+                {
+                    PopError(ex.Message);
+                }
             }
+            PopSucess("Usuarios cargados exitosamente");
+            // _DataService.ListadoUsuarios.Print();
         }
 
-        private void DeserializarVehiculos()
+        private void DeserializarVehiculos(string jsonText)
         {
-            return;
+            var vehiculos = JsonSerializer.Deserialize<List<Vehiculo>>(jsonText);
+            if (vehiculos is null)
+            {
+                PopError("No se pudo deserializar el archivo JSON");
+                return;
+            }
+
+            foreach (var vehiculo in vehiculos)
+            {
+                try
+                {
+                    _DataService.IngresarVehiculo(vehiculo);
+                }
+                catch (Exception ex)
+                {
+                    PopError(ex.Message);
+                }
+            }
+            PopSucess("Vehiculos cargados exitosamente");
+            // _DataService.ListadoVehiculos.Print();
         }
 
-        private void DeserializarRepuestos()
+        private void DeserializarRepuestos(string jsonText)
         {
-            return;
+            var repuestos = JsonSerializer.Deserialize<List<RepuestoModel>>(jsonText);
+            if (repuestos is null)
+            {
+                PopError("No se pudo deserializar el archivo JSON");
+                return;
+            }
+
+            foreach (var respuesto in repuestos)
+            {
+                try
+                {
+                    _DataService.IngresarRepuesto(respuesto);
+                }
+                catch (Exception ex)
+                {
+                    PopError(ex.Message);
+                }
+            }
+            PopSucess("Repuestos cargados exitosamente");
+            // _DataService.ListadoRepuestos.Print();
         }
+
+        
     }
+
 }
