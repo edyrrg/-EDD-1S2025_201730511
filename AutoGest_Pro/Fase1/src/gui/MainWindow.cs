@@ -7,12 +7,12 @@ namespace Fase1.src.gui
     public class MainWindow : MyWindow
     {
         private readonly DataService _DataService;
-        
+
         public MainWindow(DataService dataService) : base("Menu Principal | AutoGest Pro")
         {
             _DataService = dataService;
 
-            SetDefaultSize(450, 350);
+            SetDefaultSize(450, 400);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
 
@@ -43,12 +43,16 @@ namespace Fase1.src.gui
             var btnCancelarFactura = new Button("Cancelar Factura");
             btnCancelarFactura.Clicked += OnCancelarFacturaClicked;
 
+            var btnGenerarReportes = new Button("Generar Reportes");
+            btnGenerarReportes.Clicked += OnGenerarReportesClicked;
+
             // Agregando botones al vbox
             vbox.PackStart(btnCargaMasiva, false, false, 6);
             vbox.PackStart(btnIngresoIndividual, false, false, 6);
             vbox.PackStart(btnGestionDeUsuarios, false, false, 6);
             vbox.PackStart(btnGenerarServicio, false, false, 6);
             vbox.PackStart(btnCancelarFactura, false, false, 6);
+            vbox.PackStart(btnGenerarReportes, false, false, 6);
 
             Add(vbox);
             ShowAll();
@@ -58,7 +62,7 @@ namespace Fase1.src.gui
         {
             var cargaMasiva = new CargaMasiva(this, _DataService);
             cargaMasiva.ShowAll();
-            
+
             Hide();
         }
 
@@ -78,18 +82,31 @@ namespace Fase1.src.gui
 
         private void OnGenerarServicioClicked(object? sender, EventArgs e)
         {
-            var GenerarServicio = new GenerarServicio(this);
+            var GenerarServicio = new GenerarServicio(this, _DataService);
             GenerarServicio.ShowAll();
             Hide();
         }
 
         private void OnCancelarFacturaClicked(object? sender, EventArgs e)
         {
+            try
+            {
+                var factura = _DataService.CancelarFactura();
+                PopSucess($"Factura Cancelada/Pagada\nID: {factura?.ID}\nOrden: {factura?.IdOrden}\nTotal: {factura?.Total}");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+        }
+
+        private void OnGenerarReportesClicked(object? sender, EventArgs e)
+        {
             var dialog = new MessageDialog(this,
                 DialogFlags.Modal,
                 MessageType.Info,
                 ButtonsType.Ok,
-                "Funcionalidad no implementada | Facturación\n\nID:\t\t\t1\nID Orden:\t\t1\nTotal:\t\t200");
+                "Funcionalidad no implementada | Reportes");
             dialog.Run();
             dialog.Destroy();
             return;

@@ -7,7 +7,7 @@ namespace Fase1.src.gui
 {
     public class CargaMasiva : MyWindow
     {
-        private DataService _DataService;
+        private readonly DataService _DataService;
         private ComboBoxText _comboBox;
 
         public CargaMasiva(Window contextParent, DataService dataService) : base("Carga Masiva | AutoGest Pro", contextParent)

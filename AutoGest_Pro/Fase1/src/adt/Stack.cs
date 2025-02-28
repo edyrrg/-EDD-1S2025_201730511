@@ -6,23 +6,35 @@ namespace Fase1.src.adt
 {
     public unsafe class Stack<T> where T : unmanaged
     {
+        private int countId = 0;
         private NodoFactura<int>* top = null;
-        public void Push(int id, int idOrder, float total)
+        public void Push(int idOrder, float total)
         {
             NodoFactura<int>* newNode = (NodoFactura<int>*)Marshal.AllocHGlobal(sizeof(NodoFactura<T>));
-            newNode->ID = id;
+            newNode->ID = ++countId;
             newNode->IdOrden = idOrder;
             newNode->Total = total;
             newNode->Next = top;
             top = newNode;
         }
 
-        public void Pop()
+        public Factura? Pop()
         {
-            if (top == null) return;
+            if (top == null) return null;
             NodoFactura<int>* tmp = top;
             top = top->Next;
+            var Factura = new Factura{
+                ID = tmp->ID,
+                IdOrden = tmp->IdOrden,
+                Total = tmp->Total
+            };
             Marshal.FreeHGlobal((IntPtr)tmp);
+            return Factura;
+        }
+
+        public bool IsEmpty()
+        {
+            return top == null;
         }
 
         public void Print()

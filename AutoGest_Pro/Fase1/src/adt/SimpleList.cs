@@ -50,7 +50,7 @@ namespace Fase1.src.adt
          *  @return void
          */
 
-        public int Udpate(int id, string nombres, string apellidos, string correo, string Contrasenia)
+        public int Update(int id, string nombres, string apellidos, string correo)
         {
             if (head == null) return 0;
             if (head->ID == id)
@@ -58,7 +58,6 @@ namespace Fase1.src.adt
                 head->Nombres = nombres;
                 head->Apellidos = apellidos;
                 head->Correo = correo;
-                head->Contrasenia = Contrasenia;
                 return 1;
             }
             NodoUsuario<int>* current = head;
@@ -69,12 +68,11 @@ namespace Fase1.src.adt
                     current->Nombres = nombres;
                     current->Apellidos = apellidos;
                     current->Correo = correo;
-                    current->Contrasenia = Contrasenia;
-                    break;
+                    return 1;
                 }
                 current = current->Next;
             }
-            return 1;
+            return 0;
         }
         /** 
          *  Busca un nodo de la lista simplemente enlazada por medio de su id

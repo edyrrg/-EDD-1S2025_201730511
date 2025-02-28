@@ -70,29 +70,14 @@ namespace Fase1.src.gui
 
             if (AuthService.Login(username, password))
             {
-
-                var dialog = new MessageDialog(
-                    this,
-                    DialogFlags.Modal,
-                    MessageType.Info,
-                    ButtonsType.Ok,
-                    "Bienvenido " + username);
-                dialog.Run();
-                dialog.Destroy();
+                PopSucess($"Bienvenido {username}");
                 Hide();
                 var mainWindow = new MainWindow(_DataService);
                 mainWindow.ShowAll();
             }
             else
             {
-                var dialog = new MessageDialog(
-                    this,
-                    DialogFlags.Modal,
-                    MessageType.Warning,
-                    ButtonsType.Close,
-                    "Usuario o contraseña incorrectos");
-                dialog.Run();
-                dialog.Destroy();
+                PopError("Usuario o contraseña incorrectos");
             }
         }
     }

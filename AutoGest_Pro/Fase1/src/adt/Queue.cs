@@ -1,5 +1,6 @@
 using Fase1.src.models;
 using System;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 
 namespace Fase1.src.adt
@@ -61,6 +62,34 @@ namespace Fase1.src.adt
                 current = current->Next;
             }
             return 0;
+        }
+
+        public Servicio? Find(int id)
+        {
+            if (head == null) return null;
+
+            NodoServicio<int>* current = head;
+            while (current != null)
+            {
+                if (current->ID == id)
+                {
+                    return new Servicio
+                    {
+                        ID = current->ID,
+                        IdRepuesto = current->IdRepuesto,
+                        IdVehiculo = current->IdVehiculo,
+                        Detalles = current->Detalles,
+                        Costo = current->Costo
+                    };
+                }
+                current = current->Next;
+            }
+            return null;
+
+        }
+        public bool IsEmpty()
+        {
+            return head == null;
         }
         public void Print()
         {

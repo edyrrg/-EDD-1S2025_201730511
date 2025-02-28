@@ -75,7 +75,9 @@ namespace Fase1.src.gui
             catch (Exception ex)
             {
                 PopError(ex.Message);
-            }finally{
+            }
+            finally
+            {
                 _txtId.Text = "";
                 _txtNombre.Text = "";
                 _txtApellido.Text = "";
