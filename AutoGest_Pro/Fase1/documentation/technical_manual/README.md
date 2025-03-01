@@ -153,6 +153,20 @@ Entorno de desarrollo utilizado en AutoGest Pro
     - Versión de Direct3D: 1.611.1-81528511
     - Versión DXCore: 10.0.26100.1-240331-1435.ge-release
     - Versión de Windows: 10.0.26100.3194
+7. **SO**
+    - Edición Windows 11 Pro
+    - Versión 24H2
+    - Instalado el 14/02/2025
+    - Versión del sistema operativo 26100.3194
+    - Experiencia   Paquete de experiencia de características de Windows 1000.26100.48.0
+8. **Hardware**
+    - Nombre del dispositivo ryuk
+    - Procesador 12th Gen Intel(R) Core(TM) i5-12400   2.50 GHz
+    - RAM instalada 32.0 GB (31.7 GB usable)
+    - Identificador de dispositivo D0A7005E-E4EC-4772-B8C9-3A6345BC06CE
+    - Id. del producto 00330-80000-00000-AA075
+    - Tipo de sistema Sistema operativo de 64 bits, procesador basado en x64
+    - Lápiz y entrada táctil La entrada táctil o manuscrita no está disponible para esta pantalla
 
 > *by Edy Rolando Rojas González*
 

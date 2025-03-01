@@ -18,7 +18,7 @@ Repositorio para el curso de Estructura de Datos Sección B, Primer Semestre del
 
 #### Documentación
 
-- [Manual Técnica](./AutoGest_Pro/Fase1/documentation/technical_manual/README.md)
+- [Manual Técnico](./AutoGest_Pro/Fase1/documentation/technical_manual/README.md)
 - [Manual de Usuario](./AutoGest_Pro/Fase1/documentation/user_manul/README.md)
 
 > *By. Edy Rolando Rojas González*
