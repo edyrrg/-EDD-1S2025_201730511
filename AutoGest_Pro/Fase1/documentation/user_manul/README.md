@@ -130,6 +130,6 @@ Permite al usuario root(Administrador) Cargar de manera masiva Usuarios, Vehicul
 
 Soporte Técnico
 
-> *by Edy Rolando Rojas González - 3251938781401@ingenieria.usac.edu.gt*
+> *by Edy Rolando Rojas González - [3251938781401@ingenieria.usac.edu.gt](mail:3251938781401@ingenieria.usac.edu.gt)*
 
 [Regresar](/README.md)
