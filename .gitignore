@@ -411,5 +411,5 @@ obj/
 # End of https://www.toptal.com/developers/gitignore/api/csharp,dotnetcore
 
 # Grapviz files
-*.png
+/AutoGest_Pro/Fase1/reportes/*.png
 *.dot

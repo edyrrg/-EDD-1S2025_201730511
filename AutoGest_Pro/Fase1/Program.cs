@@ -16,7 +16,7 @@ namespace Fase1
             
             Application.Init();
             var dataService = DataService.Instance;
-            _ = new MainWindow(dataService);
+            _ = new Login(dataService);
             Application.Run();
 
             // var SimpleList = new SimpleList<int>();
