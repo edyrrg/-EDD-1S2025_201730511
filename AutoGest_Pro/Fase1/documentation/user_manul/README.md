@@ -128,6 +128,52 @@ Permite al usuario root(Administrador) Cargar de manera masiva Usuarios, Vehicul
 ]
 ```
 
+## Ingreso Individual
+
+Permite al usuario ROOT registrar de manera individual un nuevo Usuario, Vehiculo o Repuesto de manera individual.  
+![registro_individual](/documentation/images/menu_ingreso_individual.png)
+
+### Formulario de Registro Invidual
+
+Cuando el usuario ROOT selecciona el registro que desea hacer se aperturara la siguiente vista de formulario para ingresar la informacion correspondiente al nuevo datos que desea crear.  
+
+![formulario_registro_individual](/documentation/images/formulario_ingreso_individual.png)
+
+Es obligatorio llenar todo el formulario.
+De lo contrario aparecera una advertencia indicando que existen llenar campos.
+
+![campos_faltantes](/documentation/images/advertencia_campos_faltantes.png)
+
+## Gestion de Usuarios
+
+El usuario ROOT puede gestionar los usuarios permitiendo realizar los siguiente.  
+
+- Buscar Usuario: busca el usuario por el identificador unico.
+- Modificar: bloquea la informacion del usuario para poder actualizar seguidamente.
+- Actualizar: Actualiza la informacion del usuario en cuestion poseterior a ser seteada la informacion actual, entonces actualiza los datos de usuario con los nuevo ingresados.
+- Eliminar: Elimina el usuario despues de haberlo encontrado con el identificador correspondiente.
+- El area de texto a la par del formulario de Usuario muestra los vehiculos del usuario consultado.
+
+![gestion_usuario](/documentation/images/gestion_usuario.png)
+
+## Generar Servicio
+
+En esta opcion se permite generar un servicio a un vehiculo con los identificadores de vehiculo y servicio, adicional es necesario agregar el detalle y costo total.  
+
+![generar_servicio](/documentation/images/generar_servicio.png)
+
+El nuevo servicio se agrega a la cola.
+
+## Cancelar Factura
+
+Al clickear este boton se cancelara la factura que se contraba en pila y se mostrar la informacion del servicio con total pagado.
+
+![cancelar_factura](/documentation/images/cancelar_factura.png)
+
+## Reportes
+
+Se generan los reportes en .png en formato y se guardan en la carpeta [reportes](/reportes/) y ahi tambien se encuentra los archivos .dot  
+
 Soporte Técnico
 
 > *by Edy Rolando Rojas González - [3251938781401@ingenieria.usac.edu.gt](mail:3251938781401@ingenieria.usac.edu.gt)*

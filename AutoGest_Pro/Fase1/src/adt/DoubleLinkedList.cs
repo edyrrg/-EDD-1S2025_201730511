@@ -217,6 +217,41 @@ namespace Fase1.src.adt
             Process.Start(startInfo);
             return true;
         }
+
+        public void TopCincoVehiculosMasAntiguos()
+        {
+            if (head == null)
+            {
+                Console.WriteLine("Lista vacia");
+                return;
+            }
+
+            List<Vehiculo> vehiculos = new List<Vehiculo>();
+            NodoVehiculo<int>* current = head;
+
+            while (current != null)
+            {
+                var vehiculo = new Vehiculo 
+                { 
+                    ID = current->ID, 
+                    ID_Usuario = current->IdUsuario, 
+                    Marca = current->Marca, 
+                    Modelo = current->Modelo, 
+                    Placa = current->Placa 
+                };
+                vehiculos.Add(vehiculo);
+                current = current->Next;
+            }
+
+            var topCinco = vehiculos.OrderBy(v => v.Modelo).Take(5).ToList();
+
+            Console.WriteLine("Top 5 Vehículos Más Antiguos:");
+            foreach (var vehiculo in topCinco)
+            {
+                Console.WriteLine($"ID: {vehiculo.ID}, Marca: {vehiculo.Marca}, Modelo: {vehiculo.Modelo}, Placa: {vehiculo.Placa}");
+            }
+        }
+
         ~DoubleLinkedList()
         {
             if (head == null) return;

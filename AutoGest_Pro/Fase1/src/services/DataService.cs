@@ -160,6 +160,7 @@ namespace Fase1.src.services
             {
                 throw new Exception("No hay vehículos registrados");
             }
+            ListadoVehiculos.TopCincoVehiculosMasAntiguos();
         }
 
         public void GenerarReporteListadoRepuestos()
