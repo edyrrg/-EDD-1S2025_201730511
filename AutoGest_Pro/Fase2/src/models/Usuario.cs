@@ -8,5 +8,10 @@ namespace Fase2.src.models
         public string Correo { get; set; } = correo;
         public string Edad { get; set; } = edad;
         public string Contrasenia { get; set; } = contrasenia;
+
+        public override string ToString()
+        {
+            return $"User\nId: {Id}, Nombres: {Nombres}, Apellidos: {Apellidos}, Correo: {Correo}, Edad: {Edad}, Contrasenia: {Contrasenia}\n";
+        }
     }
 }

@@ -4,12 +4,12 @@ using Gtk;
 namespace Fase2.src.views {
     public class Login : MyWindow
     {
-        private readonly DataService _DataService;
+        // private readonly DataService _DataService;
         private Entry entryUserName;
         private Entry entryPassword;
-        public Login(DataService dataService) : base("Login | AutoGest Pro")
+        public Login() : base("Login | AutoGest Pro")
         {
-            _DataService = dataService;
+            // _DataService = dataService;
             SetDefaultSize(400, 300);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
@@ -65,17 +65,17 @@ namespace Fase2.src.views {
             string username = entryUserName.Text;
             string password = entryPassword.Text;
 
-            if (AuthService.Login(username, password))
-            {
-                PopSucess($"Bienvenido {username}");
-                Hide();
-                var mainWindow = new MainWindow(_DataService);
-                mainWindow.ShowAll();
-            }
-            else
-            {
-                PopError("Usuario o contraseña incorrectos");
-            }
+            // if (AuthService.Login(username, password))
+            // {
+            //     PopSucess($"Bienvenido {username}");
+            //     Hide();
+            //     var mainWindow = new MainWindow(_DataService);
+            //     mainWindow.ShowAll();
+            // }
+            // else
+            // {
+            //     PopError("Usuario o contraseña incorrectos");
+            // }
         }
     }
 }

@@ -23,7 +23,24 @@ namespace Fase2.src.adts
                 _tail = newNode;
             }
         }
-
+        public bool Update(T Data)
+        {
+            if (_head == null)
+            {
+                return false;
+            }
+            var current = _head;
+            while (current != null)
+            {
+                if (current.Data.Equals(Data))
+                {
+                    current.Data = Data;
+                    return true;
+                }
+                current = current.Next;
+            }
+            return false;
+        }
 
     }
 }
