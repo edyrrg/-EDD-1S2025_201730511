@@ -1,3 +1,12 @@
+using Fase2.src.models;
+using System.Runtime.InteropServices;
+//Importar paquetes para graphviz
+using DotNetGraph.Compilation;
+using DotNetGraph.Core;
+using DotNetGraph.Extensions;
+//Importar paquete para ejecutar el comando (este ya viene instalado)
+using System.Diagnostics;
+
 namespace Fase2.src.adts
 {
     public class DoubleLinkedList<T>
@@ -32,7 +41,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if (current.Data.Equals(Data))
+                if ((current.Data as Vehiculo)?.Id == (Data as Vehiculo)?.Id)
                 {
                     current.Data = Data;
                     return true;
@@ -41,6 +50,132 @@ namespace Fase2.src.adts
             }
             return false;
         }
+        public bool SearchById(int Id)
+        {
+            if (_head == null) return false;
+            var current = _head;
+            while (current != null)
+            {
+                if ((current.Data as Vehiculo)?.Id == Id)
+                {
+                    return true;
+                }
+                current = current.Next;
+            }
+            return false;
+        }
 
+        public T? FindById(int Id)
+        {
+            if (_head == null) return default;
+            var current = _head;
+            while (current != null)
+            {
+                if ((current.Data as Vehiculo)?.Id == Id)
+                {
+                    return current.Data;
+                }
+                current = current.Next;
+            }
+            return default;
+        }
+
+        public bool Delete(int id)
+        {
+            if (_head == null) return false;
+            if ((_head.Data as Vehiculo)?.Id == id)
+            {
+                _head = _head.Next;
+                return true;
+            }
+            var current = _head;
+            while (current.Next != null)
+            {
+                if ((current.Next.Data as Vehiculo)?.Id == id)
+                {
+                    current.Next = current.Next.Next;
+                    return true;
+                }
+                current = current.Next;
+            }
+            return false;
+        }
+
+        public bool GenerarReporte()
+        {
+            DotGraph graph = new DotGraph()
+                                .WithIdentifier("Listado de Vehiculos")
+                                .Directed()
+                                .WithRankDir(DotRankDir.LR)
+                                .WithLabel("Listado de Vehiculos");
+
+            if (_head == null) return false;
+            var current = _head;
+
+            while (current != null)
+            {
+                if (current.Next != null)
+                {
+                    var next = current.Next;
+                    DotNode node1 = new DotNode()
+                                    .WithIdentifier((current.Data as Vehiculo)?.Id.ToString())
+                                    .WithShape(DotNodeShape.Box)
+                                    .WithLabel($"ID: {(current.Data as Vehiculo)?.Id.ToString()}\nID Usuario: {(current.Data as Vehiculo)?.IdUsuario.ToString()}\nMarca: {(current.Data as Vehiculo)?.Marca}\nModelo: {(current.Data as Vehiculo)?.Modelo}\nPlaca: {(current.Data as Vehiculo)?.Placa}")
+                                    .WithFillColor(DotColor.Azure)
+                                    .WithFontColor(DotColor.Black);
+
+                    DotNode node2 = new DotNode()
+                                    .WithIdentifier((next.Data as Vehiculo)?.Id.ToString())
+                                    .WithShape(DotNodeShape.Box)
+                                    .WithLabel($"ID: {(next.Data as Vehiculo)?.Id.ToString()}\nID Usuario: {(next.Data as Vehiculo)?.IdUsuario.ToString()}\nMarca: {(next.Data as Vehiculo)?.Marca}\nModelo: {(next.Data as Vehiculo)?.Modelo.ToString()}\nPlaca: {(next.Data as Vehiculo)?.Placa}")
+                                    .WithFillColor(DotColor.Azure)
+                                    .WithFontColor(DotColor.Black)
+                                    .WithWidth(0.5)
+                                    .WithHeight(0.5)
+                                    .WithPenWidth(1.5)
+                                    .WithWidth(0.5)
+                                    .WithHeight(0.5)
+                                    .WithPenWidth(1.5);
+
+                    DotEdge edge1 = new DotEdge()
+                                    .From(node1)
+                                    .To(node2)
+                                    .WithArrowHead(DotEdgeArrowType.Normal)
+                                    .WithColor(DotColor.Black)
+                                    .WithFontColor(DotColor.Black)
+                                    .WithPenWidth(1.5);
+
+                    DotEdge edge2 = new DotEdge()
+                                    .From(node2)
+                                    .To(node1)
+                                    .WithArrowHead(DotEdgeArrowType.Normal)
+                                    .WithColor(DotColor.Black)
+                                    .WithFontColor(DotColor.Black)
+                                    .WithPenWidth(1.5);
+
+                    graph.Elements.Add(node1);
+                    graph.Elements.Add(node2);
+                    graph.Elements.Add(edge1);
+                    graph.Elements.Add(edge2);
+                }
+                current = current.Next;
+            }
+
+            using var writer = new StringWriter();
+            var context = new CompilationContext(writer, new CompilationOptions());
+            graph.CompileAsync(context);
+
+            var result = writer.GetStringBuilder().ToString();
+
+            // Save it to a file
+            File.WriteAllText("../../AutoGest_Pro/Fase2/Reportes/ListadoVehiculos.dot", result);
+
+            ProcessStartInfo startInfo = new ProcessStartInfo("dot");
+
+            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase2/Reportes/ListadoVehiculos.dot -o ../../AutoGest_Pro/Fase2/Reportes/ListadoVehiculos.png";
+
+            Process.Start(startInfo);
+            return true;
+        }
     }
 }
