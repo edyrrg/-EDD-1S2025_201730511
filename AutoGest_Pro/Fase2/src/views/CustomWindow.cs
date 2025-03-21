@@ -2,10 +2,10 @@ using System;
 using Gtk;
 
 namespace Fase2.src.views {
-    public abstract class MyWindow : Window
+    public abstract class CustomWindow : Window
     {
         private readonly Window? _contextParent;
-        public MyWindow(string title, Window? contextParent = null) : base(title) { _contextParent = contextParent; }
+        public CustomWindow(string title, Window? contextParent = null) : base(title) { _contextParent = contextParent; }
         public void AplicarEstilos()
         {
             CssProvider cssProvider = new CssProvider();

@@ -154,6 +154,20 @@ namespace Fase2.src.adts
             return false;
         }
 
+        public bool SearchByEmailAndPass(string email, string pass){
+            if (_head == null) return false;
+            var current = _head;
+            while (current != null)
+            {
+                if ((current.Data as Usuario)?.Correo == email && (current.Data as Usuario)?.Contrasenia == pass)
+                {
+                    return true;
+                }
+                current = current.Next;
+            }
+            return false;
+        }
+
         public bool GenerateReport()
         {
             DotGraph graph = new DotGraph()

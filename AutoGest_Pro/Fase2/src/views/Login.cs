@@ -1,15 +1,17 @@
+using Fase2.src.auth;
+using Fase2.src.services;
 using Gtk;
 
 
 namespace Fase2.src.views {
-    public class Login : MyWindow
+    public class Login : CustomWindow
     {
-        // private readonly DataService _DataService;
+        private readonly DatasManager _dataManager;
         private Entry entryUserName;
         private Entry entryPassword;
-        public Login() : base("Login | AutoGest Pro")
+        public Login(DatasManager datasManager) : base("Login | AutoGest Pro")
         {
-            // _DataService = dataService;
+            _dataManager = datasManager;
             SetDefaultSize(400, 300);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => Application.Quit();
@@ -65,17 +67,34 @@ namespace Fase2.src.views {
             string username = entryUserName.Text;
             string password = entryPassword.Text;
 
-            // if (AuthService.Login(username, password))
-            // {
-            //     PopSucess($"Bienvenido {username}");
-            //     Hide();
-            //     var mainWindow = new MainWindow(_DataService);
-            //     mainWindow.ShowAll();
-            // }
-            // else
-            // {
-            //     PopError("Usuario o contraseña incorrectos");
-            // }
+            (var auth,var  userRole) = AuthService.Login(username, password, _dataManager._userService);
+
+            if (auth && userRole == UserRole.Admin)
+            {
+                PopSucess($"Bienvenido {username}");
+                Hide();
+                var adminMenu = new AdminMenu(this, _dataManager);
+                adminMenu.ShowAll();
+            }
+            else if (auth && userRole == UserRole.User)
+            {
+                PopSucess($"Bienvenido {username}");
+                // Hide();
+                // var userMenu = new UserMenu(_dataManager);
+                // mainWindow.ShowAll();
+            }
+            else
+            {
+                PopError("Usuario o contraseña incorrectos");
+            }
+
+            ClearTxtFields();
+        }
+
+        private void ClearTxtFields()
+        {
+            entryUserName.Text = "";
+            entryPassword.Text = "";
         }
     }
 }
