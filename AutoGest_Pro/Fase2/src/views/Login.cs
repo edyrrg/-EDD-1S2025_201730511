@@ -1,18 +1,32 @@
+using Fase2.src.auth;
+using Fase2.src.models;
+using Fase2.src.services;
 using Gtk;
 
 
-namespace Fase2.src.views {
-    public class Login : MyWindow
+namespace Fase2.src.views
+{
+    public class Login : CustomWindow
     {
-        // private readonly DataService _DataService;
+        private readonly DatasManager _dataManager;
         private Entry entryUserName;
         private Entry entryPassword;
-        public Login() : base("Login | AutoGest Pro")
+        private readonly UserSession _userSession;
+        private readonly LogHistorySessionService _logHistorySessionService;
+        public Login(
+                    DatasManager datasManager,
+                    UserSession userSession,
+                    LogHistorySessionService logHistoryService
+                    ) : base("Login | AutoGest Pro")
         {
-            // _DataService = dataService;
+            // Inyectando las dependencias necesarias a Login
+            _dataManager = datasManager;
+            _userSession = userSession;
+            _logHistorySessionService = logHistoryService;
+
             SetDefaultSize(400, 300);
             SetPosition(WindowPosition.Center);
-            DeleteEvent += (_, _) => Application.Quit();
+            DeleteEvent += (_, _) => CloseApp();
 
             // Aplicando estilos
             AplicarEstilos();
@@ -65,17 +79,66 @@ namespace Fase2.src.views {
             string username = entryUserName.Text;
             string password = entryPassword.Text;
 
-            // if (AuthService.Login(username, password))
-            // {
-            //     PopSucess($"Bienvenido {username}");
-            //     Hide();
-            //     var mainWindow = new MainWindow(_DataService);
-            //     mainWindow.ShowAll();
-            // }
-            // else
-            // {
-            //     PopError("Usuario o contraseña incorrectos");
-            // }
+            (var auth, var userRole) = AuthService.Login(username, password, _dataManager._userService);
+
+            if (auth && userRole == UserRole.Admin)
+            {
+                PopSucess($"Bienvenido {username}");
+                Hide();
+                var dateNow = DateTime.UtcNow;
+                string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
+                var log = new LogHistorySession("Admin", utcFormattedDate); // Nuevo Registro de Log
+                var adminMenu = new AdminMenu(
+                                            this,
+                                            _dataManager,
+                                            log,
+                                            _logHistorySessionService
+                                            );
+                adminMenu.ShowAll();
+            }
+            else if (auth && userRole == UserRole.User)
+            {
+                PopSucess($"Bienvenido {username}");
+                var user = _dataManager._userService.FindUserByEmail(username);
+                try
+                {
+                    _userSession.SetUser(user);
+                }
+                catch (Exception ex)
+                {
+                    PopError(ex.Message);
+                }
+                Hide();
+                var userMenu = new UserMenu(this, _dataManager, _userSession);
+                userMenu.ShowAll();
+            }
+            else
+            {
+                PopError("Usuario o contraseña incorrectos");
+            }
+
+            ClearTxtFields();
+        }
+
+        private void ClearTxtFields()
+        {
+            entryUserName.Text = "";
+            entryPassword.Text = "";
+        }
+
+        private void CloseApp()
+        {
+            try
+            {
+                var filename = "LogHistorySessions.json";
+                _logHistorySessionService.ExportToJsonAndSave(filename);
+                Console.WriteLine($"Archivo JSON exportado correctamente: ./Reportes/{filename}");
+            }
+            catch (Exception ex)
+            {
+                PopError($"Error al exportar el historial de sesiones: {ex.Message}");
+            }
+            Application.Quit();
         }
     }
 }
