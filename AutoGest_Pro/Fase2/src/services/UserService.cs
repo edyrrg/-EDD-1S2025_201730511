@@ -19,11 +19,13 @@ namespace Fase2.src.services
 
         public void InsertUser(Usuario user)
         {
-            if (_usersList.SearchByID(user.Id)){
+            if (_usersList.SearchByID(user.Id))
+            {
                 var id = user.Id;
                 throw new Exception($"El usuario con id {id} ya existe.");
             }
-            if (_usersList.SearchByEmail(user.Correo)){
+            if (_usersList.SearchByEmail(user.Correo))
+            {
                 var email = user.Correo;
                 throw new Exception($"El usuario con email {email} ya existe.");
             }
@@ -32,7 +34,8 @@ namespace Fase2.src.services
 
         public void UpdateUser(Usuario user)
         {
-            if (!_usersList.Update(user)){
+            if (!_usersList.Update(user))
+            {
                 var id = user.Id;
                 throw new Exception($"El usuario con id {id} no existe.");
             }
@@ -41,7 +44,8 @@ namespace Fase2.src.services
         public Usuario SearchUser(int id)
         {
             var user = _usersList.Find(id);
-            if (user == null){
+            if (user == null)
+            {
                 throw new Exception($"El usuario con id {id} no existe.");
             }
             return user;
@@ -50,7 +54,8 @@ namespace Fase2.src.services
 
         public void DeleteUser(int id)
         {
-            if (!_usersList.DeleteById(id)){
+            if (!_usersList.DeleteById(id))
+            {
                 throw new Exception($"El usuario con id {id} no existe.");
             }
         }
@@ -58,6 +63,11 @@ namespace Fase2.src.services
         public bool SearchByEmailAndPass(string email, string password)
         {
             return _usersList.SearchByEmailAndPass(email, password);
+        }
+
+        public Usuario? FindUserByEmail(string email)
+        {
+            return _usersList.FindByEmail(email);
         }
     }
 }

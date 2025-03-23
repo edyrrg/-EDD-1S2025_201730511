@@ -86,6 +86,22 @@ namespace Fase2.src.adts
             return false;
         }
 
+        public T? FindByEmail(string email)
+        {
+            if (_head == null) return default;
+            var current = _head;
+            while (current != null)
+            {
+                if ((current.Data as Usuario)?.Correo == email)
+                {
+                    return current.Data;
+                }
+                current = current.Next;
+            }
+            return default;
+
+        }
+
         public T? Find(int id)
         {
             if (_head == null) return default;

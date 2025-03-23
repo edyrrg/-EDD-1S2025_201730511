@@ -1,9 +1,14 @@
+using Fase2.src.models;
+using Gtk;
+
 namespace Fase2.src.services {
     public class DatasManager {
         private static DatasManager? _instance;
         public UserService _userService { get; } = UserService.Instance;
 
-        private DatasManager() { }
+        private DatasManager() { 
+            LoadData();
+         }
         public static DatasManager Instance {
             get {
                 _instance ??= new DatasManager();
@@ -11,5 +16,8 @@ namespace Fase2.src.services {
             }
         }
 
+        public void LoadData() {
+            _userService.InsertUser(new Usuario(101, "Juan", "Perez", "jperez@mail.com", "25", "1234"));
+        }
     }
 }

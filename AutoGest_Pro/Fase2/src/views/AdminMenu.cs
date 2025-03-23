@@ -1,3 +1,4 @@
+using Fase2.src.models;
 using Fase2.src.services;
 using Gtk;
 using System;
@@ -7,10 +8,19 @@ namespace Fase2.src.views
     public class AdminMenu : CustomWindow
     {
         private readonly DatasManager _datasManager;
+        private readonly LogHistorySessionService _logHistorySessionService;
+        private readonly LogHistorySession _logHistorySession;
 
-        public AdminMenu(Window contextParent, DatasManager datasManager) : base("Menu de Administrador | AutoGest Pro", contextParent)
+        public AdminMenu(
+                        Window contextParent,
+                        DatasManager datasManager,
+                        LogHistorySession logHistorySession,
+                        LogHistorySessionService logHistorySessionService
+                        ) : base("Menu de Administrador | AutoGest Pro", contextParent)
         {
             _datasManager = datasManager;
+            _logHistorySessionService = logHistorySessionService;
+            _logHistorySession = logHistorySession;
 
             SetDefaultSize(450, 400);
             SetPosition(WindowPosition.Center);
@@ -146,6 +156,15 @@ namespace Fase2.src.views
             // {
             //     PopError(ex.Message);
             // }
+        }
+        override
+        public void OnDeleteEvent()
+        {
+            base.OnDeleteEvent();
+            var dateNow = DateTime.UtcNow;
+            string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
+            _logHistorySession.Salida = utcFormattedDate;
+            _logHistorySessionService.AddLogHistorySession(_logHistorySession);
         }
     }
 }

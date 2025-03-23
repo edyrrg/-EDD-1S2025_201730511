@@ -64,3 +64,8 @@ textview {
   color: #09122C;
   border: 2px solid #fff;
 }
+
+.title-user {
+  font-size: 15px;
+  font-weight: bold;
+}

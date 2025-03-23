@@ -27,7 +27,7 @@ namespace Fase2.src.views {
             );
         }
 
-        public void OnDeleteEvent()
+        public virtual void OnDeleteEvent()
         {
             _contextParent?.ShowAll();
             Destroy();
