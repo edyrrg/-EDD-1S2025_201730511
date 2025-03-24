@@ -41,7 +41,7 @@ namespace Fase2.src.services
             }
         }
 
-        public Usuario SearchUser(int id)
+        public Usuario FindUserById(int id)
         {
             var user = _usersList.Find(id);
             if (user == null)
@@ -68,6 +68,11 @@ namespace Fase2.src.services
         public Usuario? FindUserByEmail(string email)
         {
             return _usersList.FindByEmail(email);
+        }
+
+        public bool SearchByID(int id)
+        {
+            return _usersList.SearchByID(id);
         }
     }
 }
