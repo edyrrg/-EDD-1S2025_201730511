@@ -41,7 +41,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if ((current.Data as Vehiculo)?.Id == (Data as Vehiculo)?.Id)
+                if ((current.Data as Vehiculo)?.ID == (Data as Vehiculo)?.ID)
                 {
                     current.Data = Data;
                     return true;
@@ -56,7 +56,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if ((current.Data as Vehiculo)?.Id == Id)
+                if ((current.Data as Vehiculo)?.ID == Id)
                 {
                     return true;
                 }
@@ -71,7 +71,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if ((current.Data as Vehiculo)?.Id == Id)
+                if ((current.Data as Vehiculo)?.ID == Id)
                 {
                     return current.Data;
                 }
@@ -83,7 +83,7 @@ namespace Fase2.src.adts
         public bool Delete(int id)
         {
             if (_head == null) return false;
-            if ((_head.Data as Vehiculo)?.Id == id)
+            if ((_head.Data as Vehiculo)?.ID == id)
             {
                 _head = _head.Next;
                 return true;
@@ -91,7 +91,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current.Next != null)
             {
-                if ((current.Next.Data as Vehiculo)?.Id == id)
+                if ((current.Next.Data as Vehiculo)?.ID == id)
                 {
                     current.Next = current.Next.Next;
                     return true;
@@ -118,16 +118,16 @@ namespace Fase2.src.adts
                 {
                     var next = current.Next;
                     DotNode node1 = new DotNode()
-                                    .WithIdentifier((current.Data as Vehiculo)?.Id.ToString())
+                                    .WithIdentifier((current.Data as Vehiculo)?.ID.ToString())
                                     .WithShape(DotNodeShape.Box)
-                                    .WithLabel($"ID: {(current.Data as Vehiculo)?.Id.ToString()}\nID Usuario: {(current.Data as Vehiculo)?.IdUsuario.ToString()}\nMarca: {(current.Data as Vehiculo)?.Marca}\nModelo: {(current.Data as Vehiculo)?.Modelo}\nPlaca: {(current.Data as Vehiculo)?.Placa}")
+                                    .WithLabel($"ID: {(current.Data as Vehiculo)?.ID.ToString()}\nID Usuario: {(current.Data as Vehiculo)?.IDUsuario.ToString()}\nMarca: {(current.Data as Vehiculo)?.Marca}\nModelo: {(current.Data as Vehiculo)?.Modelo}\nPlaca: {(current.Data as Vehiculo)?.Placa}")
                                     .WithFillColor(DotColor.Azure)
                                     .WithFontColor(DotColor.Black);
 
                     DotNode node2 = new DotNode()
-                                    .WithIdentifier((next.Data as Vehiculo)?.Id.ToString())
+                                    .WithIdentifier((next.Data as Vehiculo)?.ID.ToString())
                                     .WithShape(DotNodeShape.Box)
-                                    .WithLabel($"ID: {(next.Data as Vehiculo)?.Id.ToString()}\nID Usuario: {(next.Data as Vehiculo)?.IdUsuario.ToString()}\nMarca: {(next.Data as Vehiculo)?.Marca}\nModelo: {(next.Data as Vehiculo)?.Modelo.ToString()}\nPlaca: {(next.Data as Vehiculo)?.Placa}")
+                                    .WithLabel($"ID: {(next.Data as Vehiculo)?.ID.ToString()}\nID Usuario: {(next.Data as Vehiculo)?.IDUsuario.ToString()}\nMarca: {(next.Data as Vehiculo)?.Marca}\nModelo: {(next.Data as Vehiculo)?.Modelo.ToString()}\nPlaca: {(next.Data as Vehiculo)?.Placa}")
                                     .WithFillColor(DotColor.Azure)
                                     .WithFontColor(DotColor.Black)
                                     .WithWidth(0.5)

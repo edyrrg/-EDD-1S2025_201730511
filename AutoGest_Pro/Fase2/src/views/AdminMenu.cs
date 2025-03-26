@@ -70,9 +70,9 @@ namespace Fase2.src.views
 
         private void OnCargaMasivaClicked(object? sender, EventArgs e)
         {
-            // var cargaMasiva = new CargaMasiva(this, _DataService);
-            // cargaMasiva.ShowAll();
-            // Hide();
+            var cargaMasiva = new CargaMasiva(this, _datasManager);
+            cargaMasiva.ShowAll();
+            Hide();
         }
 
         private void OnIngresoIndividualClicked(object? sender, EventArgs e)

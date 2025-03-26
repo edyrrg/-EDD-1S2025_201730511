@@ -18,13 +18,13 @@ namespace Fase2.src.adts
                 return new AVLNode(data);
             }
 
-            if (data.Id < node.Data.Id)
+            if (data.ID < node.Data.ID)
             {
                 // Insert in left subtree
                 node.Left = InsertRecursively(data, node.Left);
                 if (GetHeight(node.Left) - GetHeight(node.Right) == 2)
                 {
-                    if (data.Id < node.Left!.Data.Id)
+                    if (data.ID < node.Left!.Data.ID)
                     {
                         node = RotateRight(node);
                     }
@@ -34,13 +34,13 @@ namespace Fase2.src.adts
                     }
                 }
             }
-            if (data.Id > node.Data.Id)
+            if (data.ID > node.Data.ID)
             {
                 // Insert in right subtree
                 node.Right = InsertRecursively(data, node.Right);
                 if (GetHeight(node.Right) - GetHeight(node.Left) == 2)
                 {
-                    if (data.Id > node.Right!.Data.Id)
+                    if (data.ID > node.Right!.Data.ID)
                     {
                         node = RotateLeft(node);
                     }
@@ -104,11 +104,11 @@ namespace Fase2.src.adts
             {
                 return null;
             }
-            if (id == node.Data.Id)
+            if (id == node.Data.ID)
             {
                 return node;
             }
-            if (id < node.Data.Id)
+            if (id < node.Data.ID)
             {
                 return FindRecursively(id, node.Left);
             }
@@ -125,11 +125,11 @@ namespace Fase2.src.adts
             {
                 return false;
             }
-            if (id == node.Data.Id)
+            if (id == node.Data.ID)
             {
                 return true;
             }
-            if (id < node.Data.Id)
+            if (id < node.Data.ID)
             {
                 return SearchRecursively(id, node.Left);
             }
@@ -147,12 +147,12 @@ namespace Fase2.src.adts
             {
                 return false;
             }
-            if (data.Id == node.Data.Id)
+            if (data.ID == node.Data.ID)
             {
                 node.Data = data;
                 return true;
             }
-            if (data.Id < node.Data.Id)
+            if (data.ID < node.Data.ID)
             {
                 return UpdateRecursively(data, node.Left);
             }
