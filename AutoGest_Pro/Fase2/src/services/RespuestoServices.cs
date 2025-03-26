@@ -20,9 +20,9 @@ namespace Fase2.src.services
 
         public void InsertRepuesto(Repuestos repuesto)
         {
-            if (_repuestos.Search(repuesto.Id))
+            if (_repuestos.Search(repuesto.ID))
             {
-                var id = repuesto.Id;
+                var id = repuesto.ID;
                 throw new WebException($"El repuesto con id {id} ya existe.");
             }
             _repuestos.Insert(repuesto);
@@ -32,7 +32,7 @@ namespace Fase2.src.services
         {
             if (!_repuestos.Update(repuesto))
             {
-                var id = repuesto.Id;
+                var id = repuesto.ID;
                 throw new WebException($"El repuesto con id {id} no existe y no se puede actualizar.");
             }
         }

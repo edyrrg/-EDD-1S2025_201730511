@@ -1,0 +1,34 @@
+[
+  {
+    "ID": 1,
+    "Nombres": "Carlos Alberto",
+    "Apellidos": "Gomez Martinez",
+    "Correo": "carlos.alberto@usac.com",
+    "Edad": 20,
+    "Contrasenia": "CarlosMartinez"
+  },
+  {
+    "ID": 2,
+    "Nombres": "Ana Lucia",
+    "Apellidos": "Martinez Lopez",
+    "Correo": "ana.lucia@usac.com",
+    "Edad": 20,
+    "Contrasenia": "AnaLopez"
+  },
+  {
+    "ID": 3,
+    "Nombres": "Zoila Enali",
+    "Apellidos": "Hernandez Palacio",
+    "Correo": "zhernandez@usac.com",
+    "Edad": 23,
+    "Contrasenia": "enali23"
+  },
+  {
+    "ID": 4,
+    "Nombres": "Zoila Enali",
+    "Apellidos": "Hernandez Palacio",
+    "Correo": "zhernandez@usac.com",
+    "Edad": 23,
+    "Contrasenia": "enali23"
+  }
+]

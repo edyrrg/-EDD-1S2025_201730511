@@ -19,9 +19,9 @@ namespace Fase2.src.services
 
         public void InsertUser(Usuario user)
         {
-            if (_usersList.SearchByID(user.Id))
+            if (_usersList.SearchByID(user.ID))
             {
-                var id = user.Id;
+                var id = user.ID;
                 throw new Exception($"El usuario con id {id} ya existe.");
             }
             if (_usersList.SearchByEmail(user.Correo))
@@ -36,7 +36,7 @@ namespace Fase2.src.services
         {
             if (!_usersList.Update(user))
             {
-                var id = user.Id;
+                var id = user.ID;
                 throw new Exception($"El usuario con id {id} no existe.");
             }
         }
@@ -73,6 +73,10 @@ namespace Fase2.src.services
         public bool SearchByID(int id)
         {
             return _usersList.SearchByID(id);
+        }
+        public void Print()
+        {
+            _usersList.Print();
         }
     }
 }

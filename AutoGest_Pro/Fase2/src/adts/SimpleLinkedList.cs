@@ -39,7 +39,7 @@ namespace Fase2.src.adts
             {
                 return false;
             }
-            if ((_head.Data as Usuario)?.Id == (Data as Usuario)?.Id)
+            if ((_head.Data as Usuario)?.ID == (Data as Usuario)?.ID)
             {
                 _head.Data = Data;
                 return true;
@@ -47,7 +47,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if ((current.Data as Usuario)?.Id == (Data as Usuario)?.Id)
+                if ((current.Data as Usuario)?.ID == (Data as Usuario)?.ID)
                 {
                     current.Data = Data;
                     return true;
@@ -63,7 +63,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if ((current.Data as Usuario)?.Id == id)
+                if ((current.Data as Usuario)?.ID == id)
                 {
                     return true;
                 }
@@ -108,7 +108,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current != null)
             {
-                if ((current.Data as Usuario)?.Id == id)
+                if ((current.Data as Usuario)?.ID == id)
                 {
                     return current.Data;
                 }
@@ -122,7 +122,7 @@ namespace Fase2.src.adts
         {
             if (_head == null) return false;
 
-            if ((_head.Data as Usuario)?.Id == (Data as Usuario)?.Id)
+            if ((_head.Data as Usuario)?.ID == (Data as Usuario)?.ID)
             {
                 _head = _head.Next;
                 return true;
@@ -131,7 +131,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current.Next != null)
             {
-                if ((current.Next.Data as Usuario)?.Id == (Data as Usuario)?.Id)
+                if ((current.Next.Data as Usuario)?.ID == (Data as Usuario)?.ID)
                 {
                     current.Next = current.Next.Next;
                     return true;
@@ -152,7 +152,7 @@ namespace Fase2.src.adts
         {
             if (_head == null) return false;
 
-            if ((_head.Data as Usuario)?.Id == id)
+            if ((_head.Data as Usuario)?.ID == id)
             {
                 _head = _head.Next;
                 return true;
@@ -161,7 +161,7 @@ namespace Fase2.src.adts
             var current = _head;
             while (current.Next != null)
             {
-                if ((current.Next.Data as Usuario)?.Id == id)
+                if ((current.Next.Data as Usuario)?.ID == id)
                 {
                     current.Next = current.Next.Next;
                     return true;
@@ -170,7 +170,8 @@ namespace Fase2.src.adts
             return false;
         }
 
-        public bool SearchByEmailAndPass(string email, string pass){
+        public bool SearchByEmailAndPass(string email, string pass)
+        {
             if (_head == null) return false;
             var current = _head;
             while (current != null)
@@ -199,9 +200,9 @@ namespace Fase2.src.adts
             {
                 var currUser = current.Data as Usuario;
                 DotNode node1 = new DotNode()
-                                .WithIdentifier(currUser?.Id.ToString())
+                                .WithIdentifier(currUser?.ID.ToString())
                                 .WithShape(DotNodeShape.Box)
-                                .WithLabel($"ID: {currUser?.Id.ToString()}\nNombres: {currUser?.Nombres}\nApellidos: {currUser?.Apellidos}\nCorreo: {currUser?.Correo}\nEdad: {currUser?.Edad}")
+                                .WithLabel($"ID: {currUser?.ID.ToString()}\nNombres: {currUser?.Nombres}\nApellidos: {currUser?.Apellidos}\nCorreo: {currUser?.Correo}\nEdad: {currUser?.Edad}")
                                 .WithFillColor(DotColor.Azure)
                                 .WithFontColor(DotColor.Black);
                 graph.Elements.Add(node1);
@@ -209,9 +210,9 @@ namespace Fase2.src.adts
                 {
                     var nextUser = current.Next.Data as Usuario;
                     DotNode node2 = new DotNode()
-                                    .WithIdentifier(nextUser?.Id.ToString())
+                                    .WithIdentifier(nextUser?.ID.ToString())
                                     .WithShape(DotNodeShape.Box)
-                                    .WithLabel($"ID: {nextUser?.Id.ToString()}\nNombres: {nextUser?.Nombres}\nApellidos: {nextUser?.Apellidos}\nCorreo: {nextUser?.Correo}\nEdad: {nextUser?.Edad}")
+                                    .WithLabel($"ID: {nextUser?.ID.ToString()}\nNombres: {nextUser?.Nombres}\nApellidos: {nextUser?.Apellidos}\nCorreo: {nextUser?.Correo}\nEdad: {nextUser?.Edad}")
                                     .WithFillColor(DotColor.Azure)
                                     .WithFontColor(DotColor.Black)
                                     .WithWidth(0.5)

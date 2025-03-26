@@ -24,9 +24,9 @@ namespace Fase2.src.services
             // Check if the vehiculo already exists
             // If it does, throw an exception
             // The check if the User is existent is do in the controller -> IMPORTANT!!!
-            if (_vehiculos.SearchById(vehiculo.Id))
+            if (_vehiculos.SearchById(vehiculo.ID))
             {
-                var id = vehiculo.Id;
+                var id = vehiculo.ID;
                 throw new Exception($"El vehiculo con id {id} ya existe.");
             }
             _vehiculos.Insert(vehiculo);
@@ -36,7 +36,7 @@ namespace Fase2.src.services
         {
             if (!_vehiculos.Update(vehiculo))
             {
-                var id = vehiculo.Id;
+                var id = vehiculo.ID;
                 throw new Exception($"El vehiculo con id {id} no existe.");
             }
         }
