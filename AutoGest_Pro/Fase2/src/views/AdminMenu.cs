@@ -41,8 +41,8 @@ namespace Fase2.src.views
             btnCargaMasiva.Clicked += OnCargaMasivaClicked;
             btnCargaMasiva.StyleContext.AddClass("button"); // Añadir clase CSS
 
-            var btnIngresoIndividual = new Button("Ingreso Individual");
-            btnIngresoIndividual.Clicked += OnIngresoIndividualClicked;
+            var btnIngresoIndividual = new Button("Gestion Entidades");
+            btnIngresoIndividual.Clicked += OnGestionEntidadesClicked;
 
             var btnGestionDeUsuarios = new Button("Gestión de Usuarios");
             btnGestionDeUsuarios.Clicked += OnGestionDeUsuariosClicked;
@@ -75,11 +75,11 @@ namespace Fase2.src.views
             Hide();
         }
 
-        private void OnIngresoIndividualClicked(object? sender, EventArgs e)
+        private void OnGestionEntidadesClicked(object? sender, EventArgs e)
         {
-            // var MenuIngresoManual = new MenuIngresoManual(this, _DataService);
-            // MenuIngresoManual.ShowAll();
-            // Hide();
+            var GestionEntidadesMenu = new GestionEntidadesMenu(this, _datasManager);
+            GestionEntidadesMenu.ShowAll();
+            Hide();
         }
 
         private void OnGestionDeUsuariosClicked(object? sender, EventArgs e)
