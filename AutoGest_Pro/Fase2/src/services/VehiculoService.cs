@@ -49,9 +49,14 @@ namespace Fase2.src.services
             }
         }
 
-        public Vehiculo? FindVehiculoById(int id)
+        public Vehiculo FindVehiculoById(int id)
         {
-            return _vehiculos.FindById(id);
+            var vehiculo = _vehiculos.FindById(id);
+            if (vehiculo == null)
+            {
+                throw new Exception($"El vehiculo con id {id} no existe.");
+            }
+            return vehiculo;
         }
     }
 }
