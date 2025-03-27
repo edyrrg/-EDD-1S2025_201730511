@@ -3,7 +3,9 @@ using System.Text.Json;
 using System.IO;
 
 namespace Fase2.src.services
-{
+{   /**
+     * Clase para el servicio de historial de sesiones
+     */
     public class LogHistorySessionService
     {
         private static LogHistorySessionService? _instance;
@@ -15,18 +17,24 @@ namespace Fase2.src.services
         }
 
         public static LogHistorySessionService Instance => _instance ??= new LogHistorySessionService();
-
+        /**
+         * Método para agregar una sesión al historial de sesiones
+         */
         public void AddLogHistorySession(LogHistorySession logHistorySession)
         {
             _logHistorySessions.Add(logHistorySession);
         }
-
+        /**
+         * Método para obtener el historial de sesiones
+         */
         public List<LogHistorySession> GetLogHistorySessions()
         {
             return _logHistorySessions;
         }
 
-        // Método para exportar a JSON
+        /**
+         * Método para exportar el historial de sesiones a un archivo JSON
+         */
         public void ExportToJsonAndSave(string fileName)
         {
             // Ruta de la carpeta Reportes

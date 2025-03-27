@@ -105,6 +105,18 @@ namespace Fase2.src.views
                 return;
             }
 
+            // Confirmación de eliminación
+            var confirmacion = new MessageDialog(this,
+                DialogFlags.Modal, MessageType.Question,
+                ButtonsType.YesNo, $"¿Está seguro de eliminar el Vehiculo con ID {idInt}?");
+            var response = (ResponseType)confirmacion.Run();
+            confirmacion.Destroy();
+            if (response == ResponseType.No)
+            {
+                ClearEntries();
+                return;
+            }
+
             try
             {
                 _datasManager._vehiculoService.DeleteVehiculo(idInt);

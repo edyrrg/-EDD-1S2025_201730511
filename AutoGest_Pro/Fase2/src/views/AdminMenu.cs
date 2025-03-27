@@ -41,27 +41,31 @@ namespace Fase2.src.views
             btnCargaMasiva.Clicked += OnCargaMasivaClicked;
             btnCargaMasiva.StyleContext.AddClass("button"); // Añadir clase CSS
 
-            var btnIngresoIndividual = new Button("Gestion Entidades");
-            btnIngresoIndividual.Clicked += OnGestionEntidadesClicked;
+            var btnGestionEntidades = new Button("Gestion Entidades");
+            btnGestionEntidades.Clicked += OnGestionEntidadesClicked;
 
-            var btnGestionDeUsuarios = new Button("Gestión de Usuarios");
-            btnGestionDeUsuarios.Clicked += OnGestionDeUsuariosClicked;
+            var btnActualizarRepuestos = new Button("Actualización de Repuestos");
+            btnActualizarRepuestos.Clicked += OnActualizacionRepuestosClicked;
 
-            var btnGenerarServicio = new Button("Generar Servicio");
-            btnGenerarServicio.Clicked += OnGenerarServicioClicked;
+            var btnViewRepuestos = new Button("Visualización de Repuestos");
+            btnViewRepuestos.Clicked += OnViewServiciosClicked;
 
-            var btnCancelarFactura = new Button("Cancelar Factura");
-            btnCancelarFactura.Clicked += OnCancelarFacturaClicked;
+            var btnGenerarServicios = new Button("Generar Servicios");
+            btnGenerarServicios.Clicked += OnGenerarServiciosClicked;
+
+            var btnControlLogeo = new Button("Control de Logeo");
+            btnControlLogeo.Clicked += OnControlLogeoClicked;
 
             var btnGenerarReportes = new Button("Generar Reportes");
             btnGenerarReportes.Clicked += OnGenerarReportesClicked;
 
             // Agregando botones al vbox
             vbox.PackStart(btnCargaMasiva, false, false, 6);
-            vbox.PackStart(btnIngresoIndividual, false, false, 6);
-            vbox.PackStart(btnGestionDeUsuarios, false, false, 6);
-            vbox.PackStart(btnGenerarServicio, false, false, 6);
-            vbox.PackStart(btnCancelarFactura, false, false, 6);
+            vbox.PackStart(btnGestionEntidades, false, false, 6);
+            vbox.PackStart(btnActualizarRepuestos, false, false, 6);
+            vbox.PackStart(btnViewRepuestos, false, false, 6);
+            vbox.PackStart(btnGenerarServicios, false, false, 6);
+            vbox.PackStart(btnControlLogeo, false, false, 6);
             vbox.PackStart(btnGenerarReportes, false, false, 6);
 
             Add(vbox);
@@ -82,21 +86,14 @@ namespace Fase2.src.views
             Hide();
         }
 
-        private void OnGestionDeUsuariosClicked(object? sender, EventArgs e)
+        private void OnActualizacionRepuestosClicked(object? sender, EventArgs e)
         {
             // var GestionUsuarios = new GestionUsuarios(this, _DataService);
             // GestionUsuarios.ShowAll();
             // Hide();
         }
 
-        private void OnGenerarServicioClicked(object? sender, EventArgs e)
-        {
-            // var GenerarServicio = new GenerarServicio(this, _DataService);
-            // GenerarServicio.ShowAll();
-            // Hide();
-        }
-
-        private void OnCancelarFacturaClicked(object? sender, EventArgs e)
+        private void OnGenerarServiciosClicked(object? sender, EventArgs e)
         {
             // try
             // {
@@ -107,6 +104,20 @@ namespace Fase2.src.views
             // {
             //     PopError(ex.Message);
             // }
+        }
+
+        public void OnViewServiciosClicked(object? sender, EventArgs e)
+        {
+            // var ViewServicios = new ViewServicios(this, _DataService);
+            // ViewServicios.ShowAll();
+            // Hide();
+        }
+
+        public void OnControlLogeoClicked(object? sender, EventArgs e)
+        {
+            var filename = "LogHistorySessions.json";
+            _logHistorySessionService.ExportToJsonAndSave(filename);
+            Console.WriteLine($"Archivo JSON exportado correctamente: ./Reportes/{filename}");
         }
 
         private void OnGenerarReportesClicked(object? sender, EventArgs e)
