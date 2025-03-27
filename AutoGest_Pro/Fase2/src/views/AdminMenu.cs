@@ -88,9 +88,9 @@ namespace Fase2.src.views
 
         private void OnActualizacionRepuestosClicked(object? sender, EventArgs e)
         {
-            // var GestionUsuarios = new GestionUsuarios(this, _DataService);
-            // GestionUsuarios.ShowAll();
-            // Hide();
+            var ActualizacionRepuesto = new ActualizacionRepuesto(this, _datasManager);
+            ActualizacionRepuesto.ShowAll();
+            Hide();
         }
 
         private void OnGenerarServiciosClicked(object? sender, EventArgs e)
@@ -122,51 +122,33 @@ namespace Fase2.src.views
 
         private void OnGenerarReportesClicked(object? sender, EventArgs e)
         {
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoUsuarios();
-            //     PopSucess("Reporte de usuarios generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoVehiculos();
-            //     PopSucess("Reporte de vehículos generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoRepuestos();
-            //     PopSucess("Reporte de repuestos generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoServicios();
-            //     PopSucess("Reporte de servicios generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoFacturas();
-            //     PopSucess("Reporte de facturas generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
+            try
+            {
+                _datasManager._userService.GenerateReport();
+                PopSucess("Reporte de usuarios generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _datasManager._vehiculoService.GenerateReport();
+                PopSucess("Reporte de vehiculos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _datasManager._repuestoService.GenerateReport();
+                PopSucess("Reporte de repuestos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
         override
         public void OnDeleteEvent()

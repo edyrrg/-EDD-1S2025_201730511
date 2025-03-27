@@ -198,6 +198,7 @@ namespace Fase2.src.views
             List<Repuestos>? repuestos = null;
             try
             {
+                // Console.WriteLine(jsonText);
                 repuestos = JsonSerializer.Deserialize<List<Repuestos>>(jsonText);
             }
             catch (Exception ex)

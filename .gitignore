@@ -413,5 +413,6 @@ obj/
 # Grapviz files
 /AutoGest_Pro/Fase1/reportes/*.png
 *.dot
+/AutoGest_Pro/Fase2/Reportes/*.png
 
 /AutoGest_Pro/Fase2/Reportes/LogHistorySessions.json
