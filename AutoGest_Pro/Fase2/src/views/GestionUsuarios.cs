@@ -66,7 +66,7 @@ namespace Fase2.src.views
             var id = _txtID.Text;
             if (string.IsNullOrEmpty(id))
             {
-                PopError("No se posible hacer la eliminacion de Usuario sin un ID.");
+                PopError("No es posible hacer la eliminacion de Usuario sin un ID.");
                 return;
             }
             if (!int.TryParse(id, out var idInt))
@@ -82,7 +82,7 @@ namespace Fase2.src.views
                 ClearEntries();
             }
             catch (Exception ex)
-            {   
+            {
                 PopError(ex.Message);
                 ClearEntries();
             }
@@ -100,7 +100,7 @@ namespace Fase2.src.views
             {
                 PopError("El campo ID debe ser un número entero.");
                 return;
-            } 
+            }
 
             try
             {
@@ -123,6 +123,6 @@ namespace Fase2.src.views
             _txtApellidos.Text = "";
             _txtCorreo.Text = "";
             _txtEdad.Text = "";
-        } 
+        }
     }
 }

@@ -60,12 +60,14 @@ namespace Fase2.src.views
             ShowAll();
         }
 
-        private void OnEliminarClicked(object? sender, System.EventArgs e)
+
+
+        private void OnBuscarClicked(object? sender, System.EventArgs e)
         {
             var id = _txtID.Text;
             if (string.IsNullOrEmpty(id))
             {
-                PopError("El campo ID no puede estar vacío.");
+                PopError("No es posible hacer la eliminacion de Vehiculo sin un ID.");
                 return;
             }
             if (!int.TryParse(id, out var idInt))
@@ -76,18 +78,53 @@ namespace Fase2.src.views
 
             try
             {
-                
+                var vehiculo = _datasManager._vehiculoService.FindVehiculoById(idInt);
+                _txtIdUsuario.Text = vehiculo.ID_Usuario.ToString();
+                _txtMarca.Text = vehiculo.Marca;
+                _txtModelo.Text = vehiculo.Modelo.ToString();
+                _txtPlaca.Text = vehiculo.Placa;
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                PopError(ex.Message);
+                ClearEntries();
             }
         }
 
-        private void OnBuscarClicked(object? sender, System.EventArgs e)
+        private void OnEliminarClicked(object? sender, System.EventArgs e)
         {
-            throw new System.NotImplementedException();
+            var id = _txtID.Text;
+            if (string.IsNullOrEmpty(id))
+            {
+                PopError("No es posible hacer la eliminacion de Vehiculo sin un ID.");
+                return;
+            }
+            if (!int.TryParse(id, out var idInt))
+            {
+                PopError("El campo ID debe ser un número entero.");
+                return;
+            }
+
+            try
+            {
+                _datasManager._vehiculoService.DeleteVehiculo(idInt);
+                PopSucess("Vehiculo eliminado correctamente.");
+                ClearEntries();
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+                ClearEntries();
+            }
+        }
+
+        private void ClearEntries()
+        {
+            _txtID.Text = "";
+            _txtIdUsuario.Text = "";
+            _txtMarca.Text = "";
+            _txtModelo.Text = "";
+            _txtPlaca.Text = "";
         }
     }
 }

@@ -120,14 +120,14 @@ namespace Fase2.src.adts
                     DotNode node1 = new DotNode()
                                     .WithIdentifier((current.Data as Vehiculo)?.ID.ToString())
                                     .WithShape(DotNodeShape.Box)
-                                    .WithLabel($"ID: {(current.Data as Vehiculo)?.ID.ToString()}\nID Usuario: {(current.Data as Vehiculo)?.IDUsuario.ToString()}\nMarca: {(current.Data as Vehiculo)?.Marca}\nModelo: {(current.Data as Vehiculo)?.Modelo}\nPlaca: {(current.Data as Vehiculo)?.Placa}")
+                                    .WithLabel($"ID: {(current.Data as Vehiculo)?.ID.ToString()}\nID Usuario: {(current.Data as Vehiculo)?.ID_Usuario.ToString()}\nMarca: {(current.Data as Vehiculo)?.Marca}\nModelo: {(current.Data as Vehiculo)?.Modelo}\nPlaca: {(current.Data as Vehiculo)?.Placa}")
                                     .WithFillColor(DotColor.Azure)
                                     .WithFontColor(DotColor.Black);
 
                     DotNode node2 = new DotNode()
                                     .WithIdentifier((next.Data as Vehiculo)?.ID.ToString())
                                     .WithShape(DotNodeShape.Box)
-                                    .WithLabel($"ID: {(next.Data as Vehiculo)?.ID.ToString()}\nID Usuario: {(next.Data as Vehiculo)?.IDUsuario.ToString()}\nMarca: {(next.Data as Vehiculo)?.Marca}\nModelo: {(next.Data as Vehiculo)?.Modelo.ToString()}\nPlaca: {(next.Data as Vehiculo)?.Placa}")
+                                    .WithLabel($"ID: {(next.Data as Vehiculo)?.ID.ToString()}\nID Usuario: {(next.Data as Vehiculo)?.ID_Usuario.ToString()}\nMarca: {(next.Data as Vehiculo)?.Marca}\nModelo: {(next.Data as Vehiculo)?.Modelo.ToString()}\nPlaca: {(next.Data as Vehiculo)?.Placa}")
                                     .WithFillColor(DotColor.Azure)
                                     .WithFontColor(DotColor.Black)
                                     .WithWidth(0.5)

@@ -136,6 +136,7 @@ namespace Fase2.src.adts
                     current.Next = current.Next.Next;
                     return true;
                 }
+                current = current.Next;
             }
             return false;
         }
