@@ -53,7 +53,36 @@ namespace Fase2.src.services
             {
                 throw new Exception("No hay repuestos para generar el reporte.");
             }
-            
+        }
+
+        public List<Repuestos> GetRepuestosInOrder()
+        {
+            var listResult = _repuestos.InOrder();
+            if (listResult.Count == 0)
+            {
+                throw new Exception("No hay repuestos para mostrar.");
+            }
+            return listResult;
+        }
+
+        public List<Repuestos> GetRepuestosPreOrder()
+        {
+            var listResult = _repuestos.PreOrder();
+            if (listResult.Count == 0)
+            {
+                throw new Exception("No hay repuestos para mostrar.");
+            }
+            return listResult;
+        }
+
+        public List<Repuestos> GetRepuestosPostOrder()
+        {
+            var listResult = _repuestos.PostOrder();
+            if (listResult.Count == 0)
+            {
+                throw new Exception("No hay repuestos para mostrar.");
+            }
+            return listResult;
         }
     }
 }

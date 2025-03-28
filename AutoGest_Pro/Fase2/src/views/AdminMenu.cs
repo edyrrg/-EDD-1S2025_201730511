@@ -48,7 +48,7 @@ namespace Fase2.src.views
             btnActualizarRepuestos.Clicked += OnActualizacionRepuestosClicked;
 
             var btnViewRepuestos = new Button("Visualización de Repuestos");
-            btnViewRepuestos.Clicked += OnViewServiciosClicked;
+            btnViewRepuestos.Clicked += OnViewRepuestosClicked;
 
             var btnGenerarServicios = new Button("Generar Servicios");
             btnGenerarServicios.Clicked += OnGenerarServiciosClicked;
@@ -93,6 +93,12 @@ namespace Fase2.src.views
             Hide();
         }
 
+        private void OnViewRepuestosClicked(object? sender, EventArgs e)
+        {
+            var VisualizacionRepuestos = new VisualizacionRepuestos(this, _datasManager);
+            VisualizacionRepuestos.ShowAll();
+            Hide();
+        }
         private void OnGenerarServiciosClicked(object? sender, EventArgs e)
         {
             // try
@@ -106,12 +112,6 @@ namespace Fase2.src.views
             // }
         }
 
-        public void OnViewServiciosClicked(object? sender, EventArgs e)
-        {
-            // var ViewServicios = new ViewServicios(this, _DataService);
-            // ViewServicios.ShowAll();
-            // Hide();
-        }
 
         public void OnControlLogeoClicked(object? sender, EventArgs e)
         {

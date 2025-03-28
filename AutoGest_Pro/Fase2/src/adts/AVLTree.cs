@@ -209,5 +209,50 @@ namespace Fase2.src.adts
                 GenerateGraphvizRecursively(node.Right, graph);
             }
         }
+
+        public List<Repuestos> InOrder()
+        {
+            var list = new List<Repuestos>();
+            InOrderRecursively(Root, list);
+            return list;
+        }
+
+        private void InOrderRecursively(AVLNode? node, List<Repuestos> list)
+        {
+            if (node == null) return;
+            InOrderRecursively(node.Left, list);
+            list.Add(node.Data);
+            InOrderRecursively(node.Right, list);
+        }
+
+        public List<Repuestos> PreOrder()
+        {
+            var list = new List<Repuestos>();
+            PreOrderRecursively(Root, list);
+            return list;
+        }
+
+        private void PreOrderRecursively(AVLNode? node, List<Repuestos> list)
+        {
+            if (node == null) return;
+            list.Add(node.Data);
+            PreOrderRecursively(node.Left, list);
+            PreOrderRecursively(node.Right, list);
+        }
+
+        public List<Repuestos> PostOrder()
+        {
+            var list = new List<Repuestos>();
+            PostOrderRecursively(Root, list);
+            return list;
+        }
+
+        private void PostOrderRecursively(AVLNode? node, List<Repuestos> list)
+        {
+            if (node == null) return;
+            PostOrderRecursively(node.Left, list);
+            PostOrderRecursively(node.Right, list);
+            list.Add(node.Data);
+        }
     }
 }
