@@ -101,7 +101,7 @@ namespace Fase2.src.adts
             return false;
         }
 
-        public bool GenerarReporte()
+        public bool GenerateReport()
         {
             DotGraph graph = new DotGraph()
                                 .WithIdentifier("Listado de Vehiculos")

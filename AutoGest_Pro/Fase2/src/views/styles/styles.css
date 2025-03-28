@@ -69,3 +69,7 @@ textview {
   font-size: 15px;
   font-weight: bold;
 }
+
+.txt-lbl {
+  background: #dadada;
+}

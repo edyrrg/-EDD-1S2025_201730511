@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Fase2.src.models;
 
 namespace Fase2.src.adts
@@ -157,6 +158,101 @@ namespace Fase2.src.adts
                 return UpdateRecursively(data, node.Left);
             }
             return UpdateRecursively(data, node.Right);
+        }
+        public bool GenerateReport()
+        {
+            if (Root == null) return false;
+
+            var graph = new List<string>
+                {
+                    "digraph AVLTree {",
+                    "node [shape=box];"
+                };
+
+            GenerateGraphvizRecursively(Root, graph);
+
+            graph.Add("}");
+
+            // using var writer = new StringWriter();
+            // var context = new CompilationContext(writer, new CompilationOptions());
+            // graph.CompileAsync(context);
+
+            var result = string.Join("\n", graph);
+
+            // Save it to a file
+            File.WriteAllText("../../AutoGest_Pro/Fase2/Reportes/ArbolAVLRepuestos.dot", result);
+
+            ProcessStartInfo startInfo = new ProcessStartInfo("dot");
+
+            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase2/Reportes/ArbolAVLRepuestos.dot -o ../../AutoGest_Pro/Fase2/Reportes/ArbolAVLRepuestos.png";
+
+            Process.Start(startInfo);
+            return true;
+        }
+
+        private void GenerateGraphvizRecursively(AVLNode? node, List<string> graph)
+        {
+            if (node == null) return;
+
+            // Agregar el nodo actual
+            graph.Add(node.Data.ToGraphvizNode());
+
+            // Agregar las conexiones con los hijos
+            if (node.Left != null)
+            {
+                graph.Add($"\"{node.Data.ID}\" -> \"{node.Left.Data.ID}\";");
+                GenerateGraphvizRecursively(node.Left, graph);
+            }
+            if (node.Right != null)
+            {
+                graph.Add($"\"{node.Data.ID}\" -> \"{node.Right.Data.ID}\";");
+                GenerateGraphvizRecursively(node.Right, graph);
+            }
+        }
+
+        public List<Repuestos> InOrder()
+        {
+            var list = new List<Repuestos>();
+            InOrderRecursively(Root, list);
+            return list;
+        }
+
+        private void InOrderRecursively(AVLNode? node, List<Repuestos> list)
+        {
+            if (node == null) return;
+            InOrderRecursively(node.Left, list);
+            list.Add(node.Data);
+            InOrderRecursively(node.Right, list);
+        }
+
+        public List<Repuestos> PreOrder()
+        {
+            var list = new List<Repuestos>();
+            PreOrderRecursively(Root, list);
+            return list;
+        }
+
+        private void PreOrderRecursively(AVLNode? node, List<Repuestos> list)
+        {
+            if (node == null) return;
+            list.Add(node.Data);
+            PreOrderRecursively(node.Left, list);
+            PreOrderRecursively(node.Right, list);
+        }
+
+        public List<Repuestos> PostOrder()
+        {
+            var list = new List<Repuestos>();
+            PostOrderRecursively(Root, list);
+            return list;
+        }
+
+        private void PostOrderRecursively(AVLNode? node, List<Repuestos> list)
+        {
+            if (node == null) return;
+            PostOrderRecursively(node.Left, list);
+            PostOrderRecursively(node.Right, list);
+            list.Add(node.Data);
         }
     }
 }

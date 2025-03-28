@@ -78,5 +78,13 @@ namespace Fase2.src.services
         {
             _usersList.Print();
         }
+
+        public void GenerateReport()
+        {
+            if (!_usersList.GenerateReport())
+            {
+                throw new Exception("No hay usuarios registrados");
+            }
+        }
     }
 }
