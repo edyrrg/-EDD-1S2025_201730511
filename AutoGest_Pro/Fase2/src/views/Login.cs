@@ -109,12 +109,28 @@ namespace Fase2.src.views
                     PopError(ex.Message);
                 }
                 Hide();
-                var userMenu = new UserMenu(this, _dataManager, _userSession);
+                var dateNow = DateTime.UtcNow;
+                string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                if (user == null)
+                {
+                    PopError("Usuario no encontrado");
+                    return;
+                }
+                var log = new LogHistorySession(user.Nombres, utcFormattedDate);
+                var userMenu = new UserMenu(
+                                            this,
+                                            _dataManager,
+                                            _userSession,
+                                            log,
+                                            _logHistorySessionService
+                                            );
                 userMenu.ShowAll();
             }
             else
             {
                 PopError("Usuario o contraseña incorrectos");
+                entryUserName.GrabFocus();
+                return;
             }
 
             ClearTxtFields();

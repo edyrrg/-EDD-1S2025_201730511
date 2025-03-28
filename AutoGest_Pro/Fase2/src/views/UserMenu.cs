@@ -1,4 +1,5 @@
 using Fase2.src.auth;
+using Fase2.src.models;
 using Fase2.src.services;
 using Fase2.src.views;
 using Gtk;
@@ -10,13 +11,22 @@ namespace Fase2.src.views
     {
         private readonly DatasManager _datasManager;
         private readonly UserSession _userSession;
+        private readonly LogHistorySessionService _logHistorySessionService;
+        private readonly LogHistorySession _logHistorySession;
 
-        public UserMenu(Window contextParent, DatasManager datasManager, UserSession userSession) : base("Menu | AutoGest Pro", contextParent)
+        public UserMenu(Window contextParent,
+                        DatasManager datasManager,
+                        UserSession userSession,
+                        LogHistorySession logHistorySession,
+                        LogHistorySessionService logHistorySessionService
+                        ) : base("Menu | AutoGest Pro", contextParent)
         {
             _datasManager = datasManager;
             _userSession = userSession;
+            _logHistorySessionService = logHistorySessionService;
+            _logHistorySession = logHistorySession;
 
-            SetDefaultSize(450, 400);
+            SetDefaultSize(450, 350);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
 
@@ -32,126 +42,53 @@ namespace Fase2.src.views
             var lblUserName = new Label($"Bienvenido {_userSession.GetUser()?.Nombres}");
             lblUserName.StyleContext.AddClass("title-user");
             // Creando botones
-            var btnCargaMasiva = new Button("Carga Masiva");
-            btnCargaMasiva.Clicked += OnCargaMasivaClicked;
-            btnCargaMasiva.StyleContext.AddClass("button"); // Añadir clase CSS
+            var btnRegistrarVehiculo = new Button("Registrar Vehículo");
+            btnRegistrarVehiculo.Clicked += OnRegistrarVehiculoClicked;
+            btnRegistrarVehiculo.StyleContext.AddClass("button"); // Añadir clase CSS
 
-            var btnIngresoIndividual = new Button("Ingreso Individual");
-            btnIngresoIndividual.Clicked += OnIngresoIndividualClicked;
+            var btnVisualizacionServicios = new Button("Visualización de Servicios");
+            btnVisualizacionServicios.Clicked += OnVisualizacionServiciosClicked;
 
-            var btnGestionDeUsuarios = new Button("Gestión de Usuarios");
-            btnGestionDeUsuarios.Clicked += OnGestionDeUsuariosClicked;
+            var btnVisualizacionFacturas = new Button("Gestión de Usuarios");
+            btnVisualizacionFacturas.Clicked += OnVisualizacionFacturasClicked;
 
-            var btnGenerarServicio = new Button("Generar Servicio");
-            btnGenerarServicio.Clicked += OnGenerarServicioClicked;
-
-            var btnCancelarFactura = new Button("Cancelar Factura");
-            btnCancelarFactura.Clicked += OnCancelarFacturaClicked;
-
-            var btnGenerarReportes = new Button("Generar Reportes");
-            btnGenerarReportes.Clicked += OnGenerarReportesClicked;
+            var btnCancelarFacturas = new Button("Generar Reportes");
+            btnCancelarFacturas.Clicked += OnCancelarFacturasClicked;
 
             // Agregando componentes al contenedor
             vbox.PackStart(lblUserName, false, false, 6);
-            vbox.PackStart(btnCargaMasiva, false, false, 6);
-            vbox.PackStart(btnIngresoIndividual, false, false, 6);
-            vbox.PackStart(btnGestionDeUsuarios, false, false, 6);
-            vbox.PackStart(btnGenerarServicio, false, false, 6);
-            vbox.PackStart(btnCancelarFactura, false, false, 6);
-            vbox.PackStart(btnGenerarReportes, false, false, 6);
+            vbox.PackStart(btnRegistrarVehiculo, false, false, 6);
+            vbox.PackStart(btnVisualizacionServicios, false, false, 6);
+            vbox.PackStart(btnVisualizacionFacturas, false, false, 6);
+            vbox.PackStart(btnCancelarFacturas, false, false, 6);
 
             Add(vbox);
             ShowAll();
         }
-
-        private void OnCargaMasivaClicked(object? sender, EventArgs e)
+        private void OnRegistrarVehiculoClicked(object? sender, EventArgs e)
         {
-            // var cargaMasiva = new CargaMasiva(this, _DataService);
-            // cargaMasiva.ShowAll();
-            // Hide();
+            throw new NotImplementedException();
         }
-
-        private void OnIngresoIndividualClicked(object? sender, EventArgs e)
+        private void OnVisualizacionServiciosClicked(object? sender, EventArgs e)
         {
-            // var MenuIngresoManual = new MenuIngresoManual(this, _DataService);
-            // MenuIngresoManual.ShowAll();
-            // Hide();
+            throw new NotImplementedException();
         }
-
-        private void OnGestionDeUsuariosClicked(object? sender, EventArgs e)
+        private void OnVisualizacionFacturasClicked(object? sender, EventArgs e)
         {
-            // var GestionUsuarios = new GestionUsuarios(this, _DataService);
-            // GestionUsuarios.ShowAll();
-            // Hide();
+            throw new NotImplementedException();
         }
-
-        private void OnGenerarServicioClicked(object? sender, EventArgs e)
+        private void OnCancelarFacturasClicked(object? sender, EventArgs e)
         {
-            // var GenerarServicio = new GenerarServicio(this, _DataService);
-            // GenerarServicio.ShowAll();
-            // Hide();
+            throw new NotImplementedException();
         }
-
-        private void OnCancelarFacturaClicked(object? sender, EventArgs e)
+        override
+        public void OnDeleteEvent()
         {
-            // try
-            // {
-            //     var factura = _DataService.CancelarFactura();
-            //     PopSucess($"Factura Cancelada/Pagada\nID: {factura?.ID}\nOrden: {factura?.IdOrden}\nTotal: {factura?.Total}");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-        }
-
-        private void OnGenerarReportesClicked(object? sender, EventArgs e)
-        {
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoUsuarios();
-            //     PopSucess("Reporte de usuarios generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoVehiculos();
-            //     PopSucess("Reporte de vehículos generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoRepuestos();
-            //     PopSucess("Reporte de repuestos generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoServicios();
-            //     PopSucess("Reporte de servicios generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
-            // try
-            // {
-            //     _DataService.GenerarReporteListadoFacturas();
-            //     PopSucess("Reporte de facturas generado correctamente");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
+            base.OnDeleteEvent();
+            var dateNow = DateTime.UtcNow;
+            string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
+            _logHistorySession.Salida = utcFormattedDate;
+            _logHistorySessionService.AddLogHistorySession(_logHistorySession);
         }
     }
 }
