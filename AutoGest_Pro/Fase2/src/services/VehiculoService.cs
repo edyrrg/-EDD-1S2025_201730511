@@ -58,11 +58,16 @@ namespace Fase2.src.services
             }
             return vehiculo;
         }
+
+        public bool SearchVehiculoById(int id)
+        {
+            return _vehiculos.SearchById(id);
+        }
         public void GenerateReport()
         {
             if (!_vehiculos.GenerateReport())
             {
-                throw new Exception("No hay vehículos registrados");
+                throw new Exception("No hay vehículos registrados para generar reporte.");
             }
         }
     }

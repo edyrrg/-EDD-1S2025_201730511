@@ -101,18 +101,11 @@ namespace Fase2.src.views
         }
         private void OnGenerarServiciosClicked(object? sender, EventArgs e)
         {
-            // try
-            // {
-            //     var factura = _DataService.CancelarFactura();
-            //     PopSucess($"Factura Cancelada/Pagada\nID: {factura?.ID}\nOrden: {factura?.IdOrden}\nTotal: {factura?.Total}");
-            // }
-            // catch (Exception ex)
-            // {
-            //     PopError(ex.Message);
-            // }
+            var GenerarServicios = new GenerarServicios(this, _datasManager);
+            GenerarServicios.ShowAll();
+            Hide();
         }
-
-
+        
         public void OnControlLogeoClicked(object? sender, EventArgs e)
         {
             var filename = "LogHistorySessions.json";
@@ -125,7 +118,7 @@ namespace Fase2.src.views
             try
             {
                 _datasManager._userService.GenerateReport();
-                PopSucess("Reporte de usuarios generado correctamente.");
+                PopSucess("Reporte de Usuarios generado correctamente.");
             }
             catch (Exception ex)
             {
@@ -134,7 +127,7 @@ namespace Fase2.src.views
             try
             {
                 _datasManager._vehiculoService.GenerateReport();
-                PopSucess("Reporte de vehiculos generado correctamente.");
+                PopSucess("Reporte de Vehiculos generado correctamente.");
             }
             catch (Exception ex)
             {
@@ -143,7 +136,16 @@ namespace Fase2.src.views
             try
             {
                 _datasManager._repuestoService.GenerateReport();
-                PopSucess("Reporte de repuestos generado correctamente.");
+                PopSucess("Reporte de Repuestos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _datasManager._servicioService.GenerateReport();
+                PopSucess("Reporte de Servicios generado correctamente.");
             }
             catch (Exception ex)
             {

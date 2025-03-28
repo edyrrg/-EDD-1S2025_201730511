@@ -23,7 +23,7 @@ namespace Fase2.src.services
             if (_repuestos.Search(repuesto.ID))
             {
                 var id = repuesto.ID;
-                throw new WebException($"El repuesto con id {id} ya existe.");
+                throw new Exception($"El repuesto con id {id} ya existe.");
             }
             _repuestos.Insert(repuesto);
         }
@@ -33,7 +33,7 @@ namespace Fase2.src.services
             var AVLNode = _repuestos.Find(id);
             if (AVLNode == null)
             {
-                throw new WebException($"El repuesto con id {id} no existe.");
+                throw new Exception($"El repuesto con id {id} no existe.");
             }
             return AVLNode.Data;
         }
@@ -43,7 +43,7 @@ namespace Fase2.src.services
             if (!_repuestos.Update(repuesto))
             {
                 var id = repuesto.ID;
-                throw new WebException($"El repuesto con id {id} no existe y no se puede actualizar.");
+                throw new Exception($"El repuesto con id {id} no existe y no se puede actualizar.");
             }
         }
 
@@ -83,6 +83,11 @@ namespace Fase2.src.services
                 throw new Exception("No hay repuestos para mostrar.");
             }
             return listResult;
+        }
+
+        public bool SearchRepuestoById(int id)
+        {
+            return _repuestos.Search(id);
         }
     }
 }
