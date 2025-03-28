@@ -83,7 +83,7 @@ namespace Fase2.src.services
         {
             if (!_usersList.GenerateReport())
             {
-                throw new Exception("No hay usuarios registrados");
+                throw new Exception("No hay usuarios registrados para generar reporte.");
             }
         }
     }

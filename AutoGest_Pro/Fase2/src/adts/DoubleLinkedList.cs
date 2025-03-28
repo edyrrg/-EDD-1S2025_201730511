@@ -101,6 +101,23 @@ namespace Fase2.src.adts
             return false;
         }
 
+        public List<Vehiculo> GetVehiculosByUser(int id)
+        {
+            List<Vehiculo> vehiculos = new List<Vehiculo>();
+            if (_head == null) return vehiculos;
+            var current = _head;
+            while (current != null)
+            {
+                if ((current.Data as Vehiculo)?.ID_Usuario == id)
+                {
+                    var vehiculo = (current.Data as Vehiculo) ?? throw new Exception("No se pudo convertir el  porque es nulo");
+                    vehiculos.Add(vehiculo);
+                }
+                current = current.Next;
+            }
+            return vehiculos;
+        }
+
         public bool GenerateReport()
         {
             DotGraph graph = new DotGraph()
