@@ -106,7 +106,7 @@ namespace Fase2.src.views
             try
             {
                 var respuesto = _datasManager._repuestoService.FindRepuestoByID(idRepuestoInt);
-                var costoTotal = respuesto.Costo + costoDecimal;
+                var costoTotal = costoDecimal;
                 var servicio = new Servicio(idInt, idRepuestoInt, idVehiculoInt, _txtDetalles.Text, costoTotal);
                 _datasManager._servicioService.InsertServicio(servicio);
                 PopSucess("Servicio creado exitosamente.");

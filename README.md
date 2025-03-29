@@ -16,9 +16,17 @@ Repositorio para el curso de Estructura de Datos Sección B, Primer Semestre del
 
 ### AutoGest Pro | Fase 1
 
-#### Documentación
+#### Documentación | Fase 1
 
-- [Manual Técnico](./AutoGest_Pro/Fase1/documentation/technical_manual/README.md)
-- [Manual de Usuario](./AutoGest_Pro/Fase1/documentation/user_manul/README.md)
+- [Manual Técnico | Fase 1](./AutoGest_Pro/Fase1/documentation/technical_manual/README.md)
+- [Manual de Usuario | Fase 1](./AutoGest_Pro/Fase1/documentation/user_manul/README.md)
 
-> *By. Edy Rolando Rojas González*
+### AutoGest Pro | Fase 2
+
+#### Documentación| Fase 2
+
+- [Manual Técnico | Fase 2](./AutoGest_Pro/Fase2/documentation/technical_manual/README.md)
+- [Manual de Usuario | Fase 2](./AutoGest_Pro/Fase2/documentation/user_manul/README.md)
+
+---
+> *By. Edy Rolando Rojas González | 201730511*

@@ -9,28 +9,28 @@ AutoGest Pro es una aplicación de gestión de servicios automotrices que permit
 El proyecto está organizado en los siguientes directorios y archivos principales:
 
 ```directory
-AutoGest_Pro/
-    Fase1/
-        documentation/
-            images/
-        banner_edd_2025.png
-            technical_manual/
+📂AutoGest_Pro/
+    📂Fase1/
+        📂documentation/
+            📂images/
+        📂banner_edd_2025.png
+            📂technical_manual/
                 README.md
-            user_manual/
+            📂user_manual/
                 README.md
-        bin/
-        obj/
+        📂bin/
+        📂obj/
         Program.cs
         Fase1.csproj
         Fase1.sln
-        src/
-            adt/
+        📂src/
+            📂adt/
                 CircularList.cs
                 DoubleLinkedList.cs
                 Queue.cs
                 SimpleList.cs
                 Stack.cs
-            gui/
+            📂gui/
                 CargaMasiva.cs
                 GenerarServicio.cs
                 GestionUsuarios.cs
@@ -44,7 +44,7 @@ AutoGest_Pro/
                 MyWindow.cs
                 styles/
                     styles.css
-            models/
+            📂models/
                 Factura.cs
                 NodoFactura.cs
                 NodoRepuesto.cs
@@ -55,9 +55,9 @@ AutoGest_Pro/
                 Servicio.cs
                 Usuario.cs
                 Vehiculo.cs
-            services/
+            📂services/
                 DataService.cs
-            auth/
+            📂auth/
                 AuthService.cs
 
 ```
