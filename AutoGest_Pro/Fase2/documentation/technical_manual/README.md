@@ -10,8 +10,8 @@ Se aplica el paradigma de POO y tambien algunos patrones de diseño como la inye
 
 El proyecto está organizado en los siguientes directorios y archivos principales:
 
-![dir_tree_1](/documentation/images/dir_tree_1.png)
-![dir_tree_2](/documentation/images/dir_tree_2.png)
+![dir_tree_1](../images/dir_tree_1.png)
+![dir_tree_2](../images/dir_tree_2.png)
 
 \*\* Podra observar a simple vista que la composición general del proyecto se ordena por cada una de las carpetas, esto permite entender a simple vista el proposito de general o una idea general de lo que encontrara dentro, por ejemplo en ` adts/ ` econtrara las estructuras de datos utilizadas en el proyecto.
 
@@ -19,7 +19,7 @@ A continuación se ampliara información sobre las clases que encontrara dentro 
 
 ## Diagrama del AutoGest_Pro | General
 
-![digram_repo](/documentation/images/diagram.png)
+![digram_repo](../images/diagram.png)
 
 ## Componentes Principales
 
