@@ -44,7 +44,7 @@ namespace Fase2.src.views
             // Creando botones
             var btnRegistrarVehiculo = new Button("Registrar Vehículo");
             btnRegistrarVehiculo.Clicked += OnRegistrarVehiculoClicked;
-            btnRegistrarVehiculo.StyleContext.AddClass("button"); // Añadir clase CSS
+            //btnRegistrarVehiculo.StyleContext.AddClass("button"); // Añadir clase CSS
 
             var btnVisualizacionServicios = new Button("Visualización de Servicios");
             btnVisualizacionServicios.Clicked += OnVisualizacionServiciosClicked;
@@ -67,7 +67,9 @@ namespace Fase2.src.views
         }
         private void OnRegistrarVehiculoClicked(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var registrarVehiculo = new RegistrarVehiculos(this, _datasManager, _userSession);
+            registrarVehiculo.Show();
+            Hide();
         }
         private void OnVisualizacionServiciosClicked(object? sender, EventArgs e)
         {

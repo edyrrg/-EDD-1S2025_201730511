@@ -25,10 +25,15 @@ namespace Fase2.src.adts
                 // Insert in left subtree
                 node.Left = InsertRecursively(data, node.Left);
             }
-            if (data.ID > node.Data.ID)
+            else if (data.ID > node.Data.ID)
             {
                 // Insert in right subtree
                 node.Right = InsertRecursively(data, node.Right);
+            }
+            else
+            {
+                // Manejar duplicados (opcional)
+                throw new InvalidOperationException($"El ID {data.ID} ya existe en el árbol.");
             }
             return node;
         }
@@ -113,7 +118,7 @@ namespace Fase2.src.adts
             var graph = new List<string>
                 {
                     "digraph BinaryTree {",
-                    "node [shape=circle];"
+                    "node [shape=ellipse];"
                 };
 
             GenerateGraphvizRecursively(Root, graph);
@@ -127,11 +132,11 @@ namespace Fase2.src.adts
             var result = string.Join("\n", graph);
 
             // Save it to a file
-            File.WriteAllText("../../AutoGest_Pro/Fase2/Reportes/ArbolAVLRepuestos.dot", result);
+            File.WriteAllText("../../AutoGest_Pro/Fase2/Reportes/ArbolBinarioServicios.dot", result);
 
             ProcessStartInfo startInfo = new ProcessStartInfo("dot");
 
-            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase2/Reportes/ArbolAVLRepuestos.dot -o ../../AutoGest_Pro/Fase2/Reportes/ArbolAVLRepuestos.png";
+            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase2/Reportes/ArbolBinarioServicios.dot -o ../../AutoGest_Pro/Fase2/Reportes/ArbolBinarioServicios.png";
 
             Process.Start(startInfo);
             return true;
