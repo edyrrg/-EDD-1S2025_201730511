@@ -53,7 +53,7 @@ namespace Fase2.src.views
             var btnGenerarServicios = new Button("Generar Servicios");
             btnGenerarServicios.Clicked += OnGenerarServiciosClicked;
 
-            var btnControlLogeo = new Button("Control de Logeo");
+            var btnControlLogeo = new Button("Control de Inicios de Sesión");
             btnControlLogeo.Clicked += OnControlLogeoClicked;
 
             var btnGenerarReportes = new Button("Generar Reportes");

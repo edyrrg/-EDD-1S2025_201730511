@@ -139,6 +139,6 @@ Entorno de desarrollo utilizado en AutoGest Pro
     - Tipo de sistema Sistema operativo de 64 bits, procesador basado en x64
     - Lápiz y entrada táctil La entrada táctil o manuscrita no está disponible para esta pantalla
 
-> *by Edy Rolando Rojas González*
+> *by Edy Rolando Rojas González - [3251938781401@ingenieria.usac.edu.gt](mail:3251938781401@ingenieria.usac.edu.gt)*
 
 [Regresar](/README.md)

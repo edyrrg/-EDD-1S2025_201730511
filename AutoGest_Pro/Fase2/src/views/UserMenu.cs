@@ -49,10 +49,10 @@ namespace Fase2.src.views
             var btnVisualizacionServicios = new Button("Visualización de Servicios");
             btnVisualizacionServicios.Clicked += OnVisualizacionServiciosClicked;
 
-            var btnVisualizacionFacturas = new Button("Gestión de Usuarios");
+            var btnVisualizacionFacturas = new Button("Visualizacion de Facturas");
             btnVisualizacionFacturas.Clicked += OnVisualizacionFacturasClicked;
 
-            var btnCancelarFacturas = new Button("Generar Reportes");
+            var btnCancelarFacturas = new Button("Cancelar Facturas");
             btnCancelarFacturas.Clicked += OnCancelarFacturasClicked;
 
             // Agregando componentes al contenedor
