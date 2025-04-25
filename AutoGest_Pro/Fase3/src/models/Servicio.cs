@@ -1,4 +1,4 @@
-namespace Fase2.src.models
+namespace Fase3.src.models
 {
     public class Servicio(int id, int idRespuesto, int idVehicle, string detalles, float costo)
     {

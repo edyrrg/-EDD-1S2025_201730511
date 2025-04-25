@@ -1,7 +1,7 @@
-using Fase2.src.models;
+using Fase3.src.models;
 using Gdk;
 
-namespace Fase2.src.adts
+namespace Fase3.src.adts
 {
     public class BNode
     {

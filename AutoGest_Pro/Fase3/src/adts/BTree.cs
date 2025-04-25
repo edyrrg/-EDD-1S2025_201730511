@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Text;
-using Fase2.src.models;
+using Fase3.src.models;
 
-namespace Fase2.src.adts
+namespace Fase3.src.adts
 {
     public class BTree
     {
@@ -486,11 +486,11 @@ namespace Fase2.src.adts
             var result = GraficarGraphviz();
 
             // Save it to a file
-            File.WriteAllText("../../AutoGest_Pro/Fase2/Reportes/ArbolB-5-Facturas.dot", result);
+            File.WriteAllText("../../AutoGest_Pro/Fase3/Reportes/ArbolB-5-Facturas.dot", result);
 
             ProcessStartInfo startInfo = new ProcessStartInfo("dot");
 
-            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase2/Reportes/ArbolB-5-Facturas.dot -o ../../AutoGest_Pro/Fase2/Reportes/ArbolB-5-Facturas.png";
+            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase3/Reportes/ArbolB-5-Facturas.dot -o ../../AutoGest_Pro/Fase3/Reportes/ArbolB-5-Facturas.png";
 
             Process.Start(startInfo);
             return true;

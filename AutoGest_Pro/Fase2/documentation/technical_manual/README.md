@@ -104,7 +104,7 @@ Entorno de desarrollo utilizado en AutoGest Pro
         - Microsoft.NETCore.App 8.0.14 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]
 3. **GTK**
     - v3.24.33
-4. **Project 'Fase1' has the following package references [net8.0]**
+4. **Project 'Fase2' has the following package references [net8.0]**
     - DotNetGraph | 3.2.0
     - GtkSharp | 3.24.24.95
 

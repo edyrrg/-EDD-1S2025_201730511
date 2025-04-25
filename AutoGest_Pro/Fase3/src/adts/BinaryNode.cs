@@ -1,6 +1,6 @@
-using Fase2.src.models;
+using Fase3.src.models;
 
-namespace Fase2.src.adts
+namespace Fase3.src.adts
 {
     public class BinaryNode(Servicio data, BinaryNode? left = null, BinaryNode? right = null)
     {

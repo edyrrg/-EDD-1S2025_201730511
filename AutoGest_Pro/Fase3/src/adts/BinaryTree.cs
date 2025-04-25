@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Diagnostics;
-using Fase2.src.models;
+using Fase3.src.models;
 
-namespace Fase2.src.adts
+namespace Fase3.src.adts
 {
     public class BinaryTree
     {
@@ -132,11 +132,11 @@ namespace Fase2.src.adts
             var result = string.Join("\n", graph);
 
             // Save it to a file
-            File.WriteAllText("../../AutoGest_Pro/Fase2/Reportes/ArbolBinarioServicios.dot", result);
+            File.WriteAllText("../../AutoGest_Pro/Fase3/Reportes/ArbolBinarioServicios.dot", result);
 
             ProcessStartInfo startInfo = new ProcessStartInfo("dot");
 
-            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase2/Reportes/ArbolBinarioServicios.dot -o ../../AutoGest_Pro/Fase2/Reportes/ArbolBinarioServicios.png";
+            startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase3/Reportes/ArbolBinarioServicios.dot -o ../../AutoGest_Pro/Fase3/Reportes/ArbolBinarioServicios.png";
 
             Process.Start(startInfo);
             return true;
