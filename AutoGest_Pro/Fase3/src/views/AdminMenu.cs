@@ -41,11 +41,11 @@ namespace Fase3.src.views
             btnCargaMasiva.Clicked += OnCargaMasivaClicked;
             btnCargaMasiva.StyleContext.AddClass("button"); // Añadir clase CSS
 
-            var btnGestionEntidades = new Button("Gestion Entidades");
-            btnGestionEntidades.Clicked += OnGestionEntidadesClicked;
+            var btnVisualizacionUsuarios = new Button("Visualización de Usuarios");
+            btnVisualizacionUsuarios.Clicked += OnVisualizacionUsuariosClicked;
 
-            var btnActualizarRepuestos = new Button("Actualización de Repuestos");
-            btnActualizarRepuestos.Clicked += OnActualizacionRepuestosClicked;
+            var btnNuevoUsuario = new Button("Agregar nuevo Usuario");
+            btnNuevoUsuario.Clicked += OnAgregarNuevoUsuariosClicked;
 
             var btnViewRepuestos = new Button("Visualización de Repuestos");
             btnViewRepuestos.Clicked += OnViewRepuestosClicked;
@@ -61,8 +61,8 @@ namespace Fase3.src.views
 
             // Agregando botones al vbox
             vbox.PackStart(btnCargaMasiva, false, false, 6);
-            vbox.PackStart(btnGestionEntidades, false, false, 6);
-            vbox.PackStart(btnActualizarRepuestos, false, false, 6);
+            vbox.PackStart(btnNuevoUsuario, false, false, 6);
+            vbox.PackStart(btnVisualizacionUsuarios, false, false, 6);
             vbox.PackStart(btnViewRepuestos, false, false, 6);
             vbox.PackStart(btnGenerarServicios, false, false, 6);
             vbox.PackStart(btnControlLogeo, false, false, 6);
@@ -79,17 +79,17 @@ namespace Fase3.src.views
             Hide();
         }
 
-        private void OnGestionEntidadesClicked(object? sender, EventArgs e)
+        private void OnVisualizacionUsuariosClicked(object? sender, EventArgs e)
         {
-            var GestionEntidadesMenu = new GestionEntidadesMenu(this, _datasManager);
-            GestionEntidadesMenu.ShowAll();
+            var visualizacionUsuarios = new VisualizacionUsuarios(this, _datasManager);
+            visualizacionUsuarios.ShowAll();
             Hide();
         }
 
-        private void OnActualizacionRepuestosClicked(object? sender, EventArgs e)
+        private void OnAgregarNuevoUsuariosClicked(object? sender, EventArgs e)
         {
-            var ActualizacionRepuesto = new ActualizacionRepuesto(this, _datasManager);
-            ActualizacionRepuesto.ShowAll();
+            var nuevoUsuario = new NuevoUsuario(this, _datasManager);
+            nuevoUsuario.ShowAll();
             Hide();
         }
 
@@ -105,7 +105,7 @@ namespace Fase3.src.views
             GenerarServicios.ShowAll();
             Hide();
         }
-        
+
         public void OnControlLogeoClicked(object? sender, EventArgs e)
         {
             var filename = "LogHistorySessions.json";

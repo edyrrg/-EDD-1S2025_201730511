@@ -11,26 +11,6 @@ namespace Fase3
     {
         static void Main(string[] args)
         {
-            Blockchain blockchain = new Blockchain();
-
-            blockchain.AddBlock(new Usuario(1, "Juan", "Pérez", "jperez@mail.com", 30, "password123"));
-            blockchain.AddBlock(new Usuario(2, "María", "Gómez", "mgomez@mail.com", 25, "mypassword"));
-            blockchain.AddBlock(new Usuario(3, "Carlos", "López", "clopez@mail.com", 28, "123456"));
-
-            Console.WriteLine($"Encontrado por email y contraseña: {blockchain.SearchByEmailAndPass("jperez@mail.com", "password123")}");
-
-            Console.WriteLine($"Encontrado por id: {blockchain.FindUserById(2)}");
-
-            try
-            {
-                blockchain.GenerateReport();
-            }
-            catch (System.Exception)
-            {
-
-                Console.Error.WriteLine("Error al generar el grafo.");
-            }
-
             Application.Init();
             // Crear una instancia de DataService para inyectar en la vista Login
             var datasManager = DatasManager.Instance;

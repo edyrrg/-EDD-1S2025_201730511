@@ -11,7 +11,7 @@ namespace Fase3.src.adts
         public Block? Tail { get; private set; } = null;
         public int Size { get; private set; } = 0;
         // --- Constantes para la Minería ---
-        private const int Difficulty = 4; // Dificultad fija
+        // private const int Difficulty = 4; // Dificultad fija
         private const string ProofOfWorkPrefix = "0000"; // Prefijo requerido (4 ceros) 
         private void MineBlock(Block block)
         {
@@ -28,7 +28,7 @@ namespace Fase3.src.adts
             }
             // Hash válido encontrado, asignarlo al bloque
             block.Hash = hash;
-            Console.WriteLine($"Block Mined! Index: {block.Index}, Nonce: {block.Nonce}, Hash: {block.Hash}");
+            // Console.WriteLine($"Block Mined! Index: {block.Index}, Nonce: {block.Nonce}, Hash: {block.Hash}");
         }
 
         public void AddBlock(Usuario data)
@@ -43,7 +43,10 @@ namespace Fase3.src.adts
             }
             else
             {
-                Tail.next = newBlock;
+                if (Tail != null)
+                {
+                    Tail.next = newBlock;
+                }
                 newBlock.previous = Tail;
                 Tail = newBlock;
             }
@@ -72,6 +75,20 @@ namespace Fase3.src.adts
             while (current != null)
             {
                 if (current.Data.ID == id)
+                {
+                    return current.Data;
+                }
+                current = current.next;
+            }
+            return null;
+        }
+
+        public Usuario? FindByEmail(string email)
+        {
+            Block? current = Head;
+            while (current != null)
+            {
+                if (current.Data.Correo == email)
                 {
                     return current.Data;
                 }
@@ -126,7 +143,7 @@ namespace Fase3.src.adts
                     ];
 
                     edge [
-                        color=""#7e57c2"",
+                        color=""#222831"",
                         arrowhead=normal,
                         penwidth=2
                     ];
@@ -134,8 +151,8 @@ namespace Fase3.src.adts
 
             // Colores para alternar en los nodos (opcional)
             string[] colors = {
-                "#e3f2fd", "#bbdefb", "#90caf9", "#64b5f6",
-                "#42a5f5", "#2196f3", "#1e88e5", "#1976d2"
+                "#FFF2F2", "#A9B5DF", "#7886C7", "#3674B5",
+                "#578FCA", "#A1E3F9", "#D1F8EF", "#98D8EF"
             };
 
             var nodesBuilder = new StringBuilder();
@@ -157,16 +174,23 @@ namespace Fase3.src.adts
                                       ? current.PreviousHash.Substring(0, Math.Min(current.PreviousHash.Length, 12))
                                       : "N/A";
 
+                string safePassword = current.Data.Contrasenia != null
+                                      ? current.Data.Contrasenia.Substring(0, Math.Min(current.Data.Contrasenia.Length, 12))
+                                      : "N/A";
+
                 // Formatear los datos del Usuario para mostrarlos (ajusta según necesites)
                 // Escapar caracteres HTML si los datos pudieran contenerlos (ej. '&' -> "&amp;")
                 string userDataHtml = $"ID: {current.Data.ID}<br/>" +
-                                      $"Nombre: {System.Security.SecurityElement.Escape(current.Data.Nombres)}<br/>" +
-                                      $"Correo: {System.Security.SecurityElement.Escape(current.Data.Correo)}<br/>";
+                                      $"Nombres: {System.Security.SecurityElement.Escape(current.Data.Nombres)}<br/>" +
+                                      $"Apellidos: {System.Security.SecurityElement.Escape(current.Data.Apellidos)}<br/>" +
+                                      $"Correo: {System.Security.SecurityElement.Escape(current.Data.Correo)}<br/>" +
+                                      $"Edad: {System.Security.SecurityElement.Escape(current.Data.Edad.ToString())}<br/>" +
+                                      $"Contraseña: {safePassword}...<br/>";
                 // Definición del nodo usando formato HTML-like de Graphviz
                 nodesBuilder.AppendFormat(
                     @"    block{0} [label=<
                         <table border=""0"" cellborder=""1"" cellspacing=""0"" cellpadding=""5"" style=""rounded"" bgcolor=""{1}"">
-                            <tr><td colspan=""2"" bgcolor=""#1565c0"" align=""center""><font color=""white""><b>Bloque #{0}</b></font></td></tr>
+                            <tr><td colspan=""2"" bgcolor=""#2D336B"" align=""center""><font color=""white""><b>Bloque #{0}</b></font></td></tr>
                             <tr><td align=""right""><b>Timestamp:</b></td><td>{2}</td></tr>
                             <tr><td align=""right""><b>Nonce:</b></td><td>{3}</td></tr>
                             <tr><td align=""right"" valign=""top""><b>Data (Usuario):</b></td><td align=""left"">{4}</td></tr>
