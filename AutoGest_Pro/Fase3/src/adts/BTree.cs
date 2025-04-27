@@ -477,8 +477,7 @@ namespace Fase3.src.adts
         public bool GenerateReport()
         {
 
-            GraficarGraphviz();
-
+            // GraficarGraphviz();
             // using var writer = new StringWriter();
             // var context = new CompilationContext(writer, new CompilationOptions());
             // graph.CompileAsync(context);
