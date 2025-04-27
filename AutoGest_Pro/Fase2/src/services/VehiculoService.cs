@@ -63,6 +63,16 @@ namespace Fase2.src.services
         {
             return _vehiculos.SearchById(id);
         }
+
+        public List<Vehiculo> GetVehiculoByUserId(int id)
+        {
+            var vehiculosByUser = _vehiculos.GetVehiculosByUser(id);
+            if (vehiculosByUser.Count == 0)
+            {
+                throw new Exception($"No hay vehiculos asociados al usuario con id {id}.");
+            }
+            return vehiculosByUser;
+        }
         public void GenerateReport()
         {
             if (!_vehiculos.GenerateReport())

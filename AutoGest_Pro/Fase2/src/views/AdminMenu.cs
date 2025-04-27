@@ -151,6 +151,15 @@ namespace Fase2.src.views
             {
                 PopError(ex.Message);
             }
+            try
+            {
+                _datasManager._facturaService.GenerateReport();
+                PopSucess("Reporte de Facturas generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
         override
         public void OnDeleteEvent()

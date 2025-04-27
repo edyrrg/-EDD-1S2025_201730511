@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
-using Fase2.src.views;
+using Fase2.src.models;
 
 namespace Fase2.src.adts
 {

@@ -1,5 +1,5 @@
 using Fase2.src.adts;
-using Fase2.src.views;
+using Fase2.src.models;
 
 namespace Fase2.src.services
 {
@@ -55,10 +55,67 @@ namespace Fase2.src.services
             return servicios;
         }
 
-        public void GenerateReport(){
-            if(!_servicios.GenerateReport()){
+        public void GenerateReport()
+        {
+            if (!_servicios.GenerateReport())
+            {
                 throw new Exception("No hay servicios para generar reporte.");
             }
+        }
+
+        public List<Servicio> PostOrderFilterByUserVehicles(List<Vehiculo> vehiculos)
+        {
+            var serviciosPostOrder = PostOrder();
+            var serviciosFiltrados = new List<Servicio>();
+            foreach (var servicio in serviciosPostOrder)
+            {
+                if (vehiculos.Exists(v => v.ID == servicio.IdVehicle))
+                {
+                    serviciosFiltrados.Add(servicio);
+                }
+            }
+
+            if (serviciosFiltrados.Count == 0)
+            {
+                throw new Exception("No hay servicios registrados para los vehiculos del usuarios");
+            }
+            return serviciosFiltrados;
+        }
+
+        public List<Servicio> PreOrderFilterByUserVehicles(List<Vehiculo> vehiculos)
+        {
+            var serviciosPreOrder = PreOrder();
+            var serviciosFiltrados = new List<Servicio>();
+            foreach (var servicio in serviciosPreOrder)
+            {
+                if (vehiculos.Exists(v => v.ID == servicio.IdVehicle))
+                {
+                    serviciosFiltrados.Add(servicio);
+                }
+            }
+            if (serviciosFiltrados.Count == 0)
+            {
+                throw new Exception("No hay servicios registrados para los vehiculos del usuarios");
+            }
+            return serviciosFiltrados;
+        }
+
+        public List<Servicio> InOrderFilterByUserVehicles(List<Vehiculo> vehiculos)
+        {
+            var serviciosInOrder = InOrder();
+            var serviciosFiltrados = new List<Servicio>();
+            foreach (var servicio in serviciosInOrder)
+            {
+                if (vehiculos.Exists(v => v.ID == servicio.IdVehicle))
+                {
+                    serviciosFiltrados.Add(servicio);
+                }
+            }
+            if (serviciosFiltrados.Count == 0)
+            {
+                throw new Exception("No hay servicios registrados para los vehiculos del usuarios");
+            }
+            return serviciosFiltrados;
         }
     }
 }

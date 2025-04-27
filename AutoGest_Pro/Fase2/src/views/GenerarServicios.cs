@@ -1,5 +1,6 @@
 using Fase2.src.services;
 using Gtk;
+using Fase2.src.models;
 
 namespace Fase2.src.views
 {
@@ -106,10 +107,11 @@ namespace Fase2.src.views
             try
             {
                 var respuesto = _datasManager._repuestoService.FindRepuestoByID(idRepuestoInt);
-                var costoTotal = costoDecimal;
-                var servicio = new Servicio(idInt, idRepuestoInt, idVehiculoInt, _txtDetalles.Text, costoTotal);
+                var costoTotal = costoDecimal + respuesto.Costo;
+                var servicio = new Servicio(idInt, idRepuestoInt, idVehiculoInt, _txtDetalles.Text, costoDecimal);
                 _datasManager._servicioService.InsertServicio(servicio);
                 PopSucess("Servicio creado exitosamente.");
+                _datasManager._facturaService.InsertFactura(servicio.ID, costoTotal);
                 ClearEntries();
             }
             catch (Exception ex)

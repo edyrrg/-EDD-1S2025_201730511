@@ -73,15 +73,21 @@ namespace Fase2.src.views
         }
         private void OnVisualizacionServiciosClicked(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var visualizacionServicios = new VisualizacionServicios(this, _datasManager, _userSession);
+            visualizacionServicios.Show();
+            Hide();
         }
         private void OnVisualizacionFacturasClicked(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var visualizacionFacturas = new VisualizacionFacturas(this, _datasManager, _userSession);
+            visualizacionFacturas.Show();
+            Hide();
         }
         private void OnCancelarFacturasClicked(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var cancelarFactura = new CancelarFactura(this, _datasManager, _userSession);
+            cancelarFactura.Show();
+            Hide();
         }
         override
         public void OnDeleteEvent()

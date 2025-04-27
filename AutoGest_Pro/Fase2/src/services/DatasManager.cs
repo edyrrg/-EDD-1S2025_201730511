@@ -9,8 +9,8 @@ namespace Fase2.src.services
         public UserService _userService { get; } = UserService.Instance;
         public VehiculoService _vehiculoService { get; } = VehiculoService.Instance;
         public RepuestoService _repuestoService { get; } = RepuestoService.Instance;
-
         public ServicioService _servicioService { get; } = ServicioService.Instance;
+        public FacturaService _facturaService { get; } = FacturaService.Instance;
         private DatasManager()
         {
             LoadData();
@@ -26,7 +26,7 @@ namespace Fase2.src.services
 
         public void LoadData()
         {
-            _userService.InsertUser(new Usuario(101, "Juan", "Perez", "ryuk@mail.com", 25, "1234"));
+            _userService.InsertUser(new Usuario(101, "Edy", "Rojas", "ryuk@mail.com", 26, "123"));
         }
     }
 }

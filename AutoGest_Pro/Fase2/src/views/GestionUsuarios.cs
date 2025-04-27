@@ -74,7 +74,16 @@ namespace Fase2.src.views
                 PopError("El campo ID debe ser un número entero.");
                 return;
             }
-
+            var confirmacion = new MessageDialog(this,
+                DialogFlags.Modal, MessageType.Question,
+                ButtonsType.YesNo, $"¿Está seguro de eliminar el Usuario con ID {idInt}?");
+            var response = (ResponseType)confirmacion.Run();
+            confirmacion.Destroy();
+            if (response == ResponseType.No)
+            {
+                ClearEntries();
+                return;
+            }
             try
             {
                 _datasManager._userService.DeleteUser(idInt);
@@ -101,18 +110,6 @@ namespace Fase2.src.views
                 PopError("El campo ID debe ser un número entero.");
                 return;
             }
-
-            var confirmacion = new MessageDialog(this,
-                DialogFlags.Modal, MessageType.Question,
-                ButtonsType.YesNo, $"¿Está seguro de eliminar el Usuario con ID {idInt}?");
-            var response = (ResponseType)confirmacion.Run();
-            confirmacion.Destroy();
-            if (response == ResponseType.No)
-            {
-                ClearEntries();
-                return;
-            }
-
             try
             {
                 Usuario userFound = _datasManager._userService.FindUserById(idInt);
