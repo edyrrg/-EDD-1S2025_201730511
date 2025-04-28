@@ -135,12 +135,12 @@ namespace Fase3.src.adts
             }
 
             return null;
-        }
+        }  
 
         public bool Search(int id)
         {
             return BuscarRecursivo(root, id) != null;
-        }
+        }  
 
         // Busca un Factura por su Id
         public Factura? Buscar(int id)
@@ -477,7 +477,7 @@ namespace Fase3.src.adts
         public bool GenerateReport()
         {
             if (root == null) return false;
-            
+                
             // GraficarGraphviz();
             // using var writer = new StringWriter();
             // var context = new CompilationContext(writer, new CompilationOptions());
