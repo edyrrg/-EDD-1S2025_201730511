@@ -29,7 +29,9 @@ namespace Fase3.src.views
             treeView = new TreeView();
             treeView.AppendColumn("ID", new CellRendererText(), "text", 0);
             treeView.AppendColumn("Orden", new CellRendererText(), "text", 1);
-            treeView.AppendColumn("Total", new CellRendererText(), "text", 2);
+            treeView.AppendColumn("Fecha", new CellRendererText(), "text", 2);
+            treeView.AppendColumn("Método de Pago", new CellRendererText(), "text", 3);
+            treeView.AppendColumn("Total", new CellRendererText(), "text", 4);
             treeView.Margin = 5;
 
             DefaultView();
@@ -64,10 +66,10 @@ namespace Fase3.src.views
         }
         private ListStore GetListStore(List<Factura> facturas)
         {
-            var listStore = new ListStore(typeof(int), typeof(int), typeof(float));
+            var listStore = new ListStore(typeof(int), typeof(int), typeof(string), typeof(string), typeof(float));
             foreach (var factura in facturas)
             {
-                listStore.AppendValues(factura.Id, factura.IdServicio, factura.Total);
+                listStore.AppendValues(factura.Id, factura.IdServicio, factura.Fecha, factura.MetodoPago.ToString(), factura.Total);
             }
             return listStore;
         }

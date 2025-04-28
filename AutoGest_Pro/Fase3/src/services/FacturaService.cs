@@ -67,5 +67,21 @@ namespace Fase3.src.services
                 throw new Exception("No hay datos para generar el reporte.");
             }
         }
+
+        public void printGraph()
+        {
+            _facturas.GenerateGraphvizDot();
+        }
+
+        public void UpdateFactura(int id, MetodoPago metodoPago)
+        {
+            var factura = _facturas.Find(id);
+            if (factura == null)
+            {
+                throw new Exception($"La factura con id {id} no existe y no se puede actualizar.");
+            }
+            factura.MetodoPago = metodoPago;
+            _facturas.UpdateMetodoPago(id, metodoPago);
+        }
     }
 }

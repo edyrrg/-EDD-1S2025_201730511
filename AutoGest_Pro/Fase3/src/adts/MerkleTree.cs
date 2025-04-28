@@ -21,7 +21,7 @@ namespace Fase3.src.adts
 
             var newLeaf = new MerkleNode(data);
             Leaves.Add(newLeaf);
-
+            BuildTree();
         }
 
         public void BuildTree()
@@ -110,6 +110,20 @@ namespace Fase3.src.adts
             return false;
         }
 
+        public bool UpdateMetodoPago(int id, MetodoPago metodoPago)
+        {
+            foreach (var leaf in Leaves)
+            {
+                if (leaf.Data?.Id == id)
+                {
+                    leaf.Data.MetodoPago = metodoPago;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         public void GenerarDotRecursive(MerkleNode node, StringBuilder dot, Dictionary<string, int> nodeIds, ref int idCounter)
         {
 
@@ -173,6 +187,7 @@ namespace Fase3.src.adts
 
             dot.AppendLine("  }");
             dot.AppendLine("}");
+            Console.WriteLine(dot.ToString());
             return dot.ToString();
         }
 
