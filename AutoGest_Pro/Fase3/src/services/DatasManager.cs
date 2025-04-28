@@ -11,6 +11,7 @@ namespace Fase3.src.services
         public RepuestoService _repuestoService { get; } = RepuestoService.Instance;
         public ServicioService _servicioService { get; } = ServicioService.Instance;
         public FacturaService _facturaService { get; } = FacturaService.Instance;
+        public GrafoService _grafoService { get; } = GrafoService.Instance;
         private DatasManager()
         {
             LoadData();

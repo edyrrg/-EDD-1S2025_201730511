@@ -103,15 +103,21 @@ namespace Fase3.src.views
                 PopError($"El repuesto con ID {idRepuestoInt} no existe.");
                 return;
             }
-            
+
             try
             {
+                // Recuperamos el repuesto y vehiculo
                 var respuesto = _datasManager._repuestoService.FindRepuestoByID(idRepuestoInt);
+                var vehiculo = _datasManager._vehiculoService.FindVehiculoByID(idVehiculoInt);
                 var costoTotal = costoDecimal + respuesto.Costo;
                 var servicio = new Servicio(idInt, idRepuestoInt, idVehiculoInt, _txtDetalles.Text, costoDecimal);
+
+                _datasManager._grafoService.InsertarRepuesto(vehiculo, respuesto);
+
                 _datasManager._servicioService.InsertServicio(servicio);
-                PopSucess("Servicio creado exitosamente.");
                 _datasManager._facturaService.InsertFactura(servicio.ID, costoTotal);
+
+                PopSucess("Servicio creado exitosamente.");
                 ClearEntries();
             }
             catch (Exception ex)

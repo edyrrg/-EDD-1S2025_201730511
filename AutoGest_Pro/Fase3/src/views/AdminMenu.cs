@@ -160,6 +160,16 @@ namespace Fase3.src.views
             {
                 PopError(ex.Message);
             }
+
+            try
+            {
+                _datasManager._grafoService.GenerateReport();
+                PopSucess("Reporte de Grafo generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
         override
         public void OnDeleteEvent()

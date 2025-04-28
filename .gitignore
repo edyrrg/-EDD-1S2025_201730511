@@ -417,6 +417,12 @@ obj/
 
 /AutoGest_Pro/Fase2/Reportes/LogHistorySessions.json
 
+/AutoGest_Pro/Fase3/Reportes/*.png
+
+/AutoGest_Pro/Fase3/Reportes/LogHistorySessions.json
+
+/AutoGest_Pro/Fase3/backups/
+
 
 .vscode/
 *.sln.ide

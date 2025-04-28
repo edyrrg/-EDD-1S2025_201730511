@@ -63,7 +63,10 @@ namespace Fase3.src.services
 
         public void GenerateReport()
         {
-            _facturas.GenerateReport();
+            if(!_facturas.GenerateReport())
+            {
+                throw new Exception("No hay datos para generar el reporte.");
+            }
         }
 
         public void EliminarFactura(int id)
