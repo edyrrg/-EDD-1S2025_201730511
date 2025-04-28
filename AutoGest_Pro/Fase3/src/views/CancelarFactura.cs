@@ -155,7 +155,7 @@ namespace Fase3.src.views
                     return;
                 }
 
-                _datasManager._facturaService.EliminarFactura(factura.Id);
+                _datasManager._facturaService.CancelarFactura(factura.Id);
                 PopSucess("Factura pagada con éxito.");
                 ClearEntries();
             }

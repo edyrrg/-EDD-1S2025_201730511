@@ -49,6 +49,31 @@ namespace Fase3.src.adts
             Root = currentLevel[0];
         }
 
+        public void Delete(Factura data)
+        {
+            for (int i = 0; i < Leaves.Count; i++)
+            {
+                if (Leaves[i].Data?.Id == data.Id)
+                {
+                    Leaves.RemoveAt(i);
+                    break;
+                }
+            }
+            BuildTree();
+        }
+
+        public Factura? Find(int id)
+        {
+            foreach (var leaf in Leaves)
+            {
+                if (leaf.Data?.Id == id)
+                {
+                    return leaf.Data;
+                }
+            }
+            return null;
+        }
+
         public bool Verify(Factura data)
         {
             foreach (var leaf in Leaves)
@@ -56,6 +81,30 @@ namespace Fase3.src.adts
                 if (leaf.Data?.Id == data.Id)
                 {
                     return leaf.Hash == data.GetHash();
+                }
+            }
+            return false;
+        }
+
+        public Factura? BuscarPorServicio(int idServicio)
+        {
+            foreach (var leaf in Leaves)
+            {
+                if (leaf.Data?.IdServicio == idServicio)
+                {
+                    return leaf.Data;
+                }
+            }
+            return null;
+        }
+
+        public bool Search(int id)
+        {
+            foreach (var leaf in Leaves)
+            {
+                if (leaf.Data?.Id == id)
+                {
+                    return true;
                 }
             }
             return false;
@@ -130,7 +179,7 @@ namespace Fase3.src.adts
         public bool GenerateReport()
         {
             if (Root == null) return false;
-                
+
             var dot = GenerateGraphvizDot();
             // Save it to a file
             File.WriteAllText("../../AutoGest_Pro/Fase3/Reportes/Arbol-Merkle-Facturas.dot", dot);

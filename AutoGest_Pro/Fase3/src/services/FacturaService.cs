@@ -5,10 +5,9 @@ namespace Fase3.src.services
 {
     public class FacturaService
     {
-        private static int controlId = 0;
         private static FacturaService? _instance;
-
-        private BTree _facturas = new BTree();
+        private MerkleTree _facturas = new MerkleTree();
+        // private BTree _facturas = new BTree();
 
         private FacturaService() { }
         public static FacturaService Instance
@@ -22,23 +21,23 @@ namespace Fase3.src.services
 
         public void InsertFactura(int idServicio, float total)
         {
-            controlId++;
-            var factura = new Factura(controlId, idServicio, total);
-            if (_facturas.Search(factura.Id))
+            var factura = new Factura(idServicio, idServicio, total);
+            if (_facturas.Verify(factura))
             {
                 var id = factura.Id;
                 throw new Exception($"La factura con id {id} ya existe y no se pudo crear.");
             }
-            _facturas.Insertar(factura);
+            _facturas.Add(factura);
         }
 
         public void CancelarFactura(int id)
         {
-            if (!_facturas.Search(id))
+            var factura = _facturas.Find(id);
+            if (factura == null)
             {
                 throw new Exception($"La factura con id {id} no existe y no se puede cancelar.");
             }
-            _facturas.Eliminar(id);
+            _facturas.Delete(factura);
         }
 
         public List<Factura> ObtenerFacturasUsuario(List<Servicio> servicios)
@@ -63,19 +62,10 @@ namespace Fase3.src.services
 
         public void GenerateReport()
         {
-            if(!_facturas.GenerateReport())
+            if (!_facturas.GenerateReport())
             {
                 throw new Exception("No hay datos para generar el reporte.");
             }
-        }
-
-        public void EliminarFactura(int id)
-        {
-            if (!_facturas.Search(id))
-            {
-                throw new Exception($"La factura con id {id} no existe y no se puede eliminar.");
-            }
-            _facturas.Eliminar(id);
         }
     }
 }
