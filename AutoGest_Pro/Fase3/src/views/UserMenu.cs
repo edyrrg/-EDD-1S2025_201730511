@@ -41,10 +41,9 @@ namespace Fase3.src.views
 
             var lblUserName = new Label($"Bienvenido {_userSession.GetUser()?.Nombres}");
             lblUserName.StyleContext.AddClass("title-user");
-            // Creando botones
-            var btnRegistrarVehiculo = new Button("Registrar Vehículo");
-            btnRegistrarVehiculo.Clicked += OnRegistrarVehiculoClicked;
-            //btnRegistrarVehiculo.StyleContext.AddClass("button"); // Añadir clase CSS
+
+            var btnVisualizacionVehiculos = new Button("Visualizar mis Vehículos");
+            btnVisualizacionVehiculos.Clicked += OnVisualizarVehiculosClicked;
 
             var btnVisualizacionServicios = new Button("Visualización de Servicios");
             btnVisualizacionServicios.Clicked += OnVisualizacionServiciosClicked;
@@ -57,7 +56,7 @@ namespace Fase3.src.views
 
             // Agregando componentes al contenedor
             vbox.PackStart(lblUserName, false, false, 6);
-            vbox.PackStart(btnRegistrarVehiculo, false, false, 6);
+            vbox.PackStart(btnVisualizacionVehiculos, false, false, 6);
             vbox.PackStart(btnVisualizacionServicios, false, false, 6);
             vbox.PackStart(btnVisualizacionFacturas, false, false, 6);
             vbox.PackStart(btnCancelarFacturas, false, false, 6);
@@ -65,10 +64,10 @@ namespace Fase3.src.views
             Add(vbox);
             ShowAll();
         }
-        private void OnRegistrarVehiculoClicked(object? sender, EventArgs e)
+        private void OnVisualizarVehiculosClicked(object? sender, EventArgs e)
         {
-            var registrarVehiculo = new RegistrarVehiculos(this, _datasManager, _userSession);
-            registrarVehiculo.Show();
+            var visualizacionVehiculos = new VisualizacionVehiculos(this, _datasManager, _userSession);
+            visualizacionVehiculos.Show();
             Hide();
         }
         private void OnVisualizacionServiciosClicked(object? sender, EventArgs e)
@@ -93,10 +92,18 @@ namespace Fase3.src.views
         public void OnDeleteEvent()
         {
             base.OnDeleteEvent();
-            var dateNow = DateTime.UtcNow;
-            string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
-            _logHistorySession.Salida = utcFormattedDate;
-            _logHistorySessionService.AddLogHistorySession(_logHistorySession);
+            try
+            {
+                var dateNow = DateTime.UtcNow;
+                string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
+                _logHistorySession.Salida = utcFormattedDate;
+                _logHistorySessionService.AddLogHistorySession(_logHistorySession);
+                PopSucess("Sesión cerrada correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
     }
 }

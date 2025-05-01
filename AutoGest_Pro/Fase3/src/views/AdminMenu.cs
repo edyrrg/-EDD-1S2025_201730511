@@ -160,15 +160,34 @@ namespace Fase3.src.views
             {
                 PopError(ex.Message);
             }
+
+            try
+            {
+                _datasManager._grafoService.GenerateReport();
+                PopSucess("Reporte de Grafo generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
         override
         public void OnDeleteEvent()
         {
             base.OnDeleteEvent();
-            var dateNow = DateTime.UtcNow;
-            string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
-            _logHistorySession.Salida = utcFormattedDate;
-            _logHistorySessionService.AddLogHistorySession(_logHistorySession);
+            try
+            {
+                var dateNow = DateTime.UtcNow;
+                string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
+                _logHistorySession.Salida = utcFormattedDate;
+                _logHistorySessionService.AddLogHistorySession(_logHistorySession);
+                PopSucess("Sesión cerrada correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+
         }
     }
 }

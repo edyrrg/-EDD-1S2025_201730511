@@ -5,14 +5,14 @@ using Gtk;
 
 namespace Fase3.src.views
 {
-    public class VisualizacionFacturas : CustomWindow
+    public class VisualizacionVehiculos : CustomWindow
     {
         private readonly DatasManager _datasManager;
         private ListStore? listStore;
         private TreeView treeView;
         private readonly UserSession _userSession;
 
-        public VisualizacionFacturas(Window contextParent, DatasManager datasManager, UserSession userSession) : base("Visualización de Facturas | AutoGest Pro", contextParent)
+        public VisualizacionVehiculos(Window contextParent, DatasManager datasManager, UserSession userSession) : base("Visualización de Vehículos | AutoGest Pro", contextParent)
         {
             _datasManager = datasManager;
             _userSession = userSession;
@@ -28,10 +28,10 @@ namespace Fase3.src.views
 
             treeView = new TreeView();
             treeView.AppendColumn("ID", new CellRendererText(), "text", 0);
-            treeView.AppendColumn("Orden", new CellRendererText(), "text", 1);
-            treeView.AppendColumn("Fecha", new CellRendererText(), "text", 2);
-            treeView.AppendColumn("Método de Pago", new CellRendererText(), "text", 3);
-            treeView.AppendColumn("Total", new CellRendererText(), "text", 4);
+            treeView.AppendColumn("Propietario", new CellRendererText(), "text", 1);
+            treeView.AppendColumn("Marca", new CellRendererText(), "text", 2);
+            treeView.AppendColumn("Modelo", new CellRendererText(), "text", 3);
+            treeView.AppendColumn("Placa", new CellRendererText(), "text", 4);
             treeView.Margin = 5;
 
             DefaultView();
@@ -53,9 +53,7 @@ namespace Fase3.src.views
             try
             {
                 var vehiculos = _datasManager._vehiculoService.GetVehiculoByUserId(user.ID);
-                var servicios = _datasManager._servicioService.PreOrderFilterByUserVehicles(vehiculos);
-                var facturas = _datasManager._facturaService.ObtenerFacturasUsuario(servicios);
-                listStore = GetListStore(facturas);
+                listStore = GetListStore(vehiculos);
                 treeView.Model = listStore;
                 treeView.ShowAll();
             }
@@ -64,12 +62,12 @@ namespace Fase3.src.views
                 PopError(ex.Message);
             }
         }
-        private ListStore GetListStore(List<Factura> facturas)
+        private ListStore GetListStore(List<Vehiculo> vehiculos)
         {
-            var listStore = new ListStore(typeof(int), typeof(int), typeof(string), typeof(string), typeof(float));
-            foreach (var factura in facturas)
+            var listStore = new ListStore(typeof(int), typeof(int), typeof(string), typeof(int), typeof(string));
+            foreach (var vehiculo in vehiculos)
             {
-                listStore.AppendValues(factura.Id, factura.IdServicio, factura.Fecha, factura.MetodoPago.ToString(), factura.Total);
+                listStore.AppendValues(vehiculo.ID, vehiculo.ID_Usuario, vehiculo.Marca, vehiculo.Modelo, vehiculo.Placa);
             }
             return listStore;
         }

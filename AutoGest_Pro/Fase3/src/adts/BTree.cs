@@ -476,7 +476,8 @@ namespace Fase3.src.adts
         }
         public bool GenerateReport()
         {
-
+            if (root == null) return false;
+                
             // GraficarGraphviz();
             // using var writer = new StringWriter();
             // var context = new CompilationContext(writer, new CompilationOptions());

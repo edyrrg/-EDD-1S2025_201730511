@@ -1,6 +1,7 @@
 using Gtk;
 using Fase3.src.services;
 using Fase3.src.auth;
+using Fase3.src.models;
 
 namespace Fase3.src.views
 {
@@ -12,6 +13,8 @@ namespace Fase3.src.views
         private Entry _txtID;
         private Entry _txtIdServicio;
         private Entry _txtTotal;
+        private Entry _txtFecha;
+        private ComboBoxText _txtTipoPago;
 
         public CancelarFactura(Window contextParent, DatasManager datasManager, UserSession userSession) : base("Cancelar Factura | AutoGest Pro", contextParent)
         {
@@ -35,7 +38,9 @@ namespace Fase3.src.views
             };
 
             var lblID = new Label("ID:") { Halign = Align.Start };
+            var lblFecha = new Label("Fecha:") { Halign = Align.Start };
             var lblIdServicio = new Label("Orden:") { Halign = Align.Start };
+            var lblMetodoPago = new Label("Método de Pago:") { Halign = Align.Start };
             var lblTotal = new Label("Total:") { Halign = Align.Start };
 
             _txtID = new Entry();
@@ -50,6 +55,18 @@ namespace Fase3.src.views
                 Sensitive = false
             };
             _txtTotal.StyleContext.AddClass("txt-lbl");
+            _txtTipoPago = new ComboBoxText() { Sensitive = false };
+            _txtTipoPago.AppendText("Efectivo");
+            _txtTipoPago.AppendText("Tarjeta");
+            _txtTipoPago.AppendText("Transferencia");
+            _txtTipoPago.AppendText("Pendiente");
+            _txtTipoPago.Active = 0;
+            _txtFecha = new Entry()
+            {
+                Sensitive = false
+            };
+            _txtFecha.StyleContext.AddClass("txt-lbl");
+
 
             var btnBuscar = new Button("Buscar");
             btnBuscar.Clicked += OnBuscarClicked;
@@ -59,11 +76,15 @@ namespace Fase3.src.views
             grid.Attach(lblID, 0, 0, 1, 1);
             grid.Attach(_txtID, 1, 0, 1, 1);
             grid.Attach(btnBuscar, 2, 0, 1, 1);
-            grid.Attach(lblIdServicio, 0, 1, 1, 1);
-            grid.Attach(_txtIdServicio, 1, 1, 2, 1);
-            grid.Attach(lblTotal, 0, 2, 1, 1);
-            grid.Attach(_txtTotal, 1, 2, 2, 1);
-            grid.Attach(btnEliminar, 1, 3, 2, 1);
+            grid.Attach(lblFecha, 0, 1, 1, 1);
+            grid.Attach(_txtFecha, 1, 1, 2, 1);
+            grid.Attach(lblIdServicio, 0, 2, 1, 1);
+            grid.Attach(_txtIdServicio, 1, 2, 2, 1);
+            grid.Attach(lblMetodoPago, 0, 3, 1, 1);
+            grid.Attach(_txtTipoPago, 1, 3, 2, 1);
+            grid.Attach(lblTotal, 0, 4, 1, 1);
+            grid.Attach(_txtTotal, 1, 4, 2, 1);
+            grid.Attach(btnEliminar, 0, 5, 3, 1);
 
             vbox.Add(grid);
 
@@ -108,6 +129,17 @@ namespace Fase3.src.views
                 }
                 _txtIdServicio.Text = factura.IdServicio.ToString();
                 _txtTotal.Text = factura.Total.ToString();
+                _txtFecha.Text = factura.Fecha;
+                _txtTipoPago.SetActiveId(factura.MetodoPago.ToString());
+                // solo se habilita el campo de pago si el metodo de pago es pendiente
+                if (factura.MetodoPago == MetodoPago.Pendiente)
+                {
+                    _txtTipoPago.Sensitive = true;
+                }
+                else
+                {
+                    _txtTipoPago.Sensitive = false;
+                }
             }
             catch (Exception ex)
             {
@@ -135,6 +167,11 @@ namespace Fase3.src.views
                 PopError("El campo ID debe ser un número entero.");
                 return;
             }
+            if (_txtTipoPago.ActiveText == MetodoPago.Pendiente.ToString())
+            {
+                PopError("No se puede cancelar una factura con metodo de pago pendiente.");
+                return;
+            }
 
             try
             {
@@ -155,7 +192,7 @@ namespace Fase3.src.views
                     return;
                 }
 
-                _datasManager._facturaService.EliminarFactura(factura.Id);
+                _datasManager._facturaService.CancelarFactura(factura.Id);
                 PopSucess("Factura pagada con éxito.");
                 ClearEntries();
             }

@@ -49,7 +49,7 @@ namespace Fase3.src.services
             }
         }
 
-        public Vehiculo FindVehiculoById(int id)
+        public Vehiculo FindVehiculoByID(int id)
         {
             var vehiculo = _vehiculos.FindById(id);
             if (vehiculo == null)
