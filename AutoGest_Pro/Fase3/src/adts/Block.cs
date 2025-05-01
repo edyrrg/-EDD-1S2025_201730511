@@ -8,10 +8,10 @@ namespace Fase3.src.adts
     {
         public int Index { get; } = index;
         public Usuario Data { get; } = data;
-        public string PreviousHash { get; } = previousHash;
-        public string Timestamp { get; } = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        public string? Hash { get; internal set; }
-        public int? Nonce { get; internal set; } = 0;
+        public string PreviousHash { get; set; } = previousHash;
+        public string Timestamp { get; set; } = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        public string? Hash { get; set; }
+        public int? Nonce { get; set; } = 0;
         public Block? next { get; set; }
         public Block? previous { get; set; }
         public string CalculateHash()

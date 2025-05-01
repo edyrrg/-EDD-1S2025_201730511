@@ -98,7 +98,6 @@ namespace Fase3.src.views
                 string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
                 _logHistorySession.Salida = utcFormattedDate;
                 _logHistorySessionService.AddLogHistorySession(_logHistorySession);
-                PopSucess("Sesión cerrada correctamente.");
             }
             catch (Exception ex)
             {
