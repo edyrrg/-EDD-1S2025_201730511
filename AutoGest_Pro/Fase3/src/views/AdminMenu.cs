@@ -175,10 +175,19 @@ namespace Fase3.src.views
         public void OnDeleteEvent()
         {
             base.OnDeleteEvent();
-            var dateNow = DateTime.UtcNow;
-            string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
-            _logHistorySession.Salida = utcFormattedDate;
-            _logHistorySessionService.AddLogHistorySession(_logHistorySession);
+            try
+            {
+                var dateNow = DateTime.UtcNow;
+                string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
+                _logHistorySession.Salida = utcFormattedDate;
+                _logHistorySessionService.AddLogHistorySession(_logHistorySession);
+                PopSucess("Sesión cerrada correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+
         }
     }
 }
