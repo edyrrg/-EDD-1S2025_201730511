@@ -41,7 +41,7 @@ namespace Fase3.src.views
             var btnCargar = new Button("Cargar");
             btnCargar.Clicked += OnCargarClicked;
 
-            var btnCargarBackup = new Button("Cargar Backup");
+            var btnCargarBackup = new Button("Cargar Backups");
             btnCargarBackup.Clicked += OnCargarBackupClicked;
 
             vbox.PackStart(_comboBox, false, false, 30);
