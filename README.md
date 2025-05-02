@@ -19,21 +19,21 @@ Repositorio para el curso de Estructura de Datos Sección B, Primer Semestre del
 #### Documentación | Fase 1
 
 - [Manual Técnico | Fase 1](./AutoGest_Pro/Fase1/documentation/technical_manual/README.md)
-- [Manual de Usuario | Fase 1](./AutoGest_Pro/Fase1/documentation/user_manul/README.md)
+- [Manual de Usuario | Fase 1](./AutoGest_Pro/Fase1/documentation/user_manual/README.md)
 
 ### Fase 2
 
 #### Documentación | Fase 2
 
 - [Manual Técnico | Fase 2](./AutoGest_Pro/Fase2/documentation/technical_manual/README.md)
-- [Manual de Usuario | Fase 2](./AutoGest_Pro/Fase2/documentation/user_manul/README.md)
+- [Manual de Usuario | Fase 2](./AutoGest_Pro/Fase2/documentation/user_manual/README.md)
 
 ### Fase 3
 
 #### Documentación | Fase 3
 
 - [Manual Técnico | Fase 3](./AutoGest_Pro/Fase3/documentation/technical_manual/README.md)
-- [Manual de Usuario | Fase 3](./AutoGest_Pro/Fase3/documentation/user_manul/README.md)
+- [Manual de Usuario | Fase 3](./AutoGest_Pro/Fase3/documentation/user_manual/README.md)
 
 ---
 > *By. Edy Rolando Rojas González | 201730511*
