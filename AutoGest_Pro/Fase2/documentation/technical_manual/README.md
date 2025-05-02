@@ -81,7 +81,6 @@ Entorno de desarrollo utilizado en AutoGest Pro
 
 1. **Visual Studio Code**
     - Versión: 1.98.2 (user setup)
-    - Confirmar: ddc367ed5c8936efe395cffeec279b04ffd7db78
     - Fecha: 2025-03-12T13:32:45.399Z
     - Electron: 34.2.0
     - ElectronBuildId: 11161602
@@ -134,10 +133,7 @@ Entorno de desarrollo utilizado en AutoGest Pro
     - Nombre del dispositivo ryuk
     - Procesador 12th Gen Intel(R) Core(TM) i5-12400   2.50 GHz
     - RAM instalada 32.0 GB (31.7 GB usable)
-    - Identificador de dispositivo D0A7005E-E4EC-4772-B8C9-3A6345BC06CE
-    - Id. del producto 00330-80000-00000-AA075
     - Tipo de sistema Sistema operativo de 64 bits, procesador basado en x64
-    - Lápiz y entrada táctil La entrada táctil o manuscrita no está disponible para esta pantalla
 
 > *by Edy Rolando Rojas González - [3251938781401@ingenieria.usac.edu.gt](mail:3251938781401@ingenieria.usac.edu.gt)*
 
