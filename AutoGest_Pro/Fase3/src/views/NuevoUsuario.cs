@@ -16,7 +16,7 @@ namespace Fase3.src.views
         public NuevoUsuario(
                                 Window contextParent,
                                 DatasManager datasManager
-                                ) : base("Visualización de Usuarios | AutoGest Pro", contextParent)
+                                ) : base("Crear Nuevo Usuarios | AutoGest Pro", contextParent)
         {
             // Inyectamos dependencias
             _datasManager = datasManager;
