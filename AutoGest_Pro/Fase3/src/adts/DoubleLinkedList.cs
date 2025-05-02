@@ -6,6 +6,8 @@ using DotNetGraph.Core;
 using DotNetGraph.Extensions;
 //Importar paquete para ejecutar el comando (este ya viene instalado)
 using System.Diagnostics;
+using Newtonsoft.Json;
+using Fase3.src.utils;
 
 namespace Fase3.src.adts
 {
@@ -192,6 +194,50 @@ namespace Fase3.src.adts
             startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase3/Reportes/ListadoVehiculos.dot -o ../../AutoGest_Pro/Fase3/Reportes/ListadoVehiculos.png";
 
             Process.Start(startInfo);
+            return true;
+        }
+
+        public string GenerarJsonStrings()
+        {
+            if (_head == null) return "";
+            var vehiculosData = new List<Vehiculo>();
+            var current = _head;
+
+            while (current != null)
+            {
+                var vehiculo = (current.Data as Vehiculo) ?? throw new Exception("No se pudo convertir el  porque es nulo");
+                vehiculosData.Add(vehiculo);
+                current = current.Next;
+            }
+            var settings = new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            };
+
+            return JsonConvert.SerializeObject(vehiculosData, settings);
+        }
+
+        public bool SaveBackup()
+        {
+            string json = GenerarJsonStrings();
+            if (json == "") return false;
+
+            var (compressed, root) = HuffmanCompression.CompressWithTree(json);
+            var path = "../../AutoGest_Pro/Fase3/backups/VEHICULOS.edd";
+            string? directoryPath = Path.GetDirectoryName(path);
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                using (var writer = new BinaryWriter(fileStream))
+                {
+                    writer.Write(compressed.Length);
+                    writer.Write(compressed);
+                    writer.Write(root?.ToString() ?? string.Empty);
+                }
+            }
             return true;
         }
     }

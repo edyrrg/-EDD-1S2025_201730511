@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Fase3.src.models;
+using Fase3.src.utils;
+using Newtonsoft.Json;
 
 namespace Fase3.src.adts
 {
@@ -253,6 +255,42 @@ namespace Fase3.src.adts
             PostOrderRecursively(node.Left, list);
             PostOrderRecursively(node.Right, list);
             list.Add(node.Data);
+        }
+
+        public string GenerarJsonStrings()
+        {
+            var list = InOrder();
+            if (list.Count == 0) return "";
+            var settings = new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            };
+
+            return JsonConvert.SerializeObject(list, settings);
+        }
+
+        public bool SaveBackup()
+        {
+            string json = GenerarJsonStrings();
+            if (json == "") return false;
+
+            var (compressed, root) = HuffmanCompression.CompressWithTree(json);
+            var path = "../../AutoGest_Pro/Fase3/backups/REPUESTOS.edd";
+            string? directoryPath = Path.GetDirectoryName(path);
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                using (var writer = new BinaryWriter(fileStream))
+                {
+                    writer.Write(compressed.Length);
+                    writer.Write(compressed);
+                    writer.Write(root?.ToString() ?? string.Empty);
+                }
+            }
+            return true;
         }
     }
 }

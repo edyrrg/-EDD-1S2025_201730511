@@ -86,7 +86,25 @@ namespace Fase3.src.views
             {
                 PopError(ex.Message);
             }
-            
+
+            try
+            {
+                _datasManager._vehiculoService.SaveBackup();
+                PopSucess("Backup de Vehiculos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _datasManager._repuestoService.SaveBackup();
+                PopSucess("Backup de Repuestos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
 
         private void OnCargaMasivaClicked(object? sender, EventArgs e)

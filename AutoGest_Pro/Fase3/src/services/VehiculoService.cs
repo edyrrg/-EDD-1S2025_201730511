@@ -80,5 +80,13 @@ namespace Fase3.src.services
                 throw new Exception("No hay vehículos registrados para generar reporte.");
             }
         }
+
+        public void SaveBackup()
+        {
+            if (!_vehiculos.SaveBackup())
+            {
+                throw new Exception("No se pudo guardar el backup porque no hay datos que guardar.");
+            }
+        }
     }
 }

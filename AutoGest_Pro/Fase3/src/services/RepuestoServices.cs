@@ -89,5 +89,13 @@ namespace Fase3.src.services
         {
             return _repuestos.Search(id);
         }
+
+        public void SaveBackup()
+        {
+            if (!_repuestos.SaveBackup())
+            {
+                throw new Exception("No se pudo guardar el backup porque no hay datos que guardar.");
+            }
+        }
     }
 }
