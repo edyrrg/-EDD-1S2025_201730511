@@ -86,5 +86,21 @@ namespace Fase3.src.services
                 throw new Exception("No hay usuarios registrados para generar reporte.");
             }
         }
+
+        public void GuardarBakckup()
+        {
+            if (!_blockchainUsers.GuardarBackup())
+            {
+                throw new Exception("No hay usuarios registrados para generar backup.");
+            }
+        }
+
+        public void RestoreBackup()
+        {
+            if (!_blockchainUsers.CargarBackup())
+            {
+                throw new Exception("No existe un backup o la cadena del blockchain ha sido corrupta.");
+            }
+        }
     }
 }

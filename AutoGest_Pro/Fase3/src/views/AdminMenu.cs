@@ -1,7 +1,6 @@
 using Fase3.src.models;
 using Fase3.src.services;
 using Gtk;
-using System;
 
 namespace Fase3.src.views
 {
@@ -22,7 +21,7 @@ namespace Fase3.src.views
             _logHistorySessionService = logHistorySessionService;
             _logHistorySession = logHistorySession;
 
-            SetDefaultSize(450, 400);
+            SetDefaultSize(475, 400);
             SetPosition(WindowPosition.Center);
             DeleteEvent += (_, _) => OnDeleteEvent();
 
@@ -59,6 +58,9 @@ namespace Fase3.src.views
             var btnGenerarReportes = new Button("Generar Reportes");
             btnGenerarReportes.Clicked += OnGenerarReportesClicked;
 
+            var btnGuardarBackups = new Button("Generar y Guardar Backups");
+            btnGuardarBackups.Clicked += OnGuardarBackupsClicked;
+
             // Agregando botones al vbox
             vbox.PackStart(btnCargaMasiva, false, false, 6);
             vbox.PackStart(btnNuevoUsuario, false, false, 6);
@@ -67,9 +69,42 @@ namespace Fase3.src.views
             vbox.PackStart(btnGenerarServicios, false, false, 6);
             vbox.PackStart(btnControlLogeo, false, false, 6);
             vbox.PackStart(btnGenerarReportes, false, false, 6);
+            vbox.PackStart(btnGuardarBackups, false, false, 6);
 
             Add(vbox);
             ShowAll();
+        }
+
+        private void OnGuardarBackupsClicked(object? sender, EventArgs e)
+        {
+            try
+            {
+                _datasManager._userService.GuardarBakckup();
+                PopSucess("Backup de Usuarios generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+
+            try
+            {
+                _datasManager._vehiculoService.SaveBackup();
+                PopSucess("Backup de Vehiculos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
+            try
+            {
+                _datasManager._repuestoService.SaveBackup();
+                PopSucess("Backup de Repuestos generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
 
         private void OnCargaMasivaClicked(object? sender, EventArgs e)
@@ -181,7 +216,6 @@ namespace Fase3.src.views
                 string utcFormattedDate = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"); // Formato ISO 8601 en UTC
                 _logHistorySession.Salida = utcFormattedDate;
                 _logHistorySessionService.AddLogHistorySession(_logHistorySession);
-                PopSucess("Sesión cerrada correctamente.");
             }
             catch (Exception ex)
             {

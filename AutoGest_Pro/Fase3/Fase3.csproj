@@ -9,5 +9,6 @@
   <ItemGroup>
     <PackageReference Include="DotNetGraph" Version="3.2.0" />
     <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

@@ -41,11 +41,28 @@ namespace Fase3.src.views
             var btnCargar = new Button("Cargar");
             btnCargar.Clicked += OnCargarClicked;
 
+            var btnCargarBackup = new Button("Cargar Backups");
+            btnCargarBackup.Clicked += OnCargarBackupClicked;
+
             vbox.PackStart(_comboBox, false, false, 30);
-            vbox.PackStart(btnCargar, false, false, 30);
+            vbox.PackStart(btnCargar, false, false, 5);
+            vbox.PackStart(btnCargarBackup, false, false, 5);
 
             Add(vbox);
             ShowAll();
+        }
+
+        private void OnCargarBackupClicked(object? sender, System.EventArgs e)
+        {
+            try
+            {
+                _datasManager._userService.RestoreBackup();
+                PopSucess("Backup de usuarios restaurado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                PopError(ex.Message);
+            }
         }
         private void OnCargarClicked(object? sender, System.EventArgs e)
         {

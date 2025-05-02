@@ -1,7 +1,10 @@
 using System.Diagnostics;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Fase3.src.models;
 using Fase3.src.utils;
+using Newtonsoft.Json;
 
 namespace Fase3.src.adts
 {
@@ -51,7 +54,25 @@ namespace Fase3.src.adts
                 Tail = newBlock;
             }
             Size++;
-            Console.WriteLine($"Block added: {newBlock}");
+            // Console.WriteLine($"Block added: {newBlock}");
+        }
+
+        public void Add(Block block)
+        {
+            if (Head == null)
+            {
+                Head = block;
+                Tail = block;
+            }
+            else
+            {
+                if (Tail != null)
+                {
+                    Tail.next = block;
+                }
+                block.previous = Tail;
+                Tail = block;
+            }
         }
 
         public bool SearchByEmailAndPass(string email, string password)
@@ -253,6 +274,99 @@ namespace Fase3.src.adts
             startInfo.Arguments = $"-Tpng ../../AutoGest_Pro/Fase3/Reportes/Blockchain-usuarios.dot -o ../../AutoGest_Pro/Fase3/Reportes/Blockchain-usuarios.png";
 
             Process.Start(startInfo);
+            return true;
+        }
+
+        public string GenerarBlockToJson()
+        {
+            var blockchainData = new List<Block>();
+
+            if (Head == null) return "";
+
+            Block? current = Head;
+
+            while (current != null)
+            {
+                blockchainData.Add(current);
+                current = current.next;
+            }
+
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            };
+
+            return JsonConvert.SerializeObject(blockchainData, settings);
+        }
+
+        public bool GuardarBackup()
+        {
+            string json = GenerarBlockToJson();
+            if (json == "") return false;
+
+            string filePath = "../../AutoGest_Pro/Fase3/backups/blockchain-users.json";
+
+            // Verificar si el directorio de backups existe, si no, crearlo
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            // Guardar el JSON en un archivo
+            File.WriteAllText(filePath, json);
+            return true;
+        }
+
+        public bool CargarBackup()
+        {
+            string filePath = "../../AutoGest_Pro/Fase3/backups/blockchain-users.json";
+            if (!File.Exists(filePath))
+            {
+                return false; // No existe el archivo de backup
+            }
+            string json = File.ReadAllText(filePath);
+            var options = new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                Formatting = Formatting.Indented
+            };
+
+            var blockchainData = JsonConvert.DeserializeObject<List<Block>>(json, options);
+            if (blockchainData == null)
+            {
+                return false; // Error al deserializar el JSON
+            }
+
+            foreach (var block in blockchainData)
+            {
+                Add(block);
+            }
+
+            if(IsChainValid() == false)
+            {
+                Head = null;
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsChainValid()
+        {
+            Block? current = Head;
+            if (current == null) return false;  
+            if (current.PreviousHash != "0000") return false;
+
+            while (current.next != null)
+            {
+                Block nextBlock = current.next;
+                if (nextBlock.PreviousHash != current.Hash) return false;
+                current = nextBlock;
+            }
+
+            if(current != Tail) return false;
+
             return true;
         }
     }

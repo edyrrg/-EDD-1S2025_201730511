@@ -14,7 +14,7 @@ namespace Fase3.src.services
         public GrafoService _grafoService { get; } = GrafoService.Instance;
         private DatasManager()
         {
-            LoadData();
+            //LoadData();
         }
         public static DatasManager Instance
         {
